@@ -1,0 +1,96 @@
+/* {border: 1px solid red;} */
+
+body {
+	background-image:url("../images/stripes.png");
+}
+
+.page-header {
+	border-bottom: 1px solid #e8e6e6;
+}
+
+.panel-group .panel {
+	border-color: #dbd6d6;
+}
+
+.panel-heading {
+	background-color: #F9E7E7;
+	color: #333;
+}
+
+.panel-body {
+	padding: 0px;
+	border-top: 1px solid #ddd;
+}
+
+h1 {
+	text-align: center;
+}
+
+.panel-title {
+	font-size: 20px;
+}
+
+.tab-pane {
+	padding: 15px;
+}
+
+.nav-tabs {
+	border: none;
+}
+
+.nav-tabs>li {
+	width: 50%;
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 0px;
+	border: 1px solid #ddd;
+	background-color: #f2f2f2;
+}
+
+.nav-tabs>li.active {
+	border:none;
+}
+
+.tab-pane {
+	padding: 15px 50px;
+}
+
+a {
+	color: #888;
+}
+
+a:hover {
+	color: #333;
+}
+
+.nav-tabs>li>a, 
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus, 
+.nav-tabs>li.active>a:hover {
+	border: none;
+	border-radius: 0px;
+	
+	padding: 15px;
+	margin: 0px;
+}
+
+.nav-tabs>li>a:hover {
+	background-color: white;
+}
+
+.input-group {
+	padding-bottom: 20px;
+}
+
+center button {
+	margin: 15px;
+}
+
+form > a:link,
+form > a:visited,
+form > a:hover,
+form > a:focus,
+form > a:active {
+	text-decoration: none;
+	color: inherit;
+}
