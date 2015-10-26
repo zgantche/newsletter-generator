@@ -40,7 +40,7 @@
 
 					<div class="panel panel-default">
 						<a role="button" data-toggle="collapse" data-parent="#accordion" href="<?php echo '#collapse' . $city; ?>" >
-							<div class="panel-heading" role="tab" id="headingOne">
+							<div class="panel-heading" role="tab">
 								<h2 class="panel-title"><?php echo $city; ?></h2>
 							</div>
 						</a>
@@ -475,7 +475,7 @@
 				});
 
 
-				/*--- Button Group Styling Code (Duplicate Sections) ---*/
+				/*--- Button Group Dynamic Styling (Duplicate Sections) ---*/
 
 				// determine which class to use (vertical/horizontal) at page load
 				if ($(window).width() < 580) {
