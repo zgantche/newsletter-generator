@@ -475,7 +475,7 @@
 				});
 
 
-				/*--- Button Group Dynamic Styling (Duplicate Sections) ---*/
+				/*--- Button Group Dynamic Styling, [Duplicate] Sections ---*/
 
 				// determine which class to use (vertical/horizontal) at page load
 				if ($(window).width() < 580) {
