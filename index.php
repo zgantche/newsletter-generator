@@ -496,6 +496,12 @@
 				});
 
 
+				/*--- Collapse all [Duplicate] sections when user clicks a City section ---*/
+
+				$(".panel-heading").click(function(){
+					$("form>div.in").toggleClass("in", false);
+				});
+
 
 			});
 			
