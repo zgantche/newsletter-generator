@@ -31,7 +31,7 @@
 	<body>
 		<div class="container">
 			<div class="page-header">
-				<h1>Newsletter Generator</h1>
+				<h1>Newsletter Generator!</h1>
 			</div>
 
 			<div class="panel-group" id="accordion" role="tablist" >
