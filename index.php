@@ -1,6 +1,8 @@
 <?php 
-	require_once 'loadData.php';		// Load saved data from previous sessions
+	// Load saved data from previous sessions
+	require_once 'loadData.php';
 
+	// Declare cities in order
 	$cities = array("Toronto", "Montreal", "Calgary", "Vancouver", "Nationwide");
 ?>
 
