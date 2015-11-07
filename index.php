@@ -442,10 +442,17 @@
 
 				/*--- Ajax Form Code ---*/
 
-				// prepare Options Object with handling error and success
+				/* prepare Ajax Form's Options: 
+					dataType	- define expected server response
+					error 		- error handling function
+					success		- success handling function
+				*/
 				var options = { 
-					error:		function() {
-						alert('Ajax form submission error :/');
+					dataType: 'xml',
+					error:		function(responseXML, statusText, xhr, $form) {
+						//show Error Message pop up
+						alert('Something went wrong with the PHPs! \n\nSever returned an Error: ' 
+							+ statusText);
 						
 						//hide dimmed loading div
 						$("#dim-page-wrapper").fadeOut(100);
@@ -461,8 +468,7 @@
 						}, 1500);
 					}
 				};
-
-				// bind all forms and provide a simple callback function
+				// bind all forms as Ajax Forms, with the Options above
 				$("form").ajaxForm(options);
 
 				
