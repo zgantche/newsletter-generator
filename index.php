@@ -451,8 +451,7 @@
 					dataType: 'xml',
 					error:		function(responseXML, statusText, xhr, $form) {
 						//show Error Message pop up
-						alert('Something went wrong with the PHPs! \n\nSever returned an Error: ' 
-							+ statusText);
+						alert('Something went wrong with the PHPs! \n\nSever returned an Error: ' + statusText);
 						
 						//hide dimmed loading div
 						$("#dim-page-wrapper").fadeOut(100);

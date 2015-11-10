@@ -37,7 +37,7 @@
 	//save $article_info to varDirectory
 	switch ($_POST['city']) {
 		case 'Toronto':
-			$varDi->setVar($article_info, 'torontoArticles');
+			$varDir->setVar($article_info, 'torontoArticles');
 			break;
 		case 'Montreal':
 			$varDir->setVar($article_info, 'montrealArticles');
