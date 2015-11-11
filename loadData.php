@@ -6,7 +6,10 @@
 
 	//retrieve the toronto variables
 	$toronto_articles = $varDir->getVar('torontoArticles');
-	$toronto_ads = $varDir->getVar('torontoAds');
+	$toronto_ads = $varDir->getVar('torontoAds'); //--- delete after
+	$toronto_ad_lb = $varDir->getVar('torontoAd-LB');
+	$toronto_ad_bb1 = $varDir->getVar('torontoAd-BB1');
+	$toronto_ad_bb2 = $varDir->getVar('torontoAd-BB2');
 
 	//retrieve the montreal variables
 	$montreal_articles = $varDir->getVar('montrealArticles');

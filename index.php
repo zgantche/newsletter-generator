@@ -267,15 +267,20 @@
 									</div>
 
 									<div id="<?php echo 'ads' . $city; ?>" role="tabpanel" class="tab-pane">
-										<form action="saveAds.php" method="post">
+										<form action="saveAds.php" method="post" enctype="multipart/form-data">
 
 											<input type="hidden" name="city" value="<?php echo $city; ?>" />
+											<input type="hidden" name="ad-type" value="LB" />
 
 											<?php
 												//-- Load Ads for Appropriate City --//
 
-												if ($city === "Toronto")
+												if ($city === "Toronto"){
 													$ads = $toronto_ads;
+													$ad_lb = $toronto_ad_lb;
+													$ad_bb1 = $toronto_ad_bb1;
+													$ad_bb2 = $toronto_ad_bb2;
+												}
 												elseif ($city === "Montreal")
 													$ads = $montreal_ads;
 												elseif ($city === "Calgary")
@@ -304,17 +309,23 @@
 												</div>
 											</div>
 
+											<input type="file" name="fileToUpload" id="fileToUpload"><br />
+
 											<div class="input-group">
 												<span class="input-group-addon">Creative</span>
-												<input type="text" name="LB-creative" class="form-control" placeholder="Link to LB Creative" 
-													value="<?php echo $ads['LB-creative']; ?>" />
+												<input type="text" name="creative" class="form-control" placeholder="Link to LB Creative" 
+													value="<?php echo $ad_lb['creative']; ?>" />
 											</div>
 											<div class="input-group">
-												<span class="input-group-addon">URL</span>
-												<input type="text" name="LB-url" class="form-control" placeholder="LB's Link Address" 
-													value="<?php echo $ads['LB-url']; ?>" />
+												<span class="input-group-addon">Link URL</span>
+												<input type="text" name="link-url" class="form-control" placeholder="LB's Link Address" 
+													value="<?php echo $ad_lb['link-url']; ?>" />
 											</div>
 
+											<button type="submit" class="btn btn-primary save-btn">Save Leaderboard</button><br /><br />
+										</form>
+
+										<form action="saveAds.php" method="post">
 											<a data-toggle="collapse" href="<?php echo '#duplicateAdBB1' . $city; ?>">
 												<h3>Big Box 1 <small>[Duplicate]</small></h3>
 											</a>
