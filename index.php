@@ -267,130 +267,105 @@
 									</div>
 
 									<div id="<?php echo 'ads' . $city; ?>" role="tabpanel" class="tab-pane">
-										<form action="saveAds.php" method="post" enctype="multipart/form-data">
+										<?php
+											//-- Load Ads for Appropriate City --//
 
-											<input type="hidden" name="city" value="<?php echo $city; ?>" />
-											<input type="hidden" name="ad-type" value="LB" />
+											if ($city === "Toronto"){
+												$ads = array (
+													'lb' 	=> $toronto_ad_lb,
+													'bb' 	=> $toronto_ad_bb1,
+													'bb2' 	=> $toronto_ad_bb2
+												);
+											}
+											elseif ($city === "Montreal")
+												$ads = array (
+													'lb' 	=> $montreal_ad_lb,
+													'bb' 	=> $montreal_ad_bb1,
+													'bb2' 	=> $montreal_ad_bb2
+												);
+											elseif ($city === "Calgary")
+												$ads = array (
+													'lb' 	=> $calgary_ad_lb,
+													'bb' 	=> $calgary_ad_bb1,
+													'bb2' 	=> $calgary_ad_bb2
+												);
+											elseif ($city === "Vancouver")
+												$ads = array (
+													'lb' 	=> $vancouver_ad_lb,
+													'bb' 	=> $vancouver_ad_bb1,
+													'bb2' 	=> $vancouver_ad_bb2
+												);
+											else
+												$ads = array (
+													'lb' 	=> $nationwide_ad_lb,
+													'bb' 	=> $nationwide_ad_bb1,
+													'bb2' 	=> $nationwide_ad_bb2
+												);
+										?>
 
-											<?php
-												//-- Load Ads for Appropriate City --//
+										<!-- Loop through each ad type -->
+										<?php
+											$i = 0; //keep track of loop index
 
-												if ($city === "Toronto"){
-													$ads = $toronto_ads;
-													$ad_lb = $toronto_ad_lb;
-													$ad_bb1 = $toronto_ad_bb1;
-													$ad_bb2 = $toronto_ad_bb2;
+											foreach($ads as $ad):
+
+												if ($i === 0){
+													$ad_label = "Leaderboard";
+													$ad_input_label = "lb";
 												}
-												elseif ($city === "Montreal")
-													$ads = $montreal_ads;
-												elseif ($city === "Calgary")
-													$ads = $calgary_ads;
-												elseif ($city === "Vancouver")
-													$ads = $vancouver_ads;
-												else
-													$ads = $nationwide_ads;
-											?>
+												elseif ($i === 1) {
+													$ad_label = "Big Box 1";
+													$ad_input_label = "bb1";
+												}
+												else{
+													$ad_label = "Big Box 2";
+													$ad_input_label = "bb2";
+												}
 
-											<a data-toggle="collapse" href="<?php echo '#duplicateAdLB' . $city; ?>">
-												<h3>Leaderboard <small>[Duplicate]</small></h3>
-											</a>
+												$i++;
+										?>
 
-											<div class="collapse" id="<?php echo 'duplicateAdLB' . $city; ?>">
-												<div class="well" style="text-align:center;">
-													<div class="responsiveButtonGroup" data-toggle="buttons">
-														<?php foreach($cities as $innerCity): ?>
-															<?php if ($city === $innerCity): ?>
-																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
-															<?php else: ?>
-																<button type="button" class="btn btn-default save-btn" onclick="duplicateAd('<?php echo $city ?>', '<?php echo $innerCity ?>', 'LB');"><?php echo $innerCity; ?></button>
-															<?php endif; ?>
-														<?php endforeach; ?>
+											<form action="saveAds.php" method="post" enctype="multipart/form-data">
+
+												<input type="hidden" name="city" value="<?php echo $city; ?>" />
+												<input type="hidden" name="ad-type" value="<?php echo $ad_input_label; ?>" />
+
+												<a data-toggle="collapse" href="<?php echo '#duplicateAdLB' . $city; ?>">
+													<h3><?php echo $ad_label; ?> <small>[Duplicate]</small></h3>
+												</a>
+
+												<div class="collapse" id="<?php echo 'duplicateAdLB' . $city; ?>">
+													<div class="well" style="text-align:center;">
+														<div class="responsiveButtonGroup" data-toggle="buttons">
+															<?php foreach($cities as $innerCity): ?>
+																<?php if ($city === $innerCity): ?>
+																	<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
+																<?php else: ?>
+																	<button type="button" class="btn btn-default save-btn" onclick="duplicateAd('<?php echo $city ?>', '<?php echo $innerCity ?>', 'LB');"><?php echo $innerCity; ?></button>
+																<?php endif; ?>
+															<?php endforeach; ?>
+														</div>
 													</div>
 												</div>
-											</div>
 
-											<input type="file" name="fileToUpload" id="fileToUpload"><br />
+												<input type="file" name="fileToUpload" id="fileToUpload"><br />
 
-											<div class="input-group">
-												<span class="input-group-addon">Creative</span>
-												<input type="text" name="creative" class="form-control" placeholder="Link to LB Creative" 
-													value="<?php echo $ad_lb['creative']; ?>" />
-											</div>
-											<div class="input-group">
-												<span class="input-group-addon">Link URL</span>
-												<input type="text" name="link-url" class="form-control" placeholder="LB's Link Address" 
-													value="<?php echo $ad_lb['link-url']; ?>" />
-											</div>
-
-											<button type="submit" class="btn btn-primary save-btn">Save Leaderboard</button><br /><br />
-										</form>
-
-										<form action="saveAds.php" method="post">
-											<a data-toggle="collapse" href="<?php echo '#duplicateAdBB1' . $city; ?>">
-												<h3>Big Box 1 <small>[Duplicate]</small></h3>
-											</a>
-
-											<div class="collapse" id="<?php echo 'duplicateAdBB1' . $city; ?>">
-												<div class="well" style="text-align:center;">
-													<div class="responsiveButtonGroup" data-toggle="buttons">
-														<?php foreach($cities as $innerCity): ?>
-															<?php if ($city === $innerCity): ?>
-																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
-															<?php else: ?>
-																<button type="button" class="btn btn-default save-btn" onclick="duplicateAd('<?php echo $city ?>', '<?php echo $innerCity ?>', 'BB1');"><?php echo $innerCity; ?></button>
-															<?php endif; ?>
-														<?php endforeach; ?>
-													</div>
+												<div class="input-group">
+													<span class="input-group-addon">Creative</span>
+													<input type="text" name="creative" class="form-control" placeholder="ex. http://creatives.url.address" 
+														value="<?php echo $ad['creative']; ?>" />
 												</div>
-											</div>
-
-											<div class="input-group">
-												<span class="input-group-addon">Creative</span>
-												<input type="text" name="BB1-creative" class="form-control" placeholder="Link to BB1 Creative" 
-													value="<?php echo $ads['BB1-creative']; ?>" />
-											</div>
-											<div class="input-group">
-												<span class="input-group-addon">URL</span>
-												<input type="text" name="BB1-url" class="form-control" placeholder="BB1's Link Address" 
-													value="<?php echo $ads['BB1-url']; ?>" />
-											</div>
-
-											<a data-toggle="collapse" href="<?php echo '#duplicateAdBB2' . $city; ?>">
-												<h3>Big Box 2 <small>[Duplicate]</small></h3>
-											</a>
-
-											<div class="collapse" id="<?php echo 'duplicateAdBB2' . $city; ?>">
-												<div class="well" style="text-align:center;">
-													<div class="responsiveButtonGroup" data-toggle="buttons">
-														<?php foreach($cities as $innerCity): ?>
-															<?php if ($city === $innerCity): ?>
-																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
-															<?php else: ?>
-																<button type="button" class="btn btn-default save-btn" onclick="duplicateAd('<?php echo $city ?>', '<?php echo $innerCity ?>', 'BB2');"><?php echo $innerCity; ?></button>
-															<?php endif; ?>
-														<?php endforeach; ?>
-													</div>
+												<div class="input-group">
+													<span class="input-group-addon">Link URL</span>
+													<input type="text" name="link-url" class="form-control" placeholder="ex. http://destination.site.goes.here" 
+														value="<?php echo $ad['link-url']; ?>" />
 												</div>
-											</div>
 
-											<div class="input-group">
-												<span class="input-group-addon">Creative</span>
-												<input type="text" name="BB2-creative" class="form-control" placeholder="Link to BB2 Creative" 
-													value="<?php echo $ads['BB2-creative']; ?>" />
-											</div>
-											<div class="input-group">
-												<span class="input-group-addon">URL</span>
-												<input type="text" name="BB2-url" class="form-control" placeholder="BB2's Link Address" 
-													value="<?php echo $ads['BB2-url']; ?>" />
-											</div>
+												<button type="submit" class="btn btn-primary save-btn">Save <?php echo $ad_label; ?></button><br /><br />
+											</form>
 
-											<center>
-												<button type="submit" class="btn btn-primary save-btn">Save Content</button>
-												<button type="button" onclick="window.open('newsletter.php?city=<?php echo $city; ?>', '_blank');" class="btn btn-success">Preview Saved Content</button>
-												<button type="button" class="clearFormButton btn btn-default">Clear Ads Content</button>
-											</center>
+										<?php endforeach; ?>
 
-										</form>
 									</div>
 
 								</div>

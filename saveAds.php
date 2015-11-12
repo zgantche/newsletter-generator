@@ -5,15 +5,15 @@
 
 	//array for all Ads Info input, passed by form
 	$ad_info = array (
-		'creative' =>	$_POST['creative'],
-		'link-url' =>	$_POST['link-url']
+		'creative' 	=>	$_POST['creative'],
+		'link-url'	=>	$_POST['link-url']
 	);
 
 	//determine if we need to upload a file
 	if( isset($_FILES['fileToUpload']) ) {
 
 		// TODO: PERFORM UPLOAD FILE TYPE & SIZE CHECK!! 
-		//&& ($_FILES['xxxx_image']['size'] > 0)) {
+		//&& ($_FILES['fileToUpload']['size'] > 0)) {
 
 		//load WordPress the light-weight way
 		define('WP_USE_THEMES', false);
