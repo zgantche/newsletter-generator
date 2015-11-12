@@ -10,23 +10,33 @@
 	switch ($_GET['city']) {
 		case 'Toronto':
 			$articles = $varDir->getVar('torontoArticles');
-			$ads = $varDir->getVar('torontoAds');
+			$ad_lb = $varDir->getVar('torontoAd-LB');
+			$ad_bb1 = $varDir->getVar('torontoAd-BB1');
+			$ad_bb2 = $varDir->getVar('torontoAd-BB2');
 			break;
 		case 'Montreal':
 			$articles = $varDir->getVar('montrealArticles');
-			$ads = $varDir->getVar('montrealAds');
+			$ad_lb = $varDir->getVar('montrealAd-LB');
+			$ad_bb1 = $varDir->getVar('montrealAd-BB1');
+			$ad_bb2 = $varDir->getVar('montrealAd-BB2');
 			break;
 		case 'Vancouver':
 			$articles = $varDir->getVar('vancouverArticles');
-			$ads = $varDir->getVar('vancouverAds');
+			$ad_lb = $varDir->getVar('vancouverAd-LB');
+			$ad_bb1 = $varDir->getVar('vancouverAd-BB1');
+			$ad_bb2 = $varDir->getVar('vancouverAd-BB2');
 			break;
 		case 'Calgary':
 			$articles = $varDir->getVar('calgaryArticles');
-			$ads = $varDir->getVar('calgaryAds');
+			$ad_lb = $varDir->getVar('calgaryAd-LB');
+			$ad_bb1 = $varDir->getVar('calgaryAd-BB1');
+			$ad_bb2 = $varDir->getVar('calgaryAd-BB2');
 			break;
 		case 'Nationwide':
 			$articles = $varDir->getVar('nationwideArticles');
-			$ads = $varDir->getVar('nationwideAds');
+			$ad_lb = $varDir->getVar('nationwideAd-LB');
+			$ad_bb1 = $varDir->getVar('nationwideAd-BB1');
+			$ad_bb2 = $varDir->getVar('nationwideAd-BB2');
 			break;	
 		default:
 			# error code...
@@ -79,7 +89,7 @@
 		<table width="780" cellpadding="0" cellspacing="0" border="0" align="center" style="background-color:#ffffff;">
 			<tr>
 				<td style="padding-bottom:0px;">
-					<a href="<?php echo $ads['LB-url']; ?>" target="_blank"><img src="<?php echo $ads['LB-creative']; ?>" border="0" width="780" height="90" alt="leaderboard" style="display: block; margin:0 auto; padding-bottom: 10px;"/></a>
+					<a href="<?php echo $ad_lb['link-url']; ?>" target="_blank"><img src="<?php echo $ad_lb['creative']; ?>" border="0" width="780" height="90" alt="leaderboard" style="display: block; margin:0 auto; padding-bottom: 10px;"/></a>
 				</td>
 			</tr>
 		</table>
@@ -140,9 +150,9 @@
 				<!-- ADVERTISING -->
 				<td style="font-size:12px; color: #7c7c7c; line-height:1.6em; font-family:Helvetica, Arial, sans-serif; vertical-align:top;">
 
-					<a href="<?php echo $ads['BB1-url']; ?>" target="_blank"><img src="<?php echo $ads['BB1-creative']; ?>" alt="big box one" style="display: block; padding:10px 0px;" border="0" height="250" width="300" /></a>
+					<a href="<?php echo $ad_bb1['link-url']; ?>" target="_blank"><img src="<?php echo $ad_bb1['creative']; ?>" alt="big box one" style="display: block; padding:10px 0px;" border="0" height="250" width="300" /></a>
 
-					<a href="<?php echo $ads['BB2-url']; ?>" target="_blank"><img src="<?php echo $ads['BB2-creative']; ?>" alt="big box two" style="display: block; padding-bottom: 10px;" border="0" height="250" width="300" /></a>
+					<a href="<?php echo $ad_bb2['link-url']; ?>" target="_blank"><img src="<?php echo $ad_bb2['creative']; ?>" alt="big box two" style="display: block; padding-bottom: 10px;" border="0" height="250" width="300" /></a>
 
 				</td>
 			</tr>
