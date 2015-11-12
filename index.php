@@ -311,15 +311,15 @@
 
 												if ($i === 0){
 													$ad_label = "Leaderboard";
-													$ad_input_label = "lb";
+													$ad_input_label = "LB";
 												}
 												elseif ($i === 1) {
 													$ad_label = "Big Box 1";
-													$ad_input_label = "bb1";
+													$ad_input_label = "BB1";
 												}
 												else{
 													$ad_label = "Big Box 2";
-													$ad_input_label = "bb2";
+													$ad_input_label = "BB2";
 												}
 
 												$i++;
