@@ -315,23 +315,23 @@
 												}
 										?>
 
-											<form action="saveAds.php" method="post" enctype="multipart/form-data">
+											<form id="<?php echo $city . $ads_key; ?>" action="saveAds.php" method="post" enctype="multipart/form-data">
 
 												<input type="hidden" name="city" value="<?php echo $city; ?>" />
 												<input type="hidden" name="ad-type" value="<?php echo $ads_key; ?>" />
 
-												<a data-toggle="collapse" href="<?php echo '#duplicateAdLB' . $city; ?>">
+												<a data-toggle="collapse" href="<?php echo '#duplicateAd' . $ads_key . $city; ?>">
 													<h3><?php echo $ad_label; ?> <small>[Duplicate]</small></h3>
 												</a>
 
-												<div class="collapse" id="<?php echo 'duplicateAdLB' . $city; ?>">
+												<div class="collapse" id="<?php echo 'duplicateAd' . $ads_key . $city; ?>">
 													<div class="well" style="text-align:center;">
 														<div class="responsiveButtonGroup" data-toggle="buttons">
 															<?php foreach($cities as $innerCity): ?>
 																<?php if ($city === $innerCity): ?>
 																	<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 																<?php else: ?>
-																	<button type="button" class="btn btn-default save-btn" onclick="duplicateAd('<?php echo $city ?>', '<?php echo $innerCity ?>', 'LB');"><?php echo $innerCity; ?></button>
+																	<button type="button" class="btn btn-default save-btn" onclick="duplicateAd('<?php echo $city ?>', '<?php echo $innerCity ?>', '<?php echo $ads_key ?>');"><?php echo $innerCity; ?></button>
 																<?php endif; ?>
 															<?php endforeach; ?>
 														</div>
@@ -526,13 +526,13 @@
 			*/
 			function duplicateAd(copyFrom, pasteTo, adName){
 				var clipboard = "";
+				
+				clipboard = $("#" + copyFrom + adName + " div input[name='creative']").val();
+				$("#" + pasteTo + adName + " div input[name='creative']").val(clipboard);
 
-				clipboard = $("#ads" + copyFrom + " div input[name='" + adName + "-creative']").val();
-				$("#ads" + pasteTo + " div input[name='" + adName + "-creative']").val(clipboard);
-
-				clipboard = $("#ads" + copyFrom + " div input[name='" + adName + "-url']").val();
-				$("#ads" + pasteTo + " div input[name='" + adName + "-url']").val(clipboard);
-
+				clipboard = $("#" + copyFrom + adName + " div input[name='link-url']").val();
+				$("#" + pasteTo + adName + " div input[name='link-url']").val(clipboard);
+				
 				$("#ads" + pasteTo + " form").submit();
 			};
 
