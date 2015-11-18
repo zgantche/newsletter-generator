@@ -268,67 +268,57 @@
 
 									<div id="<?php echo 'ads' . $city; ?>" role="tabpanel" class="tab-pane">
 										<?php
-											//-- Load Ads for Appropriate City --//
 
+											//-- Load Ads for Appropriate City --//
 											if ($city === "Toronto"){
 												$ads = array (
-													'lb' 	=> $toronto_ad_lb,
-													'bb' 	=> $toronto_ad_bb1,
-													'bb2' 	=> $toronto_ad_bb2
+													'LB' 	=> $toronto_ad_lb,
+													'BB1' 	=> $toronto_ad_bb1,
+													'BB2' 	=> $toronto_ad_bb2
 												);
 											}
 											elseif ($city === "Montreal")
 												$ads = array (
-													'lb' 	=> $montreal_ad_lb,
-													'bb' 	=> $montreal_ad_bb1,
-													'bb2' 	=> $montreal_ad_bb2
+													'LB' 	=> $montreal_ad_lb,
+													'BB1' 	=> $montreal_ad_bb1,
+													'BB2' 	=> $montreal_ad_bb2
 												);
 											elseif ($city === "Calgary")
 												$ads = array (
-													'lb' 	=> $calgary_ad_lb,
-													'bb' 	=> $calgary_ad_bb1,
-													'bb2' 	=> $calgary_ad_bb2
+													'LB' 	=> $calgary_ad_lb,
+													'BB1' 	=> $calgary_ad_bb1,
+													'BB2' 	=> $calgary_ad_bb2
 												);
 											elseif ($city === "Vancouver")
 												$ads = array (
-													'lb' 	=> $vancouver_ad_lb,
-													'bb' 	=> $vancouver_ad_bb1,
-													'bb2' 	=> $vancouver_ad_bb2
+													'LB' 	=> $vancouver_ad_lb,
+													'BB1' 	=> $vancouver_ad_bb1,
+													'BB2' 	=> $vancouver_ad_bb2
 												);
 											else
 												$ads = array (
-													'lb' 	=> $nationwide_ad_lb,
-													'bb' 	=> $nationwide_ad_bb1,
-													'bb2' 	=> $nationwide_ad_bb2
+													'LB' 	=> $nationwide_ad_lb,
+													'BB1' 	=> $nationwide_ad_bb1,
+													'BB2' 	=> $nationwide_ad_bb2
 												);
-										?>
 
-										<!-- Loop through each ad type -->
-										<?php
-											$i = 0; //keep track of loop index
 
-											foreach($ads as $ad):
+											//-- Loop Through Each of the Ads --//
+											foreach($ads as $ads_key => $ad):
 
-												if ($i === 0){
-													$ad_label = "Leaderboard";
-													$ad_input_label = "LB";
+												//update each ad's text label
+												switch ($ads_key) {
+													case "LB":	$ad_label = "Leaderboard"; break;
+													case "BB1":	$ad_label = "Big Box 1"; break;
+													case "BB2":	$ad_label = "Bix Box 2"; break;
+													default:	$ad_label = "Non-expected $ads key? :/"; break;
 												}
-												elseif ($i === 1) {
-													$ad_label = "Big Box 1";
-													$ad_input_label = "BB1";
-												}
-												else{
-													$ad_label = "Big Box 2";
-													$ad_input_label = "BB2";
-												}
-
-												$i++;
 										?>
 
 											<form action="saveAds.php" method="post" enctype="multipart/form-data">
 
 												<input type="hidden" name="city" value="<?php echo $city; ?>" />
-												<input type="hidden" name="ad-type" value="<?php echo $ad_input_label; ?>" />
+												<input type="hidden" name="ad-type" value="<?php echo $ads_key; ?>" />
 
 												<a data-toggle="collapse" href="<?php echo '#duplicateAdLB' . $city; ?>">
 													<h3><?php echo $ad_label; ?> <small>[Duplicate]</small></h3>
