@@ -89,7 +89,11 @@
 															<?php if ($city === $innerCity): ?>
 																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 															<?php else: ?>
-																<button type="button" class="btn btn-default save-btn" onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'main-article');"><?php echo $innerCity; ?></button>
+																<button type="button" 
+																	class="btn btn-default save-btn" 
+																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'main-article');">
+																		<?php echo $innerCity; ?>
+																</button>
 															<?php endif; ?>
 														<?php endforeach; ?>
 													</div>
@@ -123,7 +127,11 @@
 															<?php if ($city === $innerCity): ?>
 																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 															<?php else: ?>
-																<button type="button" class="btn btn-default save-btn" onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-1');"><?php echo $innerCity; ?></button>
+																<button type="button" 
+																	class="btn btn-default save-btn" 
+																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-1');">
+																		<?php echo $innerCity; ?>
+																</button>
 															<?php endif; ?>
 														<?php endforeach; ?>
 													</div>
@@ -152,7 +160,11 @@
 															<?php if ($city === $innerCity): ?>
 																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 															<?php else: ?>
-																<button type="button" class="btn btn-default save-btn" onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-2');"><?php echo $innerCity; ?></button>
+																<button type="button" 
+																	class="btn btn-default save-btn" 
+																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-2');">
+																		<?php echo $innerCity; ?>
+																</button>
 															<?php endif; ?>
 														<?php endforeach; ?>
 													</div>
@@ -181,7 +193,11 @@
 															<?php if ($city === $innerCity): ?>
 																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 															<?php else: ?>
-																<button type="button" class="btn btn-default save-btn" onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-3');"><?php echo $innerCity; ?></button>
+																<button type="button" 
+																	class="btn btn-default save-btn" 
+																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-3');">
+																		<?php echo $innerCity; ?>
+																</button>
 															<?php endif; ?>
 														<?php endforeach; ?>
 													</div>
@@ -210,7 +226,11 @@
 															<?php if ($city === $innerCity): ?>
 																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 															<?php else: ?>
-																<button type="button" class="btn btn-default save-btn" onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-4');"><?php echo $innerCity; ?></button>
+																<button type="button" 
+																	class="btn btn-default save-btn" 
+																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-4');">
+																		<?php echo $innerCity; ?>
+																</button>
 															<?php endif; ?>
 														<?php endforeach; ?>
 													</div>
@@ -239,7 +259,11 @@
 															<?php if ($city === $innerCity): ?>
 																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 															<?php else: ?>
-																<button type="button" class="btn btn-default save-btn" onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-5');"><?php echo $innerCity; ?></button>
+																<button type="button" 
+																	class="btn btn-default save-btn" 
+																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-5');">
+																		<?php echo $innerCity; ?>
+																</button>
 															<?php endif; ?>
 														<?php endforeach; ?>
 													</div>
@@ -259,7 +283,12 @@
 
 											<center>
 												<button type="submit" class="btn btn-primary save-btn">Save Content</button>
-												<button type="button" onclick="window.open('newsletter.php?city=<?php echo $city; ?>', '_blank');" class="btn btn-success">Preview Saved Content</button>
+												<button 
+													type="button" 
+													onclick="window.open('newsletter.php?city=<?php echo $city; ?>', '_blank');" 
+													class="btn btn-success">
+														Preview Saved Content
+												</button>
 												<button type="button" class="clearFormButton btn btn-default">Clear Article Content</button>
 											</center>
 
@@ -331,7 +360,11 @@
 																<?php if ($city === $innerCity): ?>
 																	<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 																<?php else: ?>
-																	<button type="button" class="btn btn-default save-btn" onclick="duplicateAd('<?php echo $city ?>', '<?php echo $innerCity ?>', '<?php echo $ads_key ?>');"><?php echo $innerCity; ?></button>
+																	<button type="button" 
+																		class="btn btn-default save-btn" 
+																		onclick="duplicateAd('<?php echo $city ?>', '<?php echo $innerCity ?>', '<?php echo $ads_key ?>');">
+																			<?php echo $innerCity; ?>
+																	</button>
 																<?php endif; ?>
 															<?php endforeach; ?>
 														</div>
