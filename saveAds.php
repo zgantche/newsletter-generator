@@ -31,7 +31,7 @@
 	}
 
 	//clean up input (call $value by reference)
-	/*foreach ($article_info as &$value) {					//  <-------------- FIX THIS!!!!!!! AIYAAAAAAA
+	foreach ($ad_info as &$value) {
 		//replace all special colons with regular ones
 		$value = str_replace(array("‘", "’"), "'", $value);
 		$value = str_replace(array('“', '”'), '"', $value);
@@ -41,7 +41,7 @@
 
 		//trim spaces at beginning & end of string, then convert special char's to HTML entities
 		$value = htmlspecialchars( trim($value) );
-	}*/
+	}
 
 	//create new varDirectory
 	$varDir = new VarDirectory();
