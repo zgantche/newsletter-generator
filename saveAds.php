@@ -67,5 +67,11 @@
 			# error code...
 			break;
 	}
+	
+	//tell the client to expect a JSON response
+	header('Content-type: application/json')
+
+	$data = array('success', '');
+	echo json_encode( $data );
 
 ?>

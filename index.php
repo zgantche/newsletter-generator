@@ -457,7 +457,7 @@
 					success		- success handling function
 				*/
 				var options = { 
-					dataType: 'xml',
+					dataType: 'json',
 					error:		function(responseXML, statusText, xhr, $form) {
 						//show Error Message pop up
 						alert('Something went wrong with the PHPs! \n\nSever returned an Error: ' + statusText);
@@ -465,7 +465,10 @@
 						//hide dimmed loading div
 						$("#dim-page-wrapper").fadeOut(100);
 					},
-					success:	function() { 
+					success:	function(data) { 
+						//example of how to ready the returned json object
+						//alert(data);
+
 						//hide dimmed loading div
 						$("#dim-page-wrapper").delay(200).fadeOut(100);
 
