@@ -467,7 +467,7 @@
 					},
 					success:	function(data) { 
 						//example of how to ready the returned json object
-						//alert(data);
+						//alert(data['status'] + ", \n" + data['type']);
 
 						//hide dimmed loading div
 						$("#dim-page-wrapper").delay(200).fadeOut(100);
