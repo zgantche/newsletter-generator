@@ -3,6 +3,9 @@
 	//load VarDirectory class
 	require_once 'VarDirectory.php';
 
+	//create new varDirectory
+	$varDir = new VarDirectory();
+
 	//array for all Ads Info input, passed by form
 	$ad_info = array (
 		'creative' 	=>	$_POST['creative'],
@@ -15,19 +18,54 @@
 		// TODO: PERFORM UPLOAD FILE TYPE & SIZE CHECK!! 
 		//&& ($_FILES['fileToUpload']['size'] > 0)) {
 
-		//load WordPress the light-weight way
-		define('WP_USE_THEMES', false);
-		require('../wp-load.php');
+		//load image cache and check if it exists, if not, define it as an empty array
+		$imageCache = $varDir->getVar('imageCache');
+		if ( !isset($imageCache) )
+			$imageCache = array();
 
-		//load files required for image uploading
-		require_once( "../wp-admin/includes/image.php" );
-		require_once( "../wp-admin/includes/file.php" );
-		require_once( "../wp-admin/includes/media.php" );
+		//define the file's name, and a flag for its uniqueness
+		$fileToUpload_name = $_FILES['fileToUpload']['name'];
+		$uniqueImage = true;
 
-		//let WordPress handle the upload
-		$attachment_id = media_handle_upload( 'fileToUpload', 0 );
 
-		$ad_info['creative'] = wp_get_attachment_url( $attachment_id );
+		//search our cache of uploaded images for this image name
+		foreach ($imageCache as $currentCachedImage)
+			if ($currentCachedImage['name'] === $fileToUpload_name){
+				$uniqueImage = false;
+
+				//retrieve the cached image's URL
+				$ad_info['creative'] = $currentCachedImage['url'];
+			}
+
+		//if image is unique, upload it
+		if ($uniqueImage) {
+			//load WordPress the light-weight way
+			define('WP_USE_THEMES', false);
+			require('../wp-load.php');
+
+			//load files required for image uploading
+			require_once( "../wp-admin/includes/image.php" );
+			require_once( "../wp-admin/includes/file.php" );
+			require_once( "../wp-admin/includes/media.php" );
+
+			//give image to WordPress for upload
+			$attachment_id = media_handle_upload( 'fileToUpload', 0 );
+
+			//retrieve the upload's URL
+			$ad_info['creative'] = wp_get_attachment_url( $attachment_id );
+			
+			//define our new image
+			$imageToCache = array(
+				'name' 	=> basename($ad_info['creative']),
+				'url'	=> $ad_info['creative']
+			);
+
+			//push new image info to our cache
+			array_push($imageCache, $imageToCache);
+
+			//update our image cache
+			$varDir->setVar($imageCache, 'imageCache');
+		}
 	}
 
 	//clean up input (call $value by reference)
@@ -43,8 +81,6 @@
 		$value = htmlspecialchars( trim($value) );
 	}
 
-	//create new varDirectory
-	$varDir = new VarDirectory();
 
 	//save $ad_info to varDirectory
 	switch ($_POST['city']) {
@@ -69,9 +105,13 @@
 	}
 	
 	//tell the client to expect a JSON response
-	header('Content-type: application/json')
+	header('Content-type: application/json');
 
-	$data = array('success', '');
+	$data = array(
+		'status' 	=> 'success', 
+		'type' 	=> $ad_info['creative']
+	);
+
 	echo json_encode( $data );
 
 ?>
