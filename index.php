@@ -371,7 +371,8 @@
 													</div>
 												</div>
 
-												<img src="<?php echo $ad['creative']; ?>" class="img-thumbnail center-block" /><br />
+												<img src="<?php echo $ad['creative']; ?>" name="preview-creative" class="img-thumbnail center-block" />
+												<br />
 												<input type="file" name="fileToUpload" id="fileToUpload"><br />
 
 												<div class="input-group">
@@ -469,6 +470,9 @@
 					success:	function(data) { 
 						//example of how to ready the returned json object
 						//alert(data['status'] + ", \n" + data['type']);
+
+						//update appropriate image preview thumbnail
+						clipboard = $("#" + data['city'] + data['ad-type'] + " img[name='preview-creative']").attr("src", data['creative']);
 
 						//hide dimmed loading div
 						$("#dim-page-wrapper").delay(200).fadeOut(100);

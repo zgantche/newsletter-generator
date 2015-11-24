@@ -109,7 +109,10 @@
 
 	$data = array(
 		'status' 	=> 'success', 
-		'type' 	=> $ad_info['creative']
+		'city'		=> $_POST['city'],
+		'ad-type'	=> $_POST['ad-type'],
+		'creative' 	=> $ad_info['creative'],
+		'url'		=> $ad_info['link-url']
 	);
 
 	echo json_encode( $data );
