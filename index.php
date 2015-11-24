@@ -371,7 +371,9 @@
 													</div>
 												</div>
 
-												<img src="<?php echo $ad['creative']; ?>" name="preview-creative" class="img-thumbnail center-block" />
+												<a href="<?php echo $ad['link-url']; ?>" name="preview-link-url" target="_blank">
+													<img src="<?php echo $ad['creative']; ?>" name="preview-creative" class="img-thumbnail center-block" />
+												</a>
 												<br />
 												<input type="file" name="fileToUpload" id="fileToUpload"><br />
 
@@ -469,10 +471,11 @@
 					},
 					success:	function(data) { 
 						//example of how to ready the returned json object
-						//alert(data['status'] + ", \n" + data['type']);
+						//alert(data['status'] + ", \n" + data['link-url']);
 
-						//update appropriate image preview thumbnail
-						clipboard = $("#" + data['city'] + data['ad-type'] + " img[name='preview-creative']").attr("src", data['creative']);
+						//update appropriate image preview thumbnail with latest Creative and URL
+						$("#" + data['city'] + data['ad-type'] + " a[name='preview-link-url']").attr("href", data['link-url']);
+						$("#" + data['city'] + data['ad-type'] + " a img[name='preview-creative']").attr("src", data['creative']);
 
 						//hide dimmed loading div
 						$("#dim-page-wrapper").delay(200).fadeOut(100);
