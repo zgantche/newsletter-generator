@@ -295,7 +295,7 @@
 										</form>
 									</div>
 
-									<div id="<?php echo 'ads' . $city; ?>" role="tabpanel" class="tab-pane">
+									<div id="<?php echo 'ads' . $city; ?>" role="tabpanel" class="tab-pane text-center">
 										<?php
 
 											//-- Load Ads for Appropriate City --//
@@ -371,6 +371,7 @@
 													</div>
 												</div>
 
+												<img src="<?php echo $ad['creative']; ?>" class="img-thumbnail center-block" /><br />
 												<input type="file" name="fileToUpload" id="fileToUpload"><br />
 
 												<div class="input-group">
