@@ -343,33 +343,49 @@
 													default:	$ad_label = "Non-expected $ads key? :/"; break;
 												}
 										?>
+							<!-- BEGIN section for current ad (<?php echo $ad_label; ?>) -->
+							<!-- Please escuse tab indention inconsistency, things are getting too nesty in here! -->
+							<a data-toggle="collapse" href="<?php echo '#duplicateAd' . $ads_key . $city; ?>">
+								<h3><?php echo $ad_label; ?> <small>[Duplicate]</small></h3>
+							</a>
 
-											<form id="<?php echo $city . $ads_key; ?>" action="saveAds.php" method="post" enctype="multipart/form-data">
+							<div class="collapse" id="<?php echo 'duplicateAd' . $ads_key . $city; ?>">
+								<div class="well" style="text-align:center;">
+									<div class="responsiveButtonGroup" data-toggle="buttons">
+										<?php foreach($cities as $innerCity): ?>
+											<?php if ($city === $innerCity): ?>
+												<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
+											<?php else: ?>
+												<button type="button" 
+													class="btn btn-default save-btn" 
+													onclick="duplicateAd('<?php echo $city ?>', '<?php echo $innerCity ?>', '<?php echo $ads_key ?>');">
+														<?php echo $innerCity; ?>
+												</button>
+											<?php endif; ?>
+										<?php endforeach; ?>
+									</div>
+								</div>
+							</div>
+
+							<!-- Image trigger modal -->
+							<a href="#" data-toggle="modal" data-target="#adModal<?php echo $city . $ads_key; ?>">
+								<img src="<?php echo $ad['creative']; ?>" name="modal-image-trigger-<?php echo $ads_key; ?>" class="img-thumbnail center-block" />
+							</a><br />
+
+							<!-- Modal -->
+							<div class="modal fade" id="adModal<?php echo $city . $ads_key; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h3 class="modal-title" >Edit <?php echo $ad_label; ?></h3>
+										</div>
+										<form id="<?php echo $city . $ads_key; ?>" action="saveAds.php" method="post" enctype="multipart/form-data">
+											<div class="modal-body">
 
 												<input type="hidden" name="city" value="<?php echo $city; ?>" />
 												<input type="hidden" name="ad-type" value="<?php echo $ads_key; ?>" />
 
-												<a data-toggle="collapse" href="<?php echo '#duplicateAd' . $ads_key . $city; ?>">
-													<h3><?php echo $ad_label; ?> <small>[Duplicate]</small></h3>
-												</a>
-
-												<div class="collapse" id="<?php echo 'duplicateAd' . $ads_key . $city; ?>">
-													<div class="well" style="text-align:center;">
-														<div class="responsiveButtonGroup" data-toggle="buttons">
-															<?php foreach($cities as $innerCity): ?>
-																<?php if ($city === $innerCity): ?>
-																	<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
-																<?php else: ?>
-																	<button type="button" 
-																		class="btn btn-default save-btn" 
-																		onclick="duplicateAd('<?php echo $city ?>', '<?php echo $innerCity ?>', '<?php echo $ads_key ?>');">
-																			<?php echo $innerCity; ?>
-																	</button>
-																<?php endif; ?>
-															<?php endforeach; ?>
-														</div>
-													</div>
-												</div>
 
 												<a href="<?php echo $ad['link-url']; ?>" name="preview-link-url" target="_blank">
 													<img src="<?php echo $ad['creative']; ?>" name="preview-creative" class="img-thumbnail center-block" />
@@ -388,8 +404,18 @@
 														value="<?php echo $ad['link-url']; ?>" />
 												</div>
 
-												<button type="submit" class="btn btn-primary save-btn">Save <?php echo $ad_label; ?></button><br /><br />
-											</form>
+												<!--button type="submit" class="btn btn-primary save-btn">Save <?php echo $ad_label; ?></button><br /><br /-->
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary save-btn">Save changes</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<!-- END section for current ad (<?php echo $ad_label; ?>) -->
+
 
 										<?php endforeach; ?>
 
@@ -448,6 +474,9 @@
 					$("#success-message").css("display", "none");
 					$("#success-message").finish();
 
+					//close open modal
+					$("div[id^='adModal']").modal("hide");
+
 					//show dimmed loading div
 					$("#dim-page-wrapper").fadeIn(100);
 				});
@@ -476,6 +505,9 @@
 						//update appropriate image preview thumbnail with latest Creative and URL
 						$("#" + data['city'] + data['ad-type'] + " a[name='preview-link-url']").attr("href", data['link-url']);
 						$("#" + data['city'] + data['ad-type'] + " a img[name='preview-creative']").attr("src", data['creative']);
+
+						//update appropriate modal trigger image
+						$("#ads" + data['city'] + " a img[name='modal-image-trigger-" + data['ad-type'] + "']").attr("src", data['creative']);
 
 						//hide dimmed loading div
 						$("#dim-page-wrapper").delay(200).fadeOut(100);
