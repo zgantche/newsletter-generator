@@ -343,8 +343,8 @@
 													default:	$ad_label = "Non-expected $ads key? :/"; break;
 												}
 										?>
+
 							<!-- BEGIN section for current ad (<?php echo $ad_label; ?>) -->
-							<!-- Please escuse tab indention inconsistency, things are getting too nesty in here! -->
 							<a data-toggle="collapse" href="<?php echo '#duplicateAd' . $ads_key . $city; ?>">
 								<h3><?php echo $ad_label; ?> <small>[Duplicate]</small></h3>
 							</a>
@@ -367,9 +367,14 @@
 								</div>
 							</div>
 
-							<!-- Image trigger modal -->
+							<!-- Image trigger modal. Use a placeholder kitten if image does not exist. -->
 							<a href="#" data-toggle="modal" data-target="#adModal<?php echo $city . $ads_key; ?>">
-								<img src="<?php echo $ad['creative']; ?>" name="modal-image-trigger-<?php echo $ads_key; ?>" class="img-thumbnail center-block" />
+								<img src="<?php 
+												if ( strlen($ad['creative']) == 0 )
+													echo 'http://placekitten.com.s3.amazonaws.com/homepage-samples/408/287.jpg';
+												else
+													echo $ad['creative'];
+												?>" name="modal-image-trigger-<?php echo $ads_key; ?>" class="img-thumbnail center-block" />
 							</a><br />
 
 							<!-- Modal -->
@@ -420,7 +425,6 @@
 										<?php endforeach; ?>
 
 									</div>
-
 								</div>
 							</div>
 						</div>
