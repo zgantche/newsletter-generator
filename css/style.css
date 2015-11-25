@@ -94,3 +94,12 @@ form > a:active {
 	text-decoration: none;
 	color: inherit;
 }
+
+.tab-pane > a:link,
+.tab-pane > a:visited,
+.tab-pane > a:hover,
+.tab-pane > a:focus,
+.tab-pane > a:active {
+	text-decoration: none;
+	color: inherit;
+}
