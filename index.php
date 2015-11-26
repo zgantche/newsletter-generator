@@ -391,25 +391,19 @@
 												<input type="hidden" name="city" value="<?php echo $city; ?>" />
 												<input type="hidden" name="ad-type" value="<?php echo $ads_key; ?>" />
 
-
 												<a href="<?php echo $ad['link-url']; ?>" name="preview-link-url" target="_blank">
 													<img src="<?php echo $ad['creative']; ?>" name="preview-creative" class="img-thumbnail center-block" />
 												</a>
 												<br />
 												<input type="file" name="fileToUpload" id="fileToUpload"><br />
 
-												<div class="input-group">
-													<span class="input-group-addon">Creative</span>
-													<input type="text" name="creative" class="form-control" placeholder="ex. http://creatives.url.address" 
-														value="<?php echo $ad['creative']; ?>" />
-												</div>
+												<input type="hidden" name="creative" class="form-control" value="<?php echo $ad['creative']; ?>" />
 												<div class="input-group">
 													<span class="input-group-addon">Link URL</span>
 													<input type="text" name="link-url" class="form-control" placeholder="ex. http://destination.site.goes.here" 
 														value="<?php echo $ad['link-url']; ?>" />
 												</div>
 
-												<!--button type="submit" class="btn btn-primary save-btn">Save <?php echo $ad_label; ?></button><br /><br /-->
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
