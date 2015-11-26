@@ -23,7 +23,7 @@
 		</title>
 
 		<!-- Bootstrap core CSS & custom CSS -->
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"  />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		
 	</head>
@@ -395,7 +395,16 @@
 													<img src="<?php echo $ad['creative']; ?>" name="preview-creative" class="img-thumbnail center-block" />
 												</a>
 												<br />
-												<input type="file" name="fileToUpload" id="fileToUpload"><br />
+
+												<div class="input-group">
+													<span class="input-group-addon">Creative</span>
+													<input type="text" class="form-control" name="preview-filename" placeholder="Browse for a new image..." readonly>
+													<span class="input-group-btn">
+														<span class="btn btn-warning btn-file">
+															Browse...<input type="file" name="fileToUpload" id="fileToUpload"><br />
+														</span>
+													</span>
+												</div>
 
 												<input type="hidden" name="creative" class="form-control" value="<?php echo $ad['creative']; ?>" />
 												<div class="input-group">
@@ -559,6 +568,14 @@
 					$("form>div.in").toggleClass("in", false);
 				});
 
+				
+				/*--- Provide feedback to user before file upload via preview-filename input ---*/
+
+				$(document).on('change', '.btn-file :file', function() {
+					var fileUploadButton = $(this);
+					var fileName = fileUploadButton.val().replace(/\\/g, '/').replace(/.*\//, '');
+					fileUploadButton.closest(".modal-body").find("input[name='preview-filename']").val(fileName);
+				});
 
 			});
 			
