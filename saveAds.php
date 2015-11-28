@@ -37,7 +37,7 @@
 				$ad_info['creative'] = $currentCachedImage['url'];
 			}
 
-		//if image is unique, upload it
+		//if image was not found in the cache, upload it
 		if ($uniqueImage) {
 			//load WordPress the light-weight way
 			define('WP_USE_THEMES', false);
@@ -56,7 +56,7 @@
 			
 			//define our new image
 			$imageToCache = array(
-				'name' 	=> basename($ad_info['creative']),
+				'name' 	=> $fileToUpload_name,
 				'url'	=> $ad_info['creative']
 			);
 
