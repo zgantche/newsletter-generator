@@ -90,7 +90,7 @@
 																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 															<?php else: ?>
 																<button type="button" 
-																	class="btn btn-default save-btn" 
+																	class="btn btn-default" 
 																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'main-article');">
 																		<?php echo $innerCity; ?>
 																</button>
@@ -128,7 +128,7 @@
 																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 															<?php else: ?>
 																<button type="button" 
-																	class="btn btn-default save-btn" 
+																	class="btn btn-default" 
 																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-1');">
 																		<?php echo $innerCity; ?>
 																</button>
@@ -161,7 +161,7 @@
 																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 															<?php else: ?>
 																<button type="button" 
-																	class="btn btn-default save-btn" 
+																	class="btn btn-default" 
 																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-2');">
 																		<?php echo $innerCity; ?>
 																</button>
@@ -194,7 +194,7 @@
 																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 															<?php else: ?>
 																<button type="button" 
-																	class="btn btn-default save-btn" 
+																	class="btn btn-default" 
 																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-3');">
 																		<?php echo $innerCity; ?>
 																</button>
@@ -227,7 +227,7 @@
 																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 															<?php else: ?>
 																<button type="button" 
-																	class="btn btn-default save-btn" 
+																	class="btn btn-default" 
 																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-4');">
 																		<?php echo $innerCity; ?>
 																</button>
@@ -260,7 +260,7 @@
 																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 															<?php else: ?>
 																<button type="button" 
-																	class="btn btn-default save-btn" 
+																	class="btn btn-default" 
 																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-5');">
 																		<?php echo $innerCity; ?>
 																</button>
@@ -282,7 +282,7 @@
 											</div>
 
 											<center>
-												<button type="submit" class="btn btn-primary save-btn">Save Content</button>
+												<button type="submit" class="btn btn-primary">Save Content</button>
 												<button 
 													type="button" 
 													onclick="window.open('newsletter.php?city=<?php echo $city; ?>', '_blank');" 
@@ -357,7 +357,7 @@
 												<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
 											<?php else: ?>
 												<button type="button" 
-													class="btn btn-default save-btn" 
+													class="btn btn-default" 
 													onclick="duplicateAd('<?php echo $city ?>', '<?php echo $innerCity ?>', '<?php echo $ads_key ?>');">
 														<?php echo $innerCity; ?>
 												</button>
@@ -416,7 +416,7 @@
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-												<button type="submit" class="btn btn-primary save-btn">Save changes</button>
+												<button type="submit" class="btn btn-primary">Save changes</button>
 											</div>
 										</form>
 									</div>
@@ -473,31 +473,28 @@
 			$(document).ready(function(){
 				var timer;
 
-				/*--- Show Dimmed Loading Animation ---*/
-
-				$(".save-btn").click(function(){
-					//cancel onoging & incoming slideUp animation, if any -- NOTE: "if" condition seemed like overkill
-					clearTimeout(timer);
-					$("#success-message").css("display", "none");
-					$("#success-message").finish();
-
-					//close open modal
-					$("div[id^='adModal']").modal("hide");
-
-					//show dimmed loading div
-					$("#dim-page-wrapper").fadeIn(100);
-				});
-
-
 				/*--- Ajax Form Code ---*/
 
 				/* prepare Ajax Form's Options: 
-					dataType	- define expected server response
-					error 		- error handling function
-					success		- success handling function
+					dataType		- define expected server response
+					beforeSubmit	- show dimmed loading animation
+					error 			- error handling function
+					success			- success handling function
 				*/
 				var options = { 
 					dataType: 'json',
+					beforeSubmit: function(formData, jqForm) {
+						//cancel onoging & incoming slideUp animation, if any -- NOTE: "if" condition seemed like overkill
+						clearTimeout(timer);
+						$("#success-message").css("display", "none");
+						$("#success-message").finish();
+
+						//close open modal
+						$("div[id^='adModal']").modal("hide");
+
+						//show dimmed loading div
+						$("#dim-page-wrapper").fadeIn(100);
+					},
 					error:		function(responseXML, statusText, xhr, $form) {
 						//show Error Message pop up
 						alert('Something went wrong with the PHPs! \n\nSever returned an Error: ' + statusText);
