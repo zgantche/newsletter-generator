@@ -107,14 +107,15 @@
 	//tell the client to expect a JSON response
 	header('Content-type: application/json');
 
+	//create and return our JSON object
 	$data = array(
 		'status' 	=> 'success', 
+		'type'		=> 'ads',
 		'city'		=> $_POST['city'],
 		'ad-type'	=> $_POST['ad-type'],
 		'creative' 	=> $ad_info['creative'],
 		'link-url'	=> $ad_info['link-url']
 	);
-
 	echo json_encode( $data );
 
 ?>

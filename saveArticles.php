@@ -56,4 +56,14 @@
 			break;
 	}
 
+	//tell the client to expect a JSON response
+	header('Content-type: application/json');
+
+	//create and return our JSON object
+	$data = array(
+		'status' 	=> 'success', 
+		'type'		=> 'articles'
+	);
+	echo json_encode( $data );
+
 ?>
