@@ -21,7 +21,7 @@
 	//determine if we need to upload a file
 	if( isset($_FILES['fileToUpload']) ) {
 
-		//maximum file size is 2MB
+		//maximum file size is 1MB
 		if ( $_FILES['fileToUpload']['size'] < 1000000 ) {
 
 			//only allow image files to be uploaded
@@ -38,20 +38,21 @@
 
 				//define the file's name, and a flag for its uniqueness
 				$fileToUpload_name = $_FILES['fileToUpload']['name'];
-				$uniqueImage = true;
+				$imageIsUnique = true;
 
 
 				//search our cache of uploaded images for this image name
 				foreach ($imageCache as $currentCachedImage)
-					if ($currentCachedImage['name'] === $fileToUpload_name){
-						$uniqueImage = false;
+					//when match is found, double check that exists on server
+					if ( $currentCachedImage['name'] === $fileToUpload_name ){
+						$imageIsUnique = false;
 
 						//retrieve the cached image's URL
 						$ad_info['creative'] = $currentCachedImage['url'];
 					}
 
 				//if image was not found in the cache, upload it
-				if ($uniqueImage) {
+				if ($imageIsUnique) {
 					//load WordPress the light-weight way
 					define('WP_USE_THEMES', false);
 					require('../wp-load.php');
