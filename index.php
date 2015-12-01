@@ -441,8 +441,8 @@
 		<!-- Loading Status Background div -->
 		<div id="dim-page-wrapper" style="
 				display: none;
-				background: black url('loading.gif') no-repeat 50% 50%;
-				opacity: 0.5;
+				background: black url('images/waitingtea.gif') no-repeat 50% 50%;
+				opacity: 0.8;
 				width:100%;
 				height:100%;
 				position:fixed;
