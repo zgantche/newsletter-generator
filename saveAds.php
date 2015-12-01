@@ -6,6 +6,12 @@
 	//create new varDirectory
 	$varDir = new VarDirectory();
 
+	//array for the return status
+	$returnStatus = array (
+		'status'	=> "success",
+		'info'		=> ""
+	);
+
 	//array for all Ads Info input, passed by form
 	$ad_info = array (
 		'creative' 	=>	$_POST['creative'],
@@ -15,56 +21,74 @@
 	//determine if we need to upload a file
 	if( isset($_FILES['fileToUpload']) ) {
 
-		// TODO: PERFORM UPLOAD FILE TYPE & SIZE CHECK!! 
-		//&& ($_FILES['fileToUpload']['size'] > 0)) {
+		//maximum file size is 2MB
+		if ( $_FILES['fileToUpload']['size'] < 1000000 ) {
 
-		//load image cache and check if it exists, if not, define it as an empty array
-		$imageCache = $varDir->getVar('imageCache');
-		if ( !isset($imageCache) )
-			$imageCache = array();
+			//only allow image files to be uploaded
+			$allowedFileTypes =  array('gif','png' ,'jpg', 'jpeg');
+			$filename = $_FILES['fileToUpload']['name'];
+			$extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-		//define the file's name, and a flag for its uniqueness
-		$fileToUpload_name = $_FILES['fileToUpload']['name'];
-		$uniqueImage = true;
+			if( in_array($extension, $allowedFileTypes) ) {
+
+				//load image cache and check if it exists, if not, define it as an empty array
+				$imageCache = $varDir->getVar('imageCache');
+				if ( !isset($imageCache) )
+					$imageCache = array();
+
+				//define the file's name, and a flag for its uniqueness
+				$fileToUpload_name = $_FILES['fileToUpload']['name'];
+				$uniqueImage = true;
 
 
-		//search our cache of uploaded images for this image name
-		foreach ($imageCache as $currentCachedImage)
-			if ($currentCachedImage['name'] === $fileToUpload_name){
-				$uniqueImage = false;
+				//search our cache of uploaded images for this image name
+				foreach ($imageCache as $currentCachedImage)
+					if ($currentCachedImage['name'] === $fileToUpload_name){
+						$uniqueImage = false;
 
-				//retrieve the cached image's URL
-				$ad_info['creative'] = $currentCachedImage['url'];
+						//retrieve the cached image's URL
+						$ad_info['creative'] = $currentCachedImage['url'];
+					}
+
+				//if image was not found in the cache, upload it
+				if ($uniqueImage) {
+					//load WordPress the light-weight way
+					define('WP_USE_THEMES', false);
+					require('../wp-load.php');
+
+					//load files required for image uploading
+					require_once( "../wp-admin/includes/image.php" );
+					require_once( "../wp-admin/includes/file.php" );
+					require_once( "../wp-admin/includes/media.php" );
+
+					//give image to WordPress for upload
+					$attachment_id = media_handle_upload( 'fileToUpload', 0 );
+
+					//retrieve the upload's URL
+					$ad_info['creative'] = wp_get_attachment_url( $attachment_id );
+					
+					//define our new image
+					$imageToCache = array(
+						'name' 	=> $fileToUpload_name,
+						'url'	=> $ad_info['creative']
+					);
+
+					//push new image info to our cache
+					array_push($imageCache, $imageToCache);
+
+					//update our image cache
+					$varDir->setVar($imageCache, 'imageCache');
+				}
+			} else {
+				//file not acceptable type
+				$returnStatus['status'] = "warning";
+				$returnStatus['info'] = "File is not an acceptable image format. \nAcceped image types are: PNG, JPG, JPEG, and GIF.";
 			}
-
-		//if image was not found in the cache, upload it
-		if ($uniqueImage) {
-			//load WordPress the light-weight way
-			define('WP_USE_THEMES', false);
-			require('../wp-load.php');
-
-			//load files required for image uploading
-			require_once( "../wp-admin/includes/image.php" );
-			require_once( "../wp-admin/includes/file.php" );
-			require_once( "../wp-admin/includes/media.php" );
-
-			//give image to WordPress for upload
-			$attachment_id = media_handle_upload( 'fileToUpload', 0 );
-
-			//retrieve the upload's URL
-			$ad_info['creative'] = wp_get_attachment_url( $attachment_id );
-			
-			//define our new image
-			$imageToCache = array(
-				'name' 	=> $fileToUpload_name,
-				'url'	=> $ad_info['creative']
-			);
-
-			//push new image info to our cache
-			array_push($imageCache, $imageToCache);
-
-			//update our image cache
-			$varDir->setVar($imageCache, 'imageCache');
+		} else {
+			//file too big, max size is 2MB
+			$returnStatus['status'] = "warning";
+			$returnStatus['info'] = "Image file is too large, the maximum file size is 1MB. This is too heavy for an image. "
+				. $_FILES['fileToUpload']['size'];
 		}
 	}
 
@@ -80,7 +104,6 @@
 		//trim spaces at beginning & end of string, then convert special char's to HTML entities
 		$value = htmlspecialchars( trim($value) );
 	}
-
 
 	//save $ad_info to varDirectory
 	switch ($_POST['city']) {
@@ -108,14 +131,15 @@
 	header('Content-type: application/json');
 
 	//create and return our JSON object
-	$data = array(
-		'status' 	=> 'success', 
+	$response = array(
+		'status' 	=> $returnStatus['status'],
+		'info'		=> $returnStatus['info'],
 		'type'		=> 'ads',
 		'city'		=> $_POST['city'],
 		'ad-type'	=> $_POST['ad-type'],
 		'creative' 	=> $ad_info['creative'],
 		'link-url'	=> $ad_info['link-url']
 	);
-	echo json_encode( $data );
+	echo json_encode( $response );
 
 ?>

@@ -506,6 +506,11 @@
 						//example of how to ready the returned json object
 						//alert(data['status'] + ", \n" + data['link-url']);
 
+						//display Warning message, if applicable
+						if (data['status'] == "warning") {
+							alert(data['info']);
+						}
+
 						//if form submission was regarding ads, update their images
 						if (data['type'] == "ads") {
 							//update appropriate image preview thumbnail with latest Creative and URL
