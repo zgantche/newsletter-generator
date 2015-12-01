@@ -461,6 +461,20 @@
 				z-index:100;">
 			<strong>Success! </strong>Newsletter content saved
 		</div>
+		<div id="warning-message" class="alert alert-warning" role="alert" style="
+				display: none;
+				width: 100%;
+				text-align: center;
+				padding-top: 20px;
+				position:fixed;
+				top:0;
+				z-index:100;">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<strong>Warning!</strong>
+			<div id="warning-message-info"></div>
+		</div>
 		
 		<!-- Bootstrap core JavaScript, jQuery, Ajax form JS - (Placed at end of doc so page loads faster) -->
 		<!-- ============================================================================================= -->
@@ -484,6 +498,7 @@
 				var options = { 
 					dataType: 'json',
 					beforeSubmit: function(formData, jqForm) {
+
 						//cancel onoging & incoming slideUp animation, if any -- NOTE: "if" condition seemed like overkill
 						clearTimeout(timer);
 						$("#success-message").css("display", "none");
@@ -496,6 +511,7 @@
 						$("#dim-page-wrapper").fadeIn(100);
 					},
 					error:		function(responseXML, statusText, xhr, $form) {
+						
 						//show Error Message pop up
 						alert('Something went wrong with the PHPs! \n\nSever returned an Error: ' + statusText);
 						
@@ -503,13 +519,6 @@
 						$("#dim-page-wrapper").fadeOut(100);
 					},
 					success:	function(data) { 
-						//example of how to ready the returned json object
-						//alert(data['status'] + ", \n" + data['link-url']);
-
-						//display Warning message, if applicable
-						if (data['status'] == "warning") {
-							alert(data['info']);
-						}
 
 						//if form submission was regarding ads, update their images
 						if (data['type'] == "ads") {
@@ -521,14 +530,24 @@
 							$("#ads" + data['city'] + " a img[name='modal-image-trigger-" + data['ad-type'] + "']").attr("src", data['creative']);
 						}
 
-						//hide dimmed loading div
-						$("#dim-page-wrapper").delay(200).fadeOut(100);
+						//display Warning message, if applicable
+						if (data['status'] == "warning") {
+							//update warning message and display it to user
+							$("#warning-message-info").html(data['info']);
+							$("#warning-message").css("display", "block");
 
-						//show Success Message briefly (for 1.5 sec)
-						$("#success-message").css("display", "block");
-						timer = setTimeout(function(){
-							$("#success-message").slideUp(500);
-						}, 1500);
+							//hide dimmed loading div
+							$("#dim-page-wrapper").delay(300).fadeOut(200);
+						} else {
+							//hide dimmed loading div
+							$("#dim-page-wrapper").delay(200).fadeOut(100);
+
+							//show Success Message briefly (for 1.5 sec)
+							$("#success-message").css("display", "block");
+							timer = setTimeout(function(){
+								$("#success-message").slideUp(500);
+							}, 1500);
+						}
 					}
 				};
 				// bind all forms as Ajax Forms, with the Options above
