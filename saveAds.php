@@ -44,7 +44,8 @@
 				//search our cache of uploaded images for this image name
 				foreach ($imageCache as $currentCachedImage)
 					//when match is found, double check that exists on server
-					if ( $currentCachedImage['name'] === $fileToUpload_name ){
+					if ( $currentCachedImage['name'] === $fileToUpload_name && 
+							file_exists(absoluteImgPath( $currentCachedImage['url'] )) ){
 						$imageIsUnique = false;
 
 						//retrieve the cached image's URL
@@ -143,4 +144,12 @@
 	);
 	echo json_encode( $response );
 
+
+	//converts image URL to image's absolute path
+	function absoluteImgPath($url){
+		$rootPath = preg_replace('/newsletter-generator.*/', '', __FILE__);
+		$absolutePath = preg_replace('/.*wp-content/', $rootPath . 'wp-content', $url);
+
+		return $absolutePath;
+	}
 ?>
