@@ -88,12 +88,12 @@
 			} else {
 				//file not acceptable type
 				$returnStatus['status'] = "warning";
-				$returnStatus['info'] = "File is not an acceptable image format. \nAcceped image types are: PNG, JPG, JPEG, and GIF.";
+				$returnStatus['info'] = "Image <b>not</b> updated; invalid file type -- accepted extensions are: PNG, JPG, JPEG, and GIF.<br />";
 			}
 		} else {
 			//file too big, max size is 2MB
 			$returnStatus['status'] = "warning";
-			$returnStatus['info'] = "Image file is too large, the maximum file size is 1MB. This is too heavy for an image. "
+			$returnStatus['info'] = "Image <b>not</b> updated; file is too large -- the maximum file size is 1MB.<br />"
 				. $_FILES['fileToUpload']['size'];
 		}
 	} else

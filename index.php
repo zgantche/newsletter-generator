@@ -339,7 +339,7 @@
 												switch ($ads_key) {
 													case "LB":	$ad_label = "Leaderboard"; break;
 													case "BB1":	$ad_label = "Big Box 1"; break;
-													case "BB2":	$ad_label = "Bix Box 2"; break;
+													case "BB2":	$ad_label = "Big Box 2"; break;
 													default:	$ad_label = "Non-expected $ads key? :/"; break;
 												}
 										?>
