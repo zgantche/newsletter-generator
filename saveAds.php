@@ -50,6 +50,8 @@
 
 						//retrieve the cached image's URL
 						$ad_info['creative'] = $currentCachedImage['url'];
+
+						$returnStatus['info'] = 'Updated image, found on server.';
 					}
 
 				//if image was not found in the cache, upload it
@@ -80,6 +82,8 @@
 
 					//update our image cache
 					$varDir->setVar($imageCache, 'imageCache');
+					
+					$returnStatus['info'] = 'Image uploaded and updated.';
 				}
 			} else {
 				//file not acceptable type
@@ -92,7 +96,9 @@
 			$returnStatus['info'] = "Image file is too large, the maximum file size is 1MB. This is too heavy for an image. "
 				. $_FILES['fileToUpload']['size'];
 		}
-	}
+	} else
+		$returnStatus['info'] = "Image updated.";
+
 
 	//clean up input (call $value by reference)
 	foreach ($ad_info as &$value) {
@@ -111,21 +117,26 @@
 	switch ($_POST['city']) {
 		case 'Toronto':
 			$varDir->setVar($ad_info, 'torontoAd-' . $_POST['ad-type']);
+			$returnStatus['info'] .= ' Link URL updated.';
 			break;
 		case 'Montreal':
 			$varDir->setVar($ad_info, 'montrealAd-' . $_POST['ad-type']);
+			$returnStatus['info'] .= ' Link URL updated.';
 			break;
 		case 'Vancouver':
 			$varDir->setVar($ad_info, 'vancouverAd-' . $_POST['ad-type']);
+			$returnStatus['info'] .= ' Link URL updated.';
 			break;
 		case 'Calgary':
 			$varDir->setVar($ad_info, 'calgaryAd-' . $_POST['ad-type']);
+			$returnStatus['info'] .= ' Link URL updated.';
 			break;
 		case 'Nationwide':
 			$varDir->setVar($ad_info, 'nationwideAd-' . $_POST['ad-type']);
+			$returnStatus['info'] .= ' Link URL updated.';
 			break;	
 		default:
-			# error code...
+			$returnStatus['info'] .= ' Link URL <b>not</b> updated; no match found for city.';
 			break;
 	}
 	

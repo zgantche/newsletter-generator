@@ -453,13 +453,13 @@
 		<div id="success-message" class="alert alert-success" role="alert" style="
 				display: none;
 				width: 100%;
-				height: 60px;
 				text-align: center;
 				padding-top: 20px;
 				position:fixed;
 				top:0;
 				z-index:100;">
-			<strong>Success! </strong>Newsletter content saved
+			<strong>Success!</strong>
+			<div id="success-message-info"></div>
 		</div>
 		<div id="warning-message" class="alert alert-warning" role="alert" style="
 				display: none;
@@ -511,7 +511,7 @@
 						$("#dim-page-wrapper").fadeIn(100);
 					},
 					error:		function(responseXML, statusText, xhr, $form) {
-						
+
 						//show Error Message pop up
 						alert('Something went wrong with the PHPs! \n\nSever returned an Error: ' + statusText);
 						
@@ -530,23 +530,21 @@
 							$("#ads" + data['city'] + " a img[name='modal-image-trigger-" + data['ad-type'] + "']").attr("src", data['creative']);
 						}
 
+						//hide dimmed loading div
+						$("#dim-page-wrapper").delay(300).fadeOut(200);
+
 						//display Warning message, if applicable
 						if (data['status'] == "warning") {
-							//update warning message and display it to user
+							//update warning message, and display it to user
 							$("#warning-message-info").html(data['info']);
 							$("#warning-message").css("display", "block");
-
-							//hide dimmed loading div
-							$("#dim-page-wrapper").delay(300).fadeOut(200);
 						} else {
-							//hide dimmed loading div
-							$("#dim-page-wrapper").delay(200).fadeOut(100);
-
-							//show Success Message briefly (for 1.5 sec)
+							//update success message, and display it briefly (for 2.5 sec)
+							$("#success-message-info").html(data['info']);
 							$("#success-message").css("display", "block");
 							timer = setTimeout(function(){
 								$("#success-message").slideUp(500);
-							}, 1500);
+							}, 2500);
 						}
 					}
 				};

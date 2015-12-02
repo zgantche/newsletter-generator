@@ -1,6 +1,12 @@
 <?php
 	require_once 'VarDirectory.php';
 
+	//array for the return status
+	$returnStatus = array (
+		'status'	=> "success",
+		'info'		=> ""
+	);
+
 	//array for all Article Info input, passed by form
 	$article_info = array (
 		'main-article-title' => $_POST['main-article-title'],
@@ -38,21 +44,27 @@
 	switch ($_POST['city']) {
 		case 'Toronto':
 			$varDir->setVar($article_info, 'torontoArticles');
+			$returnStatus['info'] = 'Articles updated.';
 			break;
 		case 'Montreal':
 			$varDir->setVar($article_info, 'montrealArticles');
+			$returnStatus['info'] = 'Articles updated.';
 			break;
 		case 'Vancouver':
 			$varDir->setVar($article_info, 'vancouverArticles');
+			$returnStatus['info'] = 'Articles updated.';
 			break;
 		case 'Calgary':
 			$varDir->setVar($article_info, 'calgaryArticles');
+			$returnStatus['info'] = 'Articles updated.';
 			break;
 		case 'Nationwide':
 			$varDir->setVar($article_info, 'nationwideArticles');
+			$returnStatus['info'] = 'Articles updated.';
 			break;	
 		default:
-			# error code...
+			$returnStatus['status'] = 'warning.';
+			$returnStatus['info'] = 'Articles <b>not</b> updated; no match found for city.';
 			break;
 	}
 
@@ -61,7 +73,8 @@
 
 	//create and return our JSON object
 	$data = array(
-		'status' 	=> 'success', 
+		'status' 	=> $returnStatus['status'],
+		'info'		=> $returnStatus['info'],
 		'type'		=> 'articles'
 	);
 	echo json_encode( $data );
