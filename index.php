@@ -116,170 +116,46 @@
 													><?php echo $articles['main-article-copy']; ?></textarea>
 											</div>
 
-											<a data-toggle="collapse" href="<?php echo '#duplicateArticle1' . $city; ?>">
-												<h4>Thumbnail Article 1 <small>[Duplicate]</small></h4>
-											</a>
+											<?php 
+												//-- Loop Through Each of the 5 Thumbnail Articles --//
+												for ($i = 1; $i <= 5; $i++):
+													$article_url = 'article-' . $i . '-title';
+													$article_title = 'article-' . $i . '-url';
+											?>
+												<a data-toggle="collapse" href="<?php echo '#duplicateArticle' . $i . $city; ?>">
+													<h4>Thumbnail Article <?php echo $i ?> <small>[Duplicate]</small></h4>
+												</a>
 
-											<div class="collapse" id="<?php echo 'duplicateArticle1' . $city; ?>">
-												<div class="well" style="text-align:center;">
-													<div class="responsiveButtonGroup" data-toggle="buttons">
-														<?php foreach($cities as $innerCity): ?>
-															<?php if ($city === $innerCity): ?>
-																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
-															<?php else: ?>
-																<button type="button" 
-																	class="btn btn-default" 
-																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-1');">
-																		<?php echo $innerCity; ?>
-																</button>
-															<?php endif; ?>
-														<?php endforeach; ?>
+												<!-- Duplicate Section -->
+												<div class="collapse" id="<?php echo 'duplicateArticle' . $i . $city; ?>">
+													<div class="well" style="text-align:center;">
+														<div class="responsiveButtonGroup" data-toggle="buttons">
+															<?php foreach($cities as $innerCity): ?>
+																<?php if ($city === $innerCity): ?>
+																	<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
+																<?php else: ?>
+																	<button type="button" 
+																		class="btn btn-default" 
+																		onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-' . $i);">
+																			<?php echo $innerCity; ?>
+																	</button>
+																<?php endif; ?>
+															<?php endforeach; ?>
+														</div>
 													</div>
 												</div>
-											</div>
 
-											<div class="input-group">
-												<span class="input-group-addon">Title</span>
-												<input type="text" name="article-1-title" class="form-control" placeholder="Article 1 Title" 
-													value="<?php echo $articles['article-1-title']; ?>" />
-											</div>
-											<div class="input-group">
-												<span class="input-group-addon">URL</span>
-												<input type="text" name="article-1-url" class="form-control" placeholder="Article 1 Link Address"
-													value="<?php echo $articles['article-1-url']; ?>" />
-											</div>
-
-											<a data-toggle="collapse" href="<?php echo '#duplicateArticle2' . $city; ?>">
-												<h4>Thumbnail Article 2 <small>[Duplicate]</small></h4>
-											</a>
-
-											<div class="collapse" id="<?php echo 'duplicateArticle2' . $city; ?>">
-												<div class="well" style="text-align:center;">
-													<div class="responsiveButtonGroup" data-toggle="buttons">
-														<?php foreach($cities as $innerCity): ?>
-															<?php if ($city === $innerCity): ?>
-																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
-															<?php else: ?>
-																<button type="button" 
-																	class="btn btn-default" 
-																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-2');">
-																		<?php echo $innerCity; ?>
-																</button>
-															<?php endif; ?>
-														<?php endforeach; ?>
-													</div>
+												<div class="input-group">
+													<span class="input-group-addon">Title</span>
+													<input type="text" name="<?php echo 'article-' . $i . '-title'; ?>" class="form-control" placeholder="<?php echo 'Article ' . $i . ' Title'; ?>" 
+														value="<?php echo $articles[$article_title]; ?>" />
 												</div>
-											</div>
-											
-											<div class="input-group">
-												<span class="input-group-addon">Title</span>
-												<input type="text" name="article-2-title" class="form-control" placeholder="Article 2 Title"
-													value="<?php echo $articles['article-2-title']; ?>" />
-											</div>
-											<div class="input-group">
-												<span class="input-group-addon">URL</span>
-												<input type="text" name="article-2-url" class="form-control" placeholder="Article 2 Link Address"
-													value="<?php echo $articles['article-2-url']; ?>" />
-											</div>
-
-											<a data-toggle="collapse" href="<?php echo '#duplicateArticle3' . $city; ?>">
-												<h4>Thumbnail Article 3 <small>[Duplicate]</small></h4>
-											</a>
-
-											<div class="collapse" id="<?php echo 'duplicateArticle3' . $city; ?>">
-												<div class="well" style="text-align:center;">
-													<div class="responsiveButtonGroup" data-toggle="buttons">
-														<?php foreach($cities as $innerCity): ?>
-															<?php if ($city === $innerCity): ?>
-																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
-															<?php else: ?>
-																<button type="button" 
-																	class="btn btn-default" 
-																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-3');">
-																		<?php echo $innerCity; ?>
-																</button>
-															<?php endif; ?>
-														<?php endforeach; ?>
-													</div>
+												<div class="input-group">
+													<span class="input-group-addon">URL</span>
+													<input type="text" name="<?php echo 'article-' . $i . '-url'; ?>" class="form-control" placeholder="<?php echo 'Article ' . $i . ' Link Address'; ?>"
+														value="<?php echo $articles[$article_url]; ?>" />
 												</div>
-											</div>
-											
-											<div class="input-group">
-												<span class="input-group-addon">Title</span>
-												<input type="text" name="article-3-title" class="form-control" placeholder="Article 3 Title"
-													value="<?php echo $articles['article-3-title']; ?>" />
-											</div>
-											<div class="input-group">
-												<span class="input-group-addon">URL</span>
-												<input type="text" name="article-3-url" class="form-control" placeholder="Article 3 Link Address"
-													value="<?php echo $articles['article-3-url']; ?>" />
-											</div>
-
-											<a data-toggle="collapse" href="<?php echo '#duplicateArticle4' . $city; ?>">
-												<h4>Thumbnail Article 4 <small>[Duplicate]</small></h4>
-											</a>
-
-											<div class="collapse" id="<?php echo 'duplicateArticle4' . $city; ?>">
-												<div class="well" style="text-align:center;">
-													<div class="responsiveButtonGroup" data-toggle="buttons">
-														<?php foreach($cities as $innerCity): ?>
-															<?php if ($city === $innerCity): ?>
-																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
-															<?php else: ?>
-																<button type="button" 
-																	class="btn btn-default" 
-																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-4');">
-																		<?php echo $innerCity; ?>
-																</button>
-															<?php endif; ?>
-														<?php endforeach; ?>
-													</div>
-												</div>
-											</div>
-											
-											<div class="input-group">
-												<span class="input-group-addon">Title</span>
-												<input type="text" name="article-4-title" class="form-control" placeholder="Article 4 Title"
-													value="<?php echo $articles['article-4-title']; ?>" />
-											</div>
-											<div class="input-group">
-												<span class="input-group-addon">URL</span>
-												<input type="text" name="article-4-url" class="form-control" placeholder="Article 4 Link Address"
-													value="<?php echo $articles['article-4-url']; ?>" />
-											</div>
-
-											<a data-toggle="collapse" href="<?php echo '#duplicateArticle5' . $city; ?>">
-												<h4>Thumbnail Article 5 <small>[Duplicate]</small></h4>
-											</a>
-
-											<div class="collapse" id="<?php echo 'duplicateArticle5' . $city; ?>">
-												<div class="well" style="text-align:center;">
-													<div class="responsiveButtonGroup" data-toggle="buttons">
-														<?php foreach($cities as $innerCity): ?>
-															<?php if ($city === $innerCity): ?>
-																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
-															<?php else: ?>
-																<button type="button" 
-																	class="btn btn-default" 
-																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-5');">
-																		<?php echo $innerCity; ?>
-																</button>
-															<?php endif; ?>
-														<?php endforeach; ?>
-													</div>
-												</div>
-											</div>
-											
-											<div class="input-group">
-												<span class="input-group-addon">Title</span>
-												<input type="text" name="article-5-title" class="form-control" placeholder="Article 5 Title"
-													value="<?php echo $articles['article-5-title']; ?>" />
-											</div>
-											<div class="input-group">
-												<span class="input-group-addon">URL</span>
-												<input type="text" name="article-5-url" class="form-control" placeholder="Article 5 Link Address"
-													value="<?php echo $articles['article-5-url']; ?>" />
-											</div>
+											<?php endfor; ?>
 
 											<center>
 												<button type="submit" class="btn btn-primary">Save Content</button>
