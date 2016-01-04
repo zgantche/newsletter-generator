@@ -136,7 +136,7 @@
 																<?php else: ?>
 																	<button type="button" 
 																		class="btn btn-default" 
-																		onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-' . $i);">
+																		onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', '<?php echo 'article-' . $i ?>');">
 																			<?php echo $innerCity; ?>
 																	</button>
 																<?php endif; ?>
