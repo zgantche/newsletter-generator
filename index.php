@@ -119,8 +119,8 @@
 											<?php 
 												//-- Loop Through Each of the 5 Thumbnail Articles --//
 												for ($i = 1; $i <= 5; $i++):
-													$article_url = 'article-' . $i . '-title';
-													$article_title = 'article-' . $i . '-url';
+													$article_title = 'article-' . $i . '-title';
+													$article_url = 'article-' . $i . '-url';
 											?>
 												<a data-toggle="collapse" href="<?php echo '#duplicateArticle' . $i . $city; ?>">
 													<h4>Thumbnail Article <?php echo $i ?> <small>[Duplicate]</small></h4>
