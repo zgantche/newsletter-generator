@@ -86,7 +86,7 @@
 												<div class="col-md-12">
 													<!-- Duplicate Section -->
 													<div class="collapse" id="<?php echo 'duplicateArticleMain' . $city; ?>">
-														<div class="well" style="text-align:center;">
+														<div class="well">
 															<div class="responsiveButtonGroup" data-toggle="buttons">
 																<?php foreach($cities as $innerCity): ?>
 																	<?php if ($city === $innerCity): ?>
@@ -144,7 +144,7 @@
 													<div class="col-md-12">
 														<!-- Duplicate Section -->
 														<div class="collapse" id="<?php echo 'duplicateArticle' . $i . $city; ?>">
-															<div class="well" style="text-align:center;">
+															<div class="well">
 																<div class="responsiveButtonGroup" data-toggle="buttons">
 																	<?php foreach($cities as $innerCity): ?>
 																		<?php if ($city === $innerCity): ?>
@@ -252,7 +252,7 @@
 							</a>
 
 							<div class="collapse" id="<?php echo 'duplicateAd' . $ads_key . $city; ?>">
-								<div class="well" style="text-align:center;">
+								<div class="well">
 									<div class="responsiveButtonGroup" data-toggle="buttons">
 										<?php foreach($cities as $innerCity): ?>
 											<?php if ($city === $innerCity): ?>
