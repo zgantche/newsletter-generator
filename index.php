@@ -77,30 +77,33 @@
 													$articles = $nationwide_articles;
 											?>
 
-											<a data-toggle="collapse" href="<?php echo '#duplicateArticleMain' . $city; ?>">
-												<h3><?php echo $city; ?> Main Article <small>[Duplicate]</small></h3>
-											</a>
-
-											<!-- Duplicate Section -->
-											<div class="collapse" id="<?php echo 'duplicateArticleMain' . $city; ?>">
-												<div class="well" style="text-align:center;">
-													<div class="responsiveButtonGroup" data-toggle="buttons">
-														<?php foreach($cities as $innerCity): ?>
-															<?php if ($city === $innerCity): ?>
-																<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
-															<?php else: ?>
-																<button type="button" 
-																	class="btn btn-default" 
-																	onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'main-article');">
-																		<?php echo $innerCity; ?>
-																</button>
-															<?php endif; ?>
-														<?php endforeach; ?>
+											<div class="row">
+												<div class="col-md-9 col-md-offset-3">
+													<a data-toggle="collapse" href="<?php echo '#duplicateArticleMain' . $city; ?>">
+														<h3><?php echo $city; ?> Main Article <small>[Duplicate]</small></h3>
+													</a>
+												</div>
+												<div class="col-md-12">
+													<!-- Duplicate Section -->
+													<div class="collapse" id="<?php echo 'duplicateArticleMain' . $city; ?>">
+														<div class="well" style="text-align:center;">
+															<div class="responsiveButtonGroup" data-toggle="buttons">
+																<?php foreach($cities as $innerCity): ?>
+																	<?php if ($city === $innerCity): ?>
+																		<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
+																	<?php else: ?>
+																		<button type="button" 
+																			class="btn btn-default" 
+																			onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'main-article');">
+																				<?php echo $innerCity; ?>
+																		</button>
+																	<?php endif; ?>
+																<?php endforeach; ?>
+															</div>
+														</div>
 													</div>
 												</div>
-											</div>
 
-											<div class="row">
 												<div class="col-md-3">
 													<img src="
 														<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['main-article-url'] )), array(300,200) )[0]; ?>
@@ -132,30 +135,33 @@
 													$article_title = 'article-' . $i . '-title';
 													$article_url = 'article-' . $i . '-url';
 											?>
-												<a data-toggle="collapse" href="<?php echo '#duplicateArticle' . $i . $city; ?>">
-													<h4>Thumbnail Article <?php echo $i ?> <small>[Duplicate]</small></h4>
-												</a>
-
-												<!-- Duplicate Section -->
-												<div class="collapse" id="<?php echo 'duplicateArticle' . $i . $city; ?>">
-													<div class="well" style="text-align:center;">
-														<div class="responsiveButtonGroup" data-toggle="buttons">
-															<?php foreach($cities as $innerCity): ?>
-																<?php if ($city === $innerCity): ?>
-																	<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
-																<?php else: ?>
-																	<button type="button" 
-																		class="btn btn-default" 
-																		onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', '<?php echo 'article-' . $i ?>');">
-																			<?php echo $innerCity; ?>
-																	</button>
-																<?php endif; ?>
-															<?php endforeach; ?>
+												<div class="row">
+													<div class="col-md-9 col-md-offset-3">
+														<a data-toggle="collapse" href="<?php echo '#duplicateArticle' . $i . $city; ?>">
+															<h4>Thumbnail Article <?php echo $i ?> <small>[Duplicate]</small></h4>
+														</a>
+													</div>
+													<div class="col-md-12">
+														<!-- Duplicate Section -->
+														<div class="collapse" id="<?php echo 'duplicateArticle' . $i . $city; ?>">
+															<div class="well" style="text-align:center;">
+																<div class="responsiveButtonGroup" data-toggle="buttons">
+																	<?php foreach($cities as $innerCity): ?>
+																		<?php if ($city === $innerCity): ?>
+																			<button type="button" class="btn btn-default" disabled><?php echo $city; ?></button>
+																		<?php else: ?>
+																			<button type="button" 
+																				class="btn btn-default" 
+																				onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', '<?php echo 'article-' . $i ?>');">
+																					<?php echo $innerCity; ?>
+																			</button>
+																		<?php endif; ?>
+																	<?php endforeach; ?>
+																</div>
+															</div>
 														</div>
 													</div>
-												</div>
 
-												<div class="row">
 													<div class="col-md-3">
 														<img src="
 															<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles[$article_url] )), array(300,200) )[0]; ?>

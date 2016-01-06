@@ -91,11 +91,11 @@ center button {
 	margin: 15px;
 }
 
-form > a:link,
-form > a:visited,
-form > a:hover,
-form > a:focus,
-form > a:active {
+.row > div > a:link,
+.row > div > a:visited,
+.row > div > a:hover,
+.row > div > a:focus,
+.row > div > a:active {
 	text-decoration: none;
 	color: inherit;
 }
