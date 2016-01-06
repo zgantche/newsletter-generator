@@ -85,9 +85,6 @@ a:hover {
 .bit-of-top-padding {
 	padding-top: 8px;
 }
-.bit-of-bottom-margin {
-	margin-bottom: 20px;
-}
 
 .well {
 	text-align: center;
@@ -96,6 +93,10 @@ a:hover {
 .article-row {
 	padding-top: 7px;
 	border-bottom: 1px dashed #CCC;
+}
+
+.main-article-preview-img {
+	margin-bottom: 20px;
 }
 
 .article-preview-img {

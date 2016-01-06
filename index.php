@@ -107,7 +107,7 @@
 												<div class="col-md-3">
 													<img src="
 														<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['main-article-url'] )), array(300,200) )[0]; ?>
-														" name="preview-creative" class="bit-of-bottom-margin img-thumbnail center-block" />
+														" name="preview-creative" class="main-article-preview-img img-thumbnail center-block" />
 												</div>
 												<div class="col-md-9">
 													<div class="input-group">
