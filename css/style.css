@@ -82,6 +82,11 @@ a:hover {
 	padding-bottom: 20px;
 }
 
+.article-preview-img {
+	width:150px;
+	height:108px;
+}
+
 center button {
 	margin: 15px;
 }

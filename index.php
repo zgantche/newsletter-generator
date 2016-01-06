@@ -1,6 +1,6 @@
 <?php 
-	// Load saved data from previous sessions
-	require_once 'loadData.php';
+	require_once 'loadData.php';		// Load saved data from previous sessions
+	require_once '../wp-load.php';		// Import WordPress functions for us to use
 
 	// Declare cities in order
 	$cities = array("Toronto", "Montreal", "Calgary", "Vancouver", "Nationwide");
@@ -100,20 +100,30 @@
 												</div>
 											</div>
 
-											<div class="input-group">
-												<span class="input-group-addon">Title</span>
-												<input type="text" name="main-article-title" class="form-control" placeholder="Main Article's Title" 
-													value="<?php echo $articles['main-article-title']; ?>" />
-											</div>
-											<div class="input-group">
-												<span class="input-group-addon" >URL</span>
-												<input type="text" name="main-article-url" class="form-control" placeholder="Main Article's Link Address" 
-													value="<?php echo $articles['main-article-url']; ?>" value=""/>
-											</div>
-											<div class="input-group">
-												<span class="input-group-addon">Copy</span>
-												<textarea rows="3" name="main-article-copy" class="form-control" placeholder="Main Article's Summary" 
-													><?php echo $articles['main-article-copy']; ?></textarea>
+											<div class="row">
+												<div class="col-md-3">
+													<img src="
+														<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['main-article-url'] )), array(300,200) )[0]; ?>
+														" name="preview-creative" class="img-thumbnail center-block" />
+												</div>
+												<div class="col-md-9">
+													<div class="input-group">
+														<span class="input-group-addon">Title</span>
+														<input type="text" name="main-article-title" class="form-control" placeholder="Main Article's Title" 
+															value="<?php echo $articles['main-article-title']; ?>" />
+													</div>
+													
+													<div class="input-group">
+														<span class="input-group-addon" >URL</span>
+														<input type="text" name="main-article-url" class="form-control" placeholder="Main Article's Link Address" 
+															value="<?php echo $articles['main-article-url']; ?>" value=""/>
+													</div>
+													<div class="input-group">
+														<span class="input-group-addon">Copy</span>
+														<textarea rows="3" name="main-article-copy" class="form-control" placeholder="Main Article's Summary" 
+															><?php echo $articles['main-article-copy']; ?></textarea>
+													</div>
+												</div>
 											</div>
 
 											<?php 
@@ -145,16 +155,26 @@
 													</div>
 												</div>
 
-												<div class="input-group">
-													<span class="input-group-addon">Title</span>
-													<input type="text" name="<?php echo 'article-' . $i . '-title'; ?>" class="form-control" placeholder="<?php echo 'Article ' . $i . ' Title'; ?>" 
-														value="<?php echo $articles[$article_title]; ?>" />
+												<div class="row">
+													<div class="col-md-3">
+														<img src="
+															<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles[$article_url] )), array(300,200) )[0]; ?>
+															" name="preview-creative" class="article-preview-img img-thumbnail center-block" />
+													</div>
+													<div class="col-md-9">
+														<div class="input-group">
+															<span class="input-group-addon">Title</span>
+															<input type="text" name="<?php echo 'article-' . $i . '-title'; ?>" class="form-control" placeholder="<?php echo 'Article ' . $i . ' Title'; ?>" 
+																value="<?php echo $articles[$article_title]; ?>" />
+														</div>
+														<div class="input-group">
+															<span class="input-group-addon">URL</span>
+															<input type="text" name="<?php echo 'article-' . $i . '-url'; ?>" class="form-control" placeholder="<?php echo 'Article ' . $i . ' Link Address'; ?>"
+																value="<?php echo $articles[$article_url]; ?>" />
+														</div>
+													</div>
 												</div>
-												<div class="input-group">
-													<span class="input-group-addon">URL</span>
-													<input type="text" name="<?php echo 'article-' . $i . '-url'; ?>" class="form-control" placeholder="<?php echo 'Article ' . $i . ' Link Address'; ?>"
-														value="<?php echo $articles[$article_url]; ?>" />
-												</div>
+
 											<?php endfor; ?>
 
 											<center>
