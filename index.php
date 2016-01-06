@@ -77,7 +77,7 @@
 													$articles = $nationwide_articles;
 											?>
 
-											<div class="row">
+											<div class="row article-row">
 												<div class="col-md-9 col-md-offset-3">
 													<a data-toggle="collapse" href="<?php echo '#duplicateArticleMain' . $city; ?>">
 														<h3><?php echo $city; ?> Main Article <small>[Duplicate]</small></h3>
@@ -135,7 +135,7 @@
 													$article_title = 'article-' . $i . '-title';
 													$article_url = 'article-' . $i . '-url';
 											?>
-												<div class="row">
+												<div class="row article-row">
 													<div class="col-md-9 col-md-offset-3">
 														<a data-toggle="collapse" href="<?php echo '#duplicateArticle' . $i . $city; ?>">
 															<h4>Thumbnail Article <?php echo $i ?> <small>[Duplicate]</small></h4>
@@ -167,7 +167,7 @@
 															<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles[$article_url] )), array(300,200) )[0]; ?>
 															" name="preview-creative" class="article-preview-img img-thumbnail center-block" />
 													</div>
-													<div class="col-md-9">
+													<div class="col-md-9 bit-of-top-padding">
 														<div class="input-group">
 															<span class="input-group-addon">Title</span>
 															<input type="text" name="<?php echo 'article-' . $i . '-title'; ?>" class="form-control" placeholder="<?php echo 'Article ' . $i . ' Title'; ?>" 

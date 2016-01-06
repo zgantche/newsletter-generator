@@ -82,9 +82,19 @@ a:hover {
 	padding-bottom: 20px;
 }
 
+.bit-of-top-padding {
+	padding-top: 8px;
+}
+
+.article-row {
+	padding-top: 7px;
+	border-bottom: 1px dashed #CCC;
+}
+
 .article-preview-img {
 	width:150px;
 	height:108px;
+	margin-bottom: 20px;
 }
 
 center button {
@@ -108,7 +118,6 @@ center button {
 	text-decoration: none;
 	color: inherit;
 }
-
 
 .btn-file {
 	position: relative;
