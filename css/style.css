@@ -85,6 +85,9 @@ a:hover {
 .bit-of-top-padding {
 	padding-top: 8px;
 }
+.bit-of-bottom-margin {
+	margin-bottom: 20px;
+}
 
 .well {
 	text-align: center;
