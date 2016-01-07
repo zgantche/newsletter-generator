@@ -1,5 +1,6 @@
 <?php
-	require_once 'VarDirectory.php';
+	require_once 'VarDirectory.php';	//load VarDirectory class
+	require_once '../wp-load.php';		// Import WordPress functions for us to use
 
 	//array for the return status
 	$returnStatus = array (
@@ -73,9 +74,16 @@
 
 	//create and return our JSON object
 	$data = array(
-		'status' 	=> $returnStatus['status'],
-		'info'		=> $returnStatus['info'],
-		'type'		=> 'articles'
+		'status' 			=> $returnStatus['status'],
+		'info'				=> $returnStatus['info'],
+		'type'				=> 'articles',
+		'city'				=> $_POST['city'],
+		'main-article-img'	=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['main-article-url'] )), array(300,200) )[0],
+		'article-1-img' 	=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-1-url'] )), array(300,200) )[0],
+		'article-2-img'		=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-2-url'] )), array(300,200) )[0],
+		'article-3-img'		=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-3-url'] )), array(300,200) )[0],
+		'article-4-img'		=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-4-url'] )), array(300,200) )[0],
+		'article-5-img'		=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-5-url'] )), array(300,200) )[0]
 	);
 	echo json_encode( $data );
 

@@ -107,7 +107,7 @@
 												<div class="col-md-3">
 													<img src="
 														<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['main-article-url'] )), array(300,200) )[0]; ?>
-														" name="preview-creative" class="main-article-preview-img img-thumbnail center-block" />
+														" name="main-article-preview-img" class="main-article-preview-img img-thumbnail center-block" />
 												</div>
 												<div class="col-md-9">
 													<div class="input-group">
@@ -165,7 +165,7 @@
 													<div class="col-md-3">
 														<img src="
 															<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles[$article_url] )), array(300,200) )[0]; ?>
-															" name="preview-creative" class="article-preview-img img-thumbnail center-block" />
+															" name="<?php echo 'article-' . $i . '-preview-img'; ?>" class="article-preview-img img-thumbnail center-block" />
 													</div>
 													<div class="col-md-9 bit-of-top-padding">
 														<div class="input-group">
@@ -430,6 +430,14 @@
 
 							//update appropriate modal trigger image
 							$("#ads" + data['city'] + " a img[name='modal-image-trigger-" + data['ad-type'] + "']").attr("src", data['creative']);
+						}else if (data['type'] == "articles") {
+							//update article image preview thumbnails with saved content
+							$("#articles" + data['city'] + " img[name='main-article-preview-img']").attr("src", data['main-article-img']);
+							$("#articles" + data['city'] + " img[name='article-1-preview-img']").attr("src", data['article-1-img']);
+							$("#articles" + data['city'] + " img[name='article-2-preview-img']").attr("src", data['article-2-img']);
+							$("#articles" + data['city'] + " img[name='article-3-preview-img']").attr("src", data['article-3-img']);
+							$("#articles" + data['city'] + " img[name='article-4-preview-img']").attr("src", data['article-4-img']);
+							$("#articles" + data['city'] + " img[name='article-5-preview-img']").attr("src", data['article-5-img']);
 						}
 
 						//hide dimmed loading div
