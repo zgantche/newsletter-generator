@@ -127,6 +127,13 @@ center button {
 	color: inherit;
 }
 
+.col-md-3 .btn-file {
+	padding:3px 7px; 
+	position: absolute; 
+	top: 1px;
+	right: 35px;
+}
+
 .btn-file {
 	position: relative;
 	overflow: hidden;
