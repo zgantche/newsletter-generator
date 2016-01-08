@@ -15,14 +15,19 @@
 		'main-article-copy' => 	$_POST['main-article-copy'],
 		'article-1-title' => 	$_POST['article-1-title'],
 		'article-1-url' => 		$_POST['article-1-url'],
+		'article-1-url' => 		$_POST['article-1-thumbnail'],
 		'article-2-title' => 	$_POST['article-2-title'],
 		'article-2-url' => 		$_POST['article-2-url'],
+		'article-2-url' => 		$_POST['article-2-thumbnail'],
 		'article-3-title' => 	$_POST['article-3-title'],
 		'article-3-url' => 		$_POST['article-3-url'],
+		'article-3-url' => 		$_POST['article-3-thumbnail'],
 		'article-4-title' => 	$_POST['article-4-title'],
 		'article-4-url' => 		$_POST['article-4-url'],
+		'article-4-url' => 		$_POST['article-4-thumbnail'],
 		'article-5-title' => 	$_POST['article-5-title'],
 		'article-5-url' => 		$_POST['article-5-url']
+		'article-5-url' => 		$_POST['article-5-thumbnail'],
 	);
 
 	//clean up input (call $value by reference)

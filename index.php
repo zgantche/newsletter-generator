@@ -164,7 +164,8 @@
 
 													<div class="col-md-3">
 														<span class="file-input btn btn-warning btn-file">
-															Upload<input type="file" multiple>
+															Upload<input type="file" 
+																name="<?php echo 'article-' . $i . '-thumbnail'; ?>" id="<?php echo 'article-' . $i . '-thumbnail'; ?>">
 														</span>
 														<img src="
 															<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles[$article_url] )), array(300,200) )[0]; ?>
