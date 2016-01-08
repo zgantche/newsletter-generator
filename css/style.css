@@ -127,11 +127,16 @@ center button {
 	color: inherit;
 }
 
+.col-md-3:hover .btn-file {
+	display: inline;
+}
+
 .col-md-3 .btn-file {
 	padding:3px 7px; 
 	position: absolute; 
 	top: 1px;
 	right: 35px;
+	display: none;
 }
 
 .btn-file {
