@@ -163,7 +163,7 @@
 													</div>
 
 													<div class="col-md-3">
-														<span class="file-input btn btn-primary btn-file" style="">
+														<span class="file-input btn btn-warning btn-file">
 															Upload<input type="file" multiple>
 														</span>
 														<img src="
