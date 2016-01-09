@@ -134,8 +134,8 @@ center button {
 .col-md-3 .btn-file {
 	padding:3px 7px; 
 	position: absolute; 
-	top: 1px;
-	right: 35px;
+	left: 50%;
+	width: 75px;
 	display: none;
 }
 
