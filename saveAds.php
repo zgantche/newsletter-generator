@@ -1,9 +1,10 @@
 <?php
 
-	//load VarDirectory class
+	//load all necessary classes
 	require_once 'VarDirectory.php';
+	require_once 'WP_File_Uploader.php';
 
-	//create new varDirectory
+	//create new VarDirectory
 	$varDir = new VarDirectory();
 
 	//array for the return status
@@ -18,87 +19,32 @@
 		'link-url'	=>	$_POST['link-url']
 	);
 
-	//determine if we need to upload a file
-	if( isset($_FILES['fileToUpload']) ) {
+	
+	//check if the user has uploaded an image file, handle upload if they have
+	if( isset($_FILES['fileToUpload']) ){
 
-		//maximum file size is 1MB
-		if ( $_FILES['fileToUpload']['size'] < 1000000 ) {
+		//create new WP_File_Uploader, specify image cache, and verify the uploaded file
+		$myFileUploader = new WP_File_Uploader('imageCache');
+		$validation = $myFileUploader->validate_file('fileToUpload', null);
 
-			//only allow image files to be uploaded
-			$allowedFileTypes =  array('gif','png' ,'jpg', 'jpeg');
-			$filename = $_FILES['fileToUpload']['name'];
-			$extension = pathinfo($filename, PATHINFO_EXTENSION);
-
-			if( in_array($extension, $allowedFileTypes) ) {
-
-				//load image cache and check if it exists, if not, define it as an empty array
-				$imageCache = $varDir->getVar('imageCache');
-				if ( !isset($imageCache) )
-					$imageCache = array();
-
-				//define the file's name, and a flag for its uniqueness
-				$fileToUpload_name = $_FILES['fileToUpload']['name'];
-				$imageIsUnique = true;
-
-
-				//search our cache of uploaded images for this image name
-				foreach ($imageCache as $currentCachedImage)
-					//when match is found, double check that exists on server
-					if ( $currentCachedImage['name'] === $fileToUpload_name && 
-							file_exists(absoluteImgPath( $currentCachedImage['url'] )) ){
-						$imageIsUnique = false;
-
-						//retrieve the cached image's URL
-						$ad_info['creative'] = $currentCachedImage['url'];
-
-						$returnStatus['info'] = 'Updated image, found on server.';
-					}
-
-				//if image was not found in the cache, upload it
-				if ($imageIsUnique) {
-					//load WordPress the light-weight way
-					define('WP_USE_THEMES', false);
-					require('../wp-load.php');
-
-					//load files required for image uploading
-					require_once( "../wp-admin/includes/image.php" );
-					require_once( "../wp-admin/includes/file.php" );
-					require_once( "../wp-admin/includes/media.php" );
-
-					//give image to WordPress for upload
-					$attachment_id = media_handle_upload( 'fileToUpload', 0 );
-
-					//retrieve the upload's URL
-					$ad_info['creative'] = wp_get_attachment_url( $attachment_id );
-					
-					//define our new image
-					$imageToCache = array(
-						'name' 	=> $fileToUpload_name,
-						'url'	=> $ad_info['creative']
-					);
-
-					//push new image info to our cache
-					array_push($imageCache, $imageToCache);
-
-					//update our image cache
-					$varDir->setVar($imageCache, 'imageCache');
-					
-					$returnStatus['info'] = 'Image uploaded and updated.';
-				}
-			} else {
-				//file not acceptable type
-				$returnStatus['status'] = "warning";
-				$returnStatus['info'] = "Image <b>not</b> updated; invalid file type -- accepted extensions are: PNG, JPG, JPEG, and GIF.<br />";
-			}
-		} else {
-			//file too big, max size is 2MB
-			$returnStatus['status'] = "warning";
-			$returnStatus['info'] = "Image <b>not</b> updated; file is too large -- the maximum file size is 1MB.<br />"
-				. $_FILES['fileToUpload']['size'];
+		//check file's validation status and act accordingly
+		switch ($validation['status']) {
+			case 'success':
+				//upload clean file
+				$imageUploadStatus = $myFileUploader->upload_validated_file();
+				$ad_info['creative'] = $imageUploadStatus['file_url'];
+				$returnStatus['info'] = $imageUploadStatus['info'];
+				break;
+			case 'warning':
+				//record warning information
+				$returnStatus['status'] = $validation['status'];
+				$returnStatus['info'] = $validation['info'];
+				break;
+			default:
+				$returnStatus['info'] = "Image updated.";
+				break;
 		}
-	} else
-		$returnStatus['info'] = "Image updated.";
-
+	}
 
 	//clean up input (call $value by reference)
 	foreach ($ad_info as &$value) {
@@ -154,13 +100,4 @@
 		'link-url'	=> $ad_info['link-url']
 	);
 	echo json_encode( $response );
-
-
-	//converts image URL to image's absolute path
-	function absoluteImgPath($url){
-		$rootPath = preg_replace('/newsletter-generator.*/', '', __FILE__);
-		$absolutePath = preg_replace('/.*wp-content/', $rootPath . 'wp-content', $url);
-
-		return $absolutePath;
-	}
 ?>
