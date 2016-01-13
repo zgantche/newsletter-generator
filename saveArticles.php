@@ -10,24 +10,24 @@
 
 	//array for all Article Info input, passed by form
 	$article_info = array (
-		'main-article-title' => $_POST['main-article-title'],
-		'main-article-url' => 	$_POST['main-article-url'],
-		'main-article-copy' => 	$_POST['main-article-copy'],
-		'article-1-title' => 	$_POST['article-1-title'],
-		'article-1-url' => 		$_POST['article-1-url'],
-		'article-1-url' => 		$_POST['article-1-thumbnail'],
-		'article-2-title' => 	$_POST['article-2-title'],
-		'article-2-url' => 		$_POST['article-2-url'],
-		'article-2-url' => 		$_POST['article-2-thumbnail'],
-		'article-3-title' => 	$_POST['article-3-title'],
-		'article-3-url' => 		$_POST['article-3-url'],
-		'article-3-url' => 		$_POST['article-3-thumbnail'],
-		'article-4-title' => 	$_POST['article-4-title'],
-		'article-4-url' => 		$_POST['article-4-url'],
-		'article-4-url' => 		$_POST['article-4-thumbnail'],
-		'article-5-title' => 	$_POST['article-5-title'],
-		'article-5-url' => 		$_POST['article-5-url']
-		'article-5-url' => 		$_POST['article-5-thumbnail'],
+		'main-article-title'	=> $_POST['main-article-title'],
+		'main-article-url'		=> $_POST['main-article-url'],
+		'main-article-copy'		=> $_POST['main-article-copy'],
+		'article-1-title'		=> $_POST['article-1-title'],
+		'article-1-url'			=> $_POST['article-1-url'],
+		'article-1-thumbnail'	=> $_POST['article-1-thumbnail'],
+		'article-2-title'		=> $_POST['article-2-title'],
+		'article-2-url'			=> $_POST['article-2-url'],
+		'article-2-thumbnail'	=> $_POST['article-2-thumbnail'],
+		'article-3-title'		=> $_POST['article-3-title'],
+		'article-3-url'			=> $_POST['article-3-url'],
+		'article-3-thumbnail'	=> $_POST['article-3-thumbnail'],
+		'article-4-title'		=> $_POST['article-4-title'],
+		'article-4-url'			=> $_POST['article-4-url'],
+		'article-4-thumbnail'	=> $_POST['article-4-thumbnail'],
+		'article-5-title'		=> $_POST['article-5-title'],
+		'article-5-url'			=> $_POST['article-5-url'],
+		'article-5-thumbnail'	=> $_POST['article-5-thumbnail']
 	);
 
 	//clean up input (call $value by reference)
