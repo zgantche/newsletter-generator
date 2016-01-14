@@ -51,7 +51,7 @@
 	#TO DO
 
 	//clean up input (call $value by reference)
-	foreach ($article_info as &$value) {
+	foreach ($article_info as $key =>&$value) {
 		//replace all special colons with regular ones
 		$value = str_replace(array("‘", "’"), "'", $value);
 		$value = str_replace(array('“', '”'), '"', $value);
@@ -61,6 +61,18 @@
 
 		//trim spaces at beginning & end of string, then convert special char's to HTML entities
 		$value = htmlspecialchars( trim($value) );
+
+		switch ($key) {
+			case 'main-article-title':
+			case 'main-article-copy':
+			case 'article-1-title':
+			case 'article-2-title':
+			case 'article-3-title':
+			case 'article-4-title':
+			case 'article-5-title':
+				$value = removeslashes($value);
+				break;
+		}
 	}
 
 	//create new varDirectory
@@ -112,4 +124,9 @@
 	);
 	echo json_encode( $data );
 
+	//helper function to remove all slashes from Title & Copy text
+	function removeslashes($string) {
+		$string=implode("",explode("\\",$string));
+		return stripslashes(trim($string));
+	}
 ?>
