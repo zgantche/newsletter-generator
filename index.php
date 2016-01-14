@@ -134,6 +134,7 @@
 												for ($i = 1; $i <= 5; $i++):
 													$article_title = 'article-' . $i . '-title';
 													$article_url = 'article-' . $i . '-url';
+													$article_thumbnail = 'article-' . $i . '-thumbnail';
 											?>
 												<div class="row article-row">
 													<div class="col-md-9 col-md-offset-3">
@@ -164,12 +165,10 @@
 
 													<div class="col-md-3">
 														<span class="file-input btn btn-warning btn-file">
-															Upload<input type="file" 
-																name="<?php echo 'article-' . $i . '-thumbnail'; ?>" id="<?php echo 'article-' . $i . '-thumbnail'; ?>">
+															Upload<input type="file" name="fileToUpload" id="fileToUpload">
 														</span>
-														<img src="
-															<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles[$article_url] )), array(300,200) )[0]; ?>
-															" name="<?php echo 'article-' . $i . '-preview-img'; ?>" class="article-preview-img img-thumbnail center-block" />
+														<img src="<?php echo $articles[$article_thumbnail]; ?>" 
+															name="<?php echo 'article-' . $i . '-preview-img'; ?>" class="article-preview-img img-thumbnail center-block" />
 													</div>
 													<div class="col-md-9 bit-of-top-padding">
 														<div class="input-group">
@@ -181,6 +180,9 @@
 															<span class="input-group-addon">URL</span>
 															<input type="text" name="<?php echo 'article-' . $i . '-url'; ?>" class="form-control" placeholder="<?php echo 'Article ' . $i . ' Link Address'; ?>"
 																value="<?php echo $articles[$article_url]; ?>" />
+															<!-- Hidden fields used for 'smart' thumnail file uploads -->
+															<input type="hidden" name="<?php echo 'article-' . $i . '-thumbnail'; ?>" value="<?php echo $articles[$article_thumbnail]; ?>" />
+															<input type="hidden" name="<?php echo 'article-' . $i . '-url-old'; ?>" value="<?php echo $articles[$article_url]; ?>" />
 														</div>
 													</div>
 												</div>
@@ -435,13 +437,29 @@
 							//update appropriate modal trigger image
 							$("#ads" + data['city'] + " a img[name='modal-image-trigger-" + data['ad-type'] + "']").attr("src", data['creative']);
 						}else if (data['type'] == "articles") {
+							var articlesClass = "#articles" + data['city'];
+
 							//update article image preview thumbnails with saved content
-							$("#articles" + data['city'] + " img[name='main-article-preview-img']").attr("src", data['main-article-img']);
-							$("#articles" + data['city'] + " img[name='article-1-preview-img']").attr("src", data['article-1-img']);
-							$("#articles" + data['city'] + " img[name='article-2-preview-img']").attr("src", data['article-2-img']);
-							$("#articles" + data['city'] + " img[name='article-3-preview-img']").attr("src", data['article-3-img']);
-							$("#articles" + data['city'] + " img[name='article-4-preview-img']").attr("src", data['article-4-img']);
-							$("#articles" + data['city'] + " img[name='article-5-preview-img']").attr("src", data['article-5-img']);
+							$(articlesClass + " img[name='main-article-preview-img']").attr("src", data['main-article-img']);
+							$(articlesClass + " img[name='article-1-preview-img']").attr("src", data['article-1-img']);
+							$(articlesClass + " img[name='article-2-preview-img']").attr("src", data['article-2-img']);
+							$(articlesClass + " img[name='article-3-preview-img']").attr("src", data['article-3-img']);
+							$(articlesClass + " img[name='article-4-preview-img']").attr("src", data['article-4-img']);
+							$(articlesClass + " img[name='article-5-preview-img']").attr("src", data['article-5-img']);
+
+							//update articles' thumbnail hidden fields with new values
+							$(articlesClass + " input[name='article-1-thumbnail']").attr("value", data['article-1-img']);
+							$(articlesClass + " input[name='article-2-thumbnail']").attr("value", data['article-2-img']);
+							$(articlesClass + " input[name='article-3-thumbnail']").attr("value", data['article-3-img']);
+							$(articlesClass + " input[name='article-4-thumbnail']").attr("value", data['article-4-img']);
+							$(articlesClass + " input[name='article-5-thumbnail']").attr("value", data['article-5-img']);
+
+							//update articles' url-old hidden fields to the updated ones
+							$(articlesClass + " input[name='article-1-url-old']").attr("value", $(articlesClass + " input[name='article-1-url']").val());
+							$(articlesClass + " input[name='article-2-url-old']").attr("value", $(articlesClass + " input[name='article-2-url']").val());
+							$(articlesClass + " input[name='article-3-url-old']").attr("value", $(articlesClass + " input[name='article-3-url']").val());
+							$(articlesClass + " input[name='article-4-url-old']").attr("value", $(articlesClass + " input[name='article-4-url']").val());
+							$(articlesClass + " input[name='article-5-url-old']").attr("value", $(articlesClass + " input[name='article-5-url']").val());
 						}
 
 						//hide dimmed loading div

@@ -15,20 +15,40 @@
 		'main-article-copy'		=> $_POST['main-article-copy'],
 		'article-1-title'		=> $_POST['article-1-title'],
 		'article-1-url'			=> $_POST['article-1-url'],
+		'article-1-url-old'		=> $_POST['article-1-url-old'],
 		'article-1-thumbnail'	=> $_POST['article-1-thumbnail'],
 		'article-2-title'		=> $_POST['article-2-title'],
 		'article-2-url'			=> $_POST['article-2-url'],
+		'article-2-url-old'		=> $_POST['article-2-url-old'],
 		'article-2-thumbnail'	=> $_POST['article-2-thumbnail'],
 		'article-3-title'		=> $_POST['article-3-title'],
 		'article-3-url'			=> $_POST['article-3-url'],
+		'article-3-url-old'		=> $_POST['article-3-url-old'],
 		'article-3-thumbnail'	=> $_POST['article-3-thumbnail'],
 		'article-4-title'		=> $_POST['article-4-title'],
 		'article-4-url'			=> $_POST['article-4-url'],
+		'article-4-url-old'		=> $_POST['article-4-url-old'],
 		'article-4-thumbnail'	=> $_POST['article-4-thumbnail'],
 		'article-5-title'		=> $_POST['article-5-title'],
 		'article-5-url'			=> $_POST['article-5-url'],
-		'article-5-thumbnail'	=> $_POST['article-5-thumbnail']
+		'article-5-url-old'		=> $_POST['article-5-url-old'],
+		'article-5-thumbnail'	=> $_POST['article-5-thumbnail'],
 	);
+	
+	//if URL field is changed, fetch thumbnail via WordPress
+	# UPDATE main-article-thumbnail
+	/*if ($_POST['main-article-url'] !== $_POST['main-article-url-old'])
+		$article_info['main-article-thumbnail'] = 
+				wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['main-article-url'] )), [300,200] )[0];*/
+	# UPDATE article-i-thumbnail(s)
+	for ($i = 1; $i <= 5; $i++) {
+		if ($_POST['article-' . $i . '-url'] !== $_POST['article-' . $i . '-url-old'])
+			$article_info['article-' . $i . '-thumbnail'] = 
+				wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-' . $i . '-url'] )), [300,200] )[0];
+	}
+
+	//if there is a file uploaded, process it and update thumbnail accordingly
+	#TO DO
 
 	//clean up input (call $value by reference)
 	foreach ($article_info as &$value) {
@@ -84,11 +104,11 @@
 		'type'				=> 'articles',
 		'city'				=> $_POST['city'],
 		'main-article-img'	=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['main-article-url'] )), array(300,200) )[0],
-		'article-1-img' 	=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-1-url'] )), array(300,200) )[0],
-		'article-2-img'		=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-2-url'] )), array(300,200) )[0],
-		'article-3-img'		=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-3-url'] )), array(300,200) )[0],
-		'article-4-img'		=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-4-url'] )), array(300,200) )[0],
-		'article-5-img'		=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-5-url'] )), array(300,200) )[0]
+		'article-1-img' 	=> $article_info['article-1-thumbnail'],
+		'article-2-img'		=> $article_info['article-2-thumbnail'],
+		'article-3-img'		=> $article_info['article-3-thumbnail'],
+		'article-4-img'		=> $article_info['article-4-thumbnail'],
+		'article-5-img'		=> $article_info['article-5-thumbnail']
 	);
 	echo json_encode( $data );
 
