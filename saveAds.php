@@ -1,8 +1,7 @@
 <?php
 
-	//load all necessary classes
-	require_once 'VarDirectory.php';
-	require_once 'WP_File_Uploader.php';
+	require_once 'VarDirectory.php'; //load the VarDirectory cache class
+	#require_once 'WP_File_Uploader.php' //included below ONLY if uploaded file exists
 
 	//create new VarDirectory
 	$varDir = new VarDirectory();
@@ -22,9 +21,11 @@
 	
 	//check if the user has uploaded an image file, handle upload if they have
 	if( isset($_FILES['fileToUpload']) ){
-
-		//create new WP_File_Uploader, specify image cache, and verify the uploaded file
+		//load class and create new WP_File_Uploader, specify image cache
+		require_once 'WP_File_Uploader.php';
 		$myFileUploader = new WP_File_Uploader('imageCache');
+
+		//validate integrity of uploaded file
 		$validation = $myFileUploader->validate_file('fileToUpload', null);
 
 		//check file's validation status and act accordingly
