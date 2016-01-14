@@ -62,6 +62,7 @@
 		//trim spaces at beginning & end of string, then convert special char's to HTML entities
 		$value = htmlspecialchars( trim($value) );
 
+		//remove all backslashes from articles' Title & Copy text
 		switch ($key) {
 			case 'main-article-title':
 			case 'main-article-copy':
@@ -70,7 +71,7 @@
 			case 'article-3-title':
 			case 'article-4-title':
 			case 'article-5-title':
-				$value = removeslashes($value);
+				$value = removeSlashes($value);
 				break;
 		}
 	}
@@ -124,9 +125,9 @@
 	);
 	echo json_encode( $data );
 
-	//helper function to remove all slashes from Title & Copy text
-	function removeslashes($string) {
-		$string=implode("",explode("\\",$string));
-		return stripslashes(trim($string));
+	//helper function to remove all backslashes from string
+	function removeSlashes($string) {
+		$string = implode( "", explode("\\",$string) );
+		return stripslashes( trim($string) );
 	}
 ?>
