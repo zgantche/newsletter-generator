@@ -439,27 +439,18 @@
 						}else if (data['type'] == "articles") {
 							var articlesClass = "#articles" + data['city'];
 
-							//update article image preview thumbnails with saved content
+							//update main article image preview thumbnail
 							$(articlesClass + " img[name='main-article-preview-img']").attr("src", data['main-article-img']);
-							$(articlesClass + " img[name='article-1-preview-img']").attr("src", data['article-1-img']);
-							$(articlesClass + " img[name='article-2-preview-img']").attr("src", data['article-2-img']);
-							$(articlesClass + " img[name='article-3-preview-img']").attr("src", data['article-3-img']);
-							$(articlesClass + " img[name='article-4-preview-img']").attr("src", data['article-4-img']);
-							$(articlesClass + " img[name='article-5-preview-img']").attr("src", data['article-5-img']);
 
-							//update articles' thumbnail hidden fields with new values
-							$(articlesClass + " input[name='article-1-thumbnail']").attr("value", data['article-1-img']);
-							$(articlesClass + " input[name='article-2-thumbnail']").attr("value", data['article-2-img']);
-							$(articlesClass + " input[name='article-3-thumbnail']").attr("value", data['article-3-img']);
-							$(articlesClass + " input[name='article-4-thumbnail']").attr("value", data['article-4-img']);
-							$(articlesClass + " input[name='article-5-thumbnail']").attr("value", data['article-5-img']);
+							for (i = 1; i <= 5; i++) { 
+								//update "article-i-preview-img" thumbnails
+								$(articlesClass + " img[name='article-" + i + "-preview-img']").attr("src", data["article-" + i + "-img"]);
 
-							//update articles' url-old hidden fields to the updated ones
-							$(articlesClass + " input[name='article-1-url-old']").attr("value", $(articlesClass + " input[name='article-1-url']").val());
-							$(articlesClass + " input[name='article-2-url-old']").attr("value", $(articlesClass + " input[name='article-2-url']").val());
-							$(articlesClass + " input[name='article-3-url-old']").attr("value", $(articlesClass + " input[name='article-3-url']").val());
-							$(articlesClass + " input[name='article-4-url-old']").attr("value", $(articlesClass + " input[name='article-4-url']").val());
-							$(articlesClass + " input[name='article-5-url-old']").attr("value", $(articlesClass + " input[name='article-5-url']").val());
+								//update "article-i-thumbnail" & "articles-i-url-old" hidden inputs
+								$(articlesClass + " input[name='article-" + i + "-thumbnail']").attr("value", data["article-" + i + "-img"]);
+								$(articlesClass + " input[name='article-" + i + "-url-old']").attr("value", 
+									$(articlesClass + " input[name='article-" + i + "-url']").val());
+							}
 						}
 
 						//hide dimmed loading div
