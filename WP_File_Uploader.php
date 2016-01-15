@@ -45,6 +45,8 @@ class WP_File_Uploader{
 	 * @return array $validation_status - The verification result; success
 	 */
 	public function validate_file($file, $expected){
+		//create report with failure status
+		$report = $validation_status = ['status' => "warning", 'info' => "Initial pre-validation fail.", 'file_url' => ""];
 
 		//set default requirements for Size and Type
 		if ($expected === null)
@@ -62,16 +64,29 @@ class WP_File_Uploader{
 					if( in_array($extension, $expected['file_type']) ) {
 						// Save file as verified for uploading, and return success
 						$this->validated_file = $file;
-						return ['status' => 'success', 'info' => ''];
+						$report['status'] = "success";
 					}
-					else return ['status' => "warning", 
-								'info' => "Image <b>not</b> updated; invalid file type -- accepted extensions are: PNG, JPG, JPEG, and GIF.<br />"];
-				} 
-				else return ['status' => "warning",
-							 'info' => "Image <b>not</b> updated; file is too large -- the maximum file size is 1MB.<br />"
-										. $_FILES[$file]['size']];
-			} 
-		} else return ['status' => "no file", 'info' => "No file to upload."];
+					else {
+						$report['status'] = "warning";
+						$report['info'] = "File <b>not</b> updated; invalid file type -- accepted extensions: PNG, JPG, JPEG, and GIF.<br />";
+					}
+				}
+				else {
+					$report['status'] = "warning";
+					$report['info'] = "File <b>not</b> updated; file is too large -- max file size is 1MB.<br/>";
+				}
+			}
+			else {
+				$report['status'] = "warning";
+				$report['info'] = "File <b>not</b> updated; integrity looks sketchy. Refresh and try again.<br/>";
+			}
+		}
+		else {
+			$report['status'] = "no file";
+			$report['info'] = "No file to upload.";
+		}
+
+		return $report;
 	}
 
 	/**
