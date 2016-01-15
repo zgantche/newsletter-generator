@@ -46,7 +46,7 @@ class WP_File_Uploader{
 	 */
 	public function validate_file($file, $expected){
 		//create report with failure status
-		$report = $validation_status = ['status' => "warning", 'info' => "Initial pre-validation fail.", 'file_url' => ""];
+		$report = ['status' => "warning", 'info' => "Initial pre-validation fail.", 'file_url' => ""];
 
 		//set default requirements for Size and Type
 		if ($expected === null)
