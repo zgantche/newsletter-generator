@@ -22,6 +22,7 @@ class WP_File_Uploader{
 	public $file_cache;
 	public $file_cache_name;
 	public $validated_file;
+	public $report;
 
 	/**
 	 * Constructor
@@ -38,130 +39,151 @@ class WP_File_Uploader{
 	}
 
 	/**
+	 * Function which searches through WP_File_Uploader's instantiated cache for a file
+	 *
+	 * @param string $file - Name of the file to look for
+	 * @return boolean $file_found - return file's URL if found, if not, return null
+	 */
+	public function search_cache($file){
+		// Check if file_cache exists, if not, define it as an empty array
+		if ( !isset($this->file_cache) )
+			$this->file_cache = array();
+
+		// Define the file's name, and a flag for its uniqueness
+		$fileToUpload_name = $_FILES[$file]['name'];
+
+		// Search our cache of uploaded files for this file name
+		foreach ($this->file_cache as $currentCachedFile){
+			// When match is found, double check that it exists on server
+			if ( $currentCachedFile['name'] === $fileToUpload_name && file_exists(self::get_server_path( $currentCachedFile['url'] )) ){
+
+				// File found in cache, retrieve its URL
+				$this->report['file_url'] = $currentCachedFile['url'];
+				return TRUE;
+			}
+		}
+
+		// File not found in cache
+		return FALSE;
+	}
+
+	/**
 	 * Function for file verification
 	 *
 	 * @param string $file - Name of the file to be verified
 	 * @param array $expected - Expected file Size and Type
-	 * @return array $validation_status - The verification result; success
+	 * @return boolean - The verification result; TRUE or FALSE
 	 */
-	public function validate_file($file, $expected){
-		//create report with failure status
-		$report = ['status' => "warning", 'info' => "Initial pre-validation fail.", 'file_url' => ""];
-
-		//set default requirements for Size and Type
+	public function validate_file($file, $expected = null){
+		// Set default requirements for Size and Type
 		if ($expected === null)
 			$expected = ['max_size' => 1000000, 'file_type' => ['gif', 'png', 'jpg', 'jpeg']];
 
-		// Check if file exists, and if it was uploaded via HTTP POST, for integrity
+		// Check if file exists, and if it was uploaded via HTTP POST -- for integrity
 		if( isset($_FILES[$file]) ){
 			if (is_uploaded_file($_FILES[$file]['tmp_name'])) {
 
-				// Check if file is under the expected size
+				// Check if file is within the expected size
 				if ( $_FILES[$file]['size'] < $expected['max_size'] ) {
 
-					// Check if file is of the expected type
+					// Check against expected file type
 					$extension = pathinfo($_FILES[$file]['name'], PATHINFO_EXTENSION);
 					if( in_array($extension, $expected['file_type']) ) {
-						// Save file as verified for uploading, and return success
+						// File has passed all verifications, save as verified; ready for upload
 						$this->validated_file = $file;
-						$report['status'] = "success";
+						return TRUE;
 					}
 					else {
-						$report['status'] = "warning";
-						$report['info'] = "File <b>not</b> updated; invalid file type -- accepted extensions: PNG, JPG, JPEG, and GIF.<br />";
+						$this->report['status'] = "warning";
+						$this->report['info'] = "File <b>not</b> updated; invalid file type -- accepted extensions: PNG, JPG, JPEG, and GIF.<br />";
 					}
 				}
 				else {
-					$report['status'] = "warning";
-					$report['info'] = "File <b>not</b> updated; file is too large -- max file size is 1MB.<br/>";
+					$this->report['status'] = "warning";
+					$this->report['info'] = "File <b>not</b> updated; file is too large -- max file size is 1MB.<br/>";
 				}
 			}
 			else {
-				$report['status'] = "warning";
-				$report['info'] = "File <b>not</b> updated; integrity looks sketchy. Refresh and try again.<br/>";
+				$this->report['status'] = "warning";
+				$this->report['info'] = "File <b>not</b> updated; integrity looks sketchy. Refresh and try again.<br/>";
 			}
 		}
 		else {
-			$report['status'] = "no file";
-			$report['info'] = "No file to upload.";
+			$this->report['status'] = "no file";
+			$this->report['info'] = "No file to upload.";
 		}
 
-		return $report;
+		// File has failed the above verifications
+		return FALSE;
 	}
 
 	/**
-	 * Function for file upload via WP's media_handle_upload()
+	 * Void Function for uploading $verified_file via WP's media_handle_upload()
 	 *
-	 * @param string $file - Name of the file to be verified
-	 * @return array $validation_status - return upload Information, and the uploaded File's URL
 	 */
 	public function upload_validated_file(){
-		//create empty return object
-		$validation_status = ['info' => 'Image not updated.', 'file_url' => ''];
-
-		//check if file_cache exists, if not, define it as an empty array
-		if ( !isset($this->file_cache) )
-			$this->file_cache = array();
-
-		//define the file's name, and a flag for its uniqueness
-		$fileToUpload_name = $_FILES[$this->validated_file]['name'];
-		$imageIsUnique = true;
-
-		//search our cache of uploaded images for this image name
-		foreach ($this->file_cache as $currentCachedImage){
-			//when match is found, double check that exists on server
-			if ( $currentCachedImage['name'] === $fileToUpload_name && file_exists(self::get_server_path_for_file( $currentCachedImage['url'] )) ){
-				$imageIsUnique = false;
-
-				//retrieve the matching cached image's URL, update status
-				$validation_status['file_url'] = $currentCachedImage['url'];
-				$validation_status['info'] = 'Updated image, found on server.';
-			}
-		}
-
-		//if image was not found in the cache, upload it
-		if ($imageIsUnique) {
-			//load WordPress the light-weight way
-			define('WP_USE_THEMES', false);
-			require('../wp-load.php');
-
-			//load files required for image uploading
-			require_once( "../wp-admin/includes/image.php" );
-			require_once( "../wp-admin/includes/file.php" );
-			require_once( "../wp-admin/includes/media.php" );
-
-			//give image to WordPress for upload
-			$attachment_id = media_handle_upload( $this->validated_file, 0 );
-
-			//retrieve the upload's URL
-			$validation_status['file_url'] = wp_get_attachment_url( $attachment_id );
-			
-			//define our new image
-			$new_file_for_cache = array(
-				'name' 	=> $fileToUpload_name,
-				'url'	=> $validation_status['file_url']
-			);
-
-			//push new image info to our cache
-			array_push($this->file_cache, $new_file_for_cache);
-
-			//update our image cache
-			$this->var_dir->setVar($this->file_cache, $this->file_cache_name);
-			
-			$validation_status['info'] = 'Image uploaded and updated.';
-		}
 		
-		return $validation_status;
+		// Load WordPress in a light-weight manner
+		define('WP_USE_THEMES', FALSE);
+		require('../wp-load.php');
+
+		// Load WP files required for file uploading
+		require_once( "../wp-admin/includes/image.php" );
+		require_once( "../wp-admin/includes/file.php" );
+		require_once( "../wp-admin/includes/media.php" );
+
+		// Give file to WordPress for upload
+		$attachment_id = media_handle_upload( $this->validated_file, 0 );
+
+		// Retrieve and store the new upload's URL
+		$this->report['file_url'] = wp_get_attachment_url( $attachment_id );
+		
+		// Push new file info to our cache
+		array_push($this->file_cache, [ 'name' 	=> $_FILES[$this->validated_file]['name'],
+										'url'	=> $this->report['file_url'] ]);
+
+		// Update our file cache
+		$this->var_dir->setVar($this->file_cache, $this->file_cache_name);
 	}
 
 	/**
-	 * Helper Function for converting image URL to image's absolute path
+	 * Main function; checks cache, verifies, and uploads passed file
+	 *
+	 * @param string $file - Name of the file to be uploaded
+	 * @return array $report - return a report of the upload; status, info, and file_url
+	 */
+	public function upload_file($file){
+		// Instantiate report with initial failure status
+		$this->report = ['status' => "warning", 'info' => "Initial pre-validation fail.", 'file_url' => ""];
+
+		// Search cache for file, if file not found in the cache, upload it
+		if (FALSE === self::search_cache($file)) {
+			// Check file for integrity, size, type, etc.
+			if (self::validate_file($file)){
+				// Upload upon successful validation
+				self::upload_validated_file();
+
+				$this->report['status'] = "success";
+				$this->report['info'] = "Image uploaded to server.";
+			}
+		}
+		else {
+			$this->report['status'] = "success";
+			$this->report['info'] = "Image found on server.";
+		}
+
+		// Return the final report
+		return $this->report;
+	}
+
+	/**
+	 * Helper Function for converting file URL to file's absolute path
 	 *
 	 * @param string $url - file's URL path
 	 * @return array $absolutePath - file's absolute server path
 	 */
 	//
-	private function get_server_path_for_file($url){
+	private function get_server_path($url){
 		$rootPath = preg_replace('/newsletter-generator.*/', '', __FILE__);
 		$absolutePath = preg_replace('/.*wp-content/', $rootPath . 'wp-content', $url);
 

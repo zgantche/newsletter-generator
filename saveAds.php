@@ -17,34 +17,20 @@
 		'creative' 	=>	$_POST['creative'],
 		'link-url'	=>	$_POST['link-url']
 	);
-
 	
 	//check if the user has uploaded an image file, handle upload if they have
 	if( isset($_FILES['fileToUpload']) ){
-		//load class and create new WP_File_Uploader, specify image cache
+		//load and instantiate new WP_File_Uploader, specify image cache
 		require_once 'WP_File_Uploader.php';
 		$myFileUploader = new WP_File_Uploader('imageCache');
 
-		//validate integrity of uploaded file
-		$validation = $myFileUploader->validate_file('fileToUpload', null);
+		//retrieve report of image upload
+		$report = $myFileUploader->upload_file('fileToUpload');
 
-		//check file's validation status and act accordingly
-		switch ($validation['status']) {
-			case 'success':
-				//upload clean file
-				$imageUploadStatus = $myFileUploader->upload_validated_file();
-				$ad_info['creative'] = $imageUploadStatus['file_url'];
-				$returnStatus['info'] = $imageUploadStatus['info'];
-				break;
-			case 'warning':
-				//record warning information
-				$returnStatus['status'] = $validation['status'];
-				$returnStatus['info'] = $validation['info'];
-				break;
-			default:
-				$returnStatus['info'] = "Image updated.";
-				break;
-		}
+		//save report info to pass back as JSON object
+		$returnStatus['status'] = $report['status'];
+		$returnStatus['info'] = $report['info'];
+		$ad_info['creative'] = $report['file_url'];
 	}
 
 	//clean up input (call $value by reference)
