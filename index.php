@@ -61,6 +61,7 @@
 										<form action="saveArticles.php" method="post">
 
 											<input type="hidden" name="city" value="<?php echo $city; ?>" />
+											<input type="hidden" name="article-x-thumbnail" value="" />
 
 											<?php 
 												//-- Load Articles for Appropriate City --//
@@ -165,7 +166,7 @@
 
 													<div class="col-md-3">
 														<span class="file-input btn btn-warning btn-file">
-															Upload<input type="file" name="<?php echo 'thumbnail-article-' . $i; ?>" class="<?php echo 'articleThumbnail' . $city; ?>">
+															Upload<input type="file" name="<?php echo 'article-' . $i . '-thumbnail'; ?>" class="articleThumbnail">
 														</span>
 														<img src="<?php echo $articles[$article_thumbnail]; ?>" 
 															name="<?php echo 'article-' . $i . '-preview-img'; ?>" class="article-preview-img img-thumbnail center-block" />
@@ -436,11 +437,16 @@
 
 							//update appropriate modal trigger image
 							$("#ads" + data['city'] + " a img[name='modal-image-trigger-" + data['ad-type'] + "']").attr("src", data['creative']);
-						}else if (data['type'] == "articles") {
+						}
+						else if (data['type'] == "articles") {
+
 							var articlesClass = "#articles" + data['city'];
 
 							//update main article image preview thumbnail
 							$(articlesClass + " img[name='main-article-preview-img']").attr("src", data['main-article-img']);
+
+							//reset thumbnail name field
+							$(articlesClass).find("input[name='article-x-thumbnail']").attr("value", "");
 
 							for (i = 1; i <= 5; i++) { 
 								//update "article-i-preview-img" thumbnails
@@ -474,12 +480,15 @@
 				// bind all forms as Ajax Forms, with the Options above
 				$("form").ajaxForm(options);
 
+
 				/*--- Auto-submit Articles Form on Thumbnail Selection ---*/
-				$(".articleThumbnailToronto").change(function() { $("#articlesToronto form").submit(); });
-				$(".articleThumbnailMontreal").change(function() { $("#articlesMontreal form").submit(); });
-				$(".articleThumbnailCalgary").change(function() { $("#articlesCalgary form").submit(); });
-				$(".articleThumbnailVancouver").change(function() { $("#articlesVancouver form").submit(); });
-				$(".articleThumbnailNationwide").change(function() { $("#articlesNationwide form").submit(); });
+				$(".articleThumbnail").change(function() { 
+					var thumb = $(this);
+
+					//update appropriate city's thumbnail Name with the correct article (0-5), and submit
+					thumb.closest("form").children("input[name='article-x-thumbnail']").attr("value", thumb.attr("name"));
+					thumb.closest("form").submit();
+				});
 
 
 				/*--- Clear Button Code ---*/
