@@ -110,7 +110,7 @@ class WP_File_Uploader{
 		}
 		else {
 			$this->report['status'] = "no file";
-			$this->report['info'] = "No file to upload.";
+			$this->report['info'] = "Could not find uploaded file.";
 		}
 
 		// File has failed the above verifications
