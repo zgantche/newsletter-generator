@@ -1,6 +1,7 @@
 <?php
-	require_once 'VarDirectory.php';	//load VarDirectory class
-	require_once '../wp-load.php';		// Import WordPress functions for us to use
+	require_once 'VarDirectory.php';		//load VarDirectory class
+	require_once '../wp-load.php';			// Import WordPress functions for us to use
+	#require_once 'WP_File_Uploader.php'	//included below ONLY if uploaded file exists
 
 	//array for the return status
 	$returnStatus = array (
@@ -44,7 +45,21 @@
 	}
 
 	//check if the user has uploaded an image file, handle upload if they have
-	#TO DO
+	if ($_POST['article-x-thumbnail'] !== ""){
+		//$article_info['article-1-thumbnail'] = "value: " . $_POST['article-x-thumbnail'];
+
+		//load and instantiate new WP_File_Uploader, specify image cache
+		require_once 'WP_File_Uploader.php';
+		$myFileUploader = new WP_File_Uploader('imageCache');
+
+		//retrieve report of image upload
+		$report = $myFileUploader->upload_file($_POST['article-x-thumbnail']);
+
+		//save report info to pass back as JSON object
+		$returnStatus['status'] = $report['status'];
+		$returnStatus['info'] = $report['info'];
+		$article_info[ $_POST['article-x-thumbnail'] ] = $report['file_url'] . " ";
+	}
 
 	//clean up input (call $value by reference)
 	foreach ($article_info as $key =>&$value) {
@@ -79,27 +94,27 @@
 	switch ($_POST['city']) {
 		case 'Toronto':
 			$varDir->setVar($article_info, 'torontoArticles');
-			$returnStatus['info'] = "Articles updated.";
+			$returnStatus['info'] .= "Articles updated.";
 			break;
 		case 'Montreal':
 			$varDir->setVar($article_info, 'montrealArticles');
-			$returnStatus['info'] = "Articles updated.";
+			$returnStatus['info'] .= "Articles updated.";
 			break;
 		case 'Vancouver':
 			$varDir->setVar($article_info, 'vancouverArticles');
-			$returnStatus['info'] = "Articles updated.";
+			$returnStatus['info'] .= "Articles updated.";
 			break;
 		case 'Calgary':
 			$varDir->setVar($article_info, 'calgaryArticles');
-			$returnStatus['info'] = "Articles updated.";
+			$returnStatus['info'] .= "Articles updated.";
 			break;
 		case 'Nationwide':
 			$varDir->setVar($article_info, 'nationwideArticles');
-			$returnStatus['info'] = "Articles updated.";
+			$returnStatus['info'] .= "Articles updated.";
 			break;	
 		default:
 			$returnStatus['status'] = "warning.";
-			$returnStatus['info'] = "Articles <b>not</b> updated; no match found for city.";
+			$returnStatus['info'] .= "Articles <b>not</b> updated; no match found for city.";
 			break;
 	}
 
