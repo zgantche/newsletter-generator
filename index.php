@@ -165,7 +165,7 @@
 
 													<div class="col-md-3">
 														<span class="file-input btn btn-warning btn-file">
-															Upload<input type="file" name="fileToUpload" id="fileToUpload">
+															Upload<input type="file" name="<?php echo 'thumbnail-article-' . $i; ?>" class="<?php echo 'articleThumbnail' . $city; ?>">
 														</span>
 														<img src="<?php echo $articles[$article_thumbnail]; ?>" 
 															name="<?php echo 'article-' . $i . '-preview-img'; ?>" class="article-preview-img img-thumbnail center-block" />
@@ -474,7 +474,14 @@
 				// bind all forms as Ajax Forms, with the Options above
 				$("form").ajaxForm(options);
 
-				
+				/*--- Auto-submit Articles Form on Thumbnail Selection ---*/
+				$(".articleThumbnailToronto").change(function() { $("#articlesToronto form").submit(); });
+				$(".articleThumbnailMontreal").change(function() { $("#articlesMontreal form").submit(); });
+				$(".articleThumbnailCalgary").change(function() { $("#articlesCalgary form").submit(); });
+				$(".articleThumbnailVancouver").change(function() { $("#articlesVancouver form").submit(); });
+				$(".articleThumbnailNationwide").change(function() { $("#articlesNationwide form").submit(); });
+
+
 				/*--- Clear Button Code ---*/
 
 				$(".clearFormButton").click(function(){
