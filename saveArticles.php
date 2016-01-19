@@ -36,18 +36,14 @@
 	);
 	
 	//if URL field is changed, fetch thumbnail via WordPress
-	# UPDATE main-article-thumbnail
-	/*if ($_POST['main-article-url'] !== $_POST['main-article-url-old'])
-		$article_info['main-article-thumbnail'] = 
-				wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['main-article-url'] )), [300,200] )[0];*/
-	# UPDATE article-i-thumbnail(s)
+	#TO DO: Convert main-article to article-0
 	for ($i = 1; $i <= 5; $i++) {
 		if ($_POST['article-' . $i . '-url'] !== $_POST['article-' . $i . '-url-old'])
 			$article_info['article-' . $i . '-thumbnail'] = 
 				wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-' . $i . '-url'] )), [300,200] )[0];
 	}
 
-	//if there is a file uploaded, process it and update thumbnail accordingly
+	//check if the user has uploaded an image file, handle upload if they have
 	#TO DO
 
 	//clean up input (call $value by reference)
@@ -83,27 +79,27 @@
 	switch ($_POST['city']) {
 		case 'Toronto':
 			$varDir->setVar($article_info, 'torontoArticles');
-			$returnStatus['info'] = 'Articles updated.';
+			$returnStatus['info'] = "Articles updated.";
 			break;
 		case 'Montreal':
 			$varDir->setVar($article_info, 'montrealArticles');
-			$returnStatus['info'] = 'Articles updated.';
+			$returnStatus['info'] = "Articles updated.";
 			break;
 		case 'Vancouver':
 			$varDir->setVar($article_info, 'vancouverArticles');
-			$returnStatus['info'] = 'Articles updated.';
+			$returnStatus['info'] = "Articles updated.";
 			break;
 		case 'Calgary':
 			$varDir->setVar($article_info, 'calgaryArticles');
-			$returnStatus['info'] = 'Articles updated.';
+			$returnStatus['info'] = "Articles updated.";
 			break;
 		case 'Nationwide':
 			$varDir->setVar($article_info, 'nationwideArticles');
-			$returnStatus['info'] = 'Articles updated.';
+			$returnStatus['info'] = "Articles updated.";
 			break;	
 		default:
-			$returnStatus['status'] = 'warning.';
-			$returnStatus['info'] = 'Articles <b>not</b> updated; no match found for city.';
+			$returnStatus['status'] = "warning.";
+			$returnStatus['info'] = "Articles <b>not</b> updated; no match found for city.";
 			break;
 	}
 
