@@ -172,7 +172,7 @@
 					<td width="145px" style="padding-right:9px; font-size:11.5px; align:left; color:#666666; letter-spacing:0.5px; line-height:1.4em; font-family:Helvetica, Arial, sans-serif; vertical-align: text-top;">
 			
 						<a href="<?php echo $articles['article-1-url']; ?>" target="_blank" style="text-decoration:none">
-						<img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['article-1-url'] )), array(310,200) )[0]; ?>" alt="Story 2 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
+						<img src="<?php echo $articles['article-1-thumbnail']; ?>" alt="Story 2 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
 						<font color="#000000">
 							<?php echo $articles['article-1-title']; ?>
 						</font></a>
@@ -182,7 +182,7 @@
 					<td width="145px" style="padding-right:9px; font-size:11.5px; align:left; color:#666666; letter-spacing:0.5px; line-height:1.4em; font-family:Helvetica, Arial, sans-serif; vertical-align: text-top;">
 
 						<a href="<?php echo $articles['article-2-url']; ?>" target="_blank" style="text-decoration:none">
-						<img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['article-2-url'] )), array(310,200) )[0]; ?>" alt="Story 3 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
+						<img src="<?php echo $articles['article-2-thumbnail']; ?>" alt="Story 3 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
 						<font color="#000000">
 							<?php echo $articles['article-2-title']; ?>
 						</font></a>
@@ -192,7 +192,7 @@
 					<td width="145px" style="padding-right:9px; font-size:11.5px; align:left; color:#666666; letter-spacing:0.5px; line-height:1.4em; font-family:Helvetica, Arial, sans-serif; vertical-align: text-top;">
 
 						<a href="<?php echo $articles['article-3-url']; ?>" target="_blank" style="text-decoration:none">
-						<img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['article-3-url'] )), array(310,200) )[0]; ?>" alt="Story 2 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
+						<img src="<?php echo $articles['article-3-thumbnail']; ?>" alt="Story 2 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
 						<font color="#000000">
 							<?php echo $articles['article-3-title']; ?>
 						</font></a>
@@ -202,7 +202,7 @@
 					<td width="145px" style="padding-right:9px;	font-size:11.5px; align:left; color:#666666; lletter-spacing:0.5px; line-height:1.4em; font-family:Helvetica, Arial, sans-serif; vertical-align: text-top;">
 
 						<a href="<?php echo $articles['article-4-url']; ?>" target="_blank" style="text-decoration:none">
-						<img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['article-4-url'] )), array(310,200) )[0]; ?>" alt="Story 5 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
+						<img src="<?php echo $articles['article-4-thumbnail']; ?>" alt="Story 5 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
 						<font color="#000000">
 							<?php echo $articles['article-4-title']; ?>
 						</font></a>
@@ -212,7 +212,7 @@
 					<td width="145px" style="font-size:11.5px; align:left; color:#666666; letter-spacing:0.5px; line-height:1.4em; font-family:Helvetica, Arial, sans-serif; vertical-align: text-top;">
 
 						<a href="<?php echo $articles['article-5-url']; ?>" target="_blank" style="text-decoration:none">
-						<img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['article-5-url'] )), array(310,200) )[0]; ?>" alt="Story 6 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
+						<img src="<?php echo $articles['article-5-thumbnail']; ?>" alt="Story 6 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
 						<font color="#000000">
 							<?php echo $articles['article-5-title']; ?>
 						</font></a>
