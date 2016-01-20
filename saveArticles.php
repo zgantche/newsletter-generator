@@ -57,8 +57,8 @@
 
 		//save report info to pass back as JSON object
 		$returnStatus['status'] = $report['status'];
-		$returnStatus['info'] = $report['info'];
-		$article_info[ $_POST['article-x-thumbnail'] ] = $report['file_url'] . " ";
+		$returnStatus['info'] = $report['info'] . " ";
+		$article_info[ $_POST['article-x-thumbnail'] ] = $report['file_url'];
 	}
 
 	//clean up input (call $value by reference)
