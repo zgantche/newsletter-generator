@@ -13,15 +13,38 @@ require_once 'VarDirectory.php';
 class WP_File_Uploader{
 
 	/**
-	 * varDir object, and file_cache name
+	 * VarDirectory object, used for accessing the cache.
 	 *
-	 * @var VarDirectory $var_dir 	- For reading and writing to file_cache
-	 * @var string $file_cache 		- Name of the file_cache, which stores a record of past uploads
+	 * @var VarDirectory $var_dir Reads and writes to file_cache.
 	 */
 	public $var_dir;
+
+	/**
+	 * Cache object, stores a record of past uploads.
+	 *
+	 * @var string $file_cache Holds the contents of the file_cache.
+	 */
 	public $file_cache;
+
+	/**
+	 * The cache's VarDirectory variable name.
+	 *
+	 * @var string $file_cache_name Holds the name of the file_cache.
+	 */
 	public $file_cache_name;
+
+	/**
+	 * The most recent file which has been successfully validated by validate_file().
+	 *
+	 * @var string $validated_file Holds the name of a file who has passed validation.
+	 */
 	public $validated_file;
+
+	/**
+	 * The report documenting the file upload status, returned by upload_file().
+	 *
+	 * @var string $report Holds final report to be returned by class.
+	 */
 	public $report;
 
 	/**
