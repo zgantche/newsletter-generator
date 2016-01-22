@@ -11,9 +11,9 @@
 
 	//array for all Article Info input, passed by form
 	$article_info = array (
-		'main-article-title'	=> $_POST['main-article-title'],
-		'main-article-url'		=> $_POST['main-article-url'],
-		'main-article-copy'		=> $_POST['main-article-copy'],
+		'article-0-title'		=> $_POST['article-0-title'],
+		'article-0-url'			=> $_POST['article-0-url'],
+		'article-0-copy'		=> $_POST['article-0-copy'],
 		'article-1-title'		=> $_POST['article-1-title'],
 		'article-1-url'			=> $_POST['article-1-url'],
 		'article-1-url-old'		=> $_POST['article-1-url-old'],
@@ -37,7 +37,7 @@
 	);
 	
 	//if URL field is changed, fetch thumbnail via WordPress
-	#TO DO: Convert main-article to article-0
+	#TO DO: Convert article-0 to article-0
 	for ($i = 1; $i <= 5; $i++) {
 		if ($_POST['article-' . $i . '-url'] !== $_POST['article-' . $i . '-url-old'])
 			$article_info['article-' . $i . '-thumbnail'] = 
@@ -75,8 +75,8 @@
 
 		//remove all backslashes from articles' Title & Copy text
 		switch ($key) {
-			case 'main-article-title':
-			case 'main-article-copy':
+			case 'article-0-title':
+			case 'article-0-copy':
 			case 'article-1-title':
 			case 'article-2-title':
 			case 'article-3-title':
@@ -127,7 +127,7 @@
 		'info'				=> $returnStatus['info'],
 		'type'				=> 'articles',
 		'city'				=> $_POST['city'],
-		'main-article-img'	=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['main-article-url'] )), array(300,200) )[0],
+		'article-0-img'	=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-0-url'] )), array(300,200) )[0],
 		'article-1-img' 	=> $article_info['article-1-thumbnail'],
 		'article-2-img'		=> $article_info['article-2-thumbnail'],
 		'article-3-img'		=> $article_info['article-3-thumbnail'],

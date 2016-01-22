@@ -95,7 +95,7 @@
 																	<?php else: ?>
 																		<button type="button" 
 																			class="btn btn-default" 
-																			onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'main-article');">
+																			onclick="duplicateArticle('<?php echo $city ?>', '<?php echo $innerCity ?>', 'article-0');">
 																				<?php echo $innerCity; ?>
 																		</button>
 																	<?php endif; ?>
@@ -107,25 +107,25 @@
 
 												<div class="col-md-3">
 													<img src="
-														<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['main-article-url'] )), array(300,200) )[0]; ?>
-														" name="main-article-preview-img" class="main-article-preview-img img-thumbnail center-block" />
+														<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['article-0-url'] )), array(300,200) )[0]; ?>
+														" name="article-0-preview-img" class="article-0-preview-img img-thumbnail center-block" />
 												</div>
 												<div class="col-md-9">
 													<div class="input-group">
 														<span class="input-group-addon">Title</span>
-														<input type="text" name="main-article-title" class="form-control" placeholder="Main Article's Title" 
-															value="<?php echo $articles['main-article-title']; ?>" />
+														<input type="text" name="article-0-title" class="form-control" placeholder="Main Article's Title" 
+															value="<?php echo $articles['article-0-title']; ?>" />
 													</div>
 													
 													<div class="input-group">
 														<span class="input-group-addon" >URL</span>
-														<input type="text" name="main-article-url" class="form-control" placeholder="Main Article's Link Address" 
-															value="<?php echo $articles['main-article-url']; ?>" value=""/>
+														<input type="text" name="article-0-url" class="form-control" placeholder="Main Article's Link Address" 
+															value="<?php echo $articles['article-0-url']; ?>" value=""/>
 													</div>
 													<div class="input-group">
 														<span class="input-group-addon">Copy</span>
-														<textarea rows="3" name="main-article-copy" class="form-control" placeholder="Main Article's Summary" 
-															><?php echo $articles['main-article-copy']; ?></textarea>
+														<textarea rows="3" name="article-0-copy" class="form-control" placeholder="Main Article's Summary" 
+															><?php echo $articles['article-0-copy']; ?></textarea>
 													</div>
 												</div>
 											</div>
@@ -443,7 +443,7 @@
 							var articlesClass = "#articles" + data['city'];
 
 							//update main article image preview thumbnail
-							$(articlesClass + " img[name='main-article-preview-img']").attr("src", data['main-article-img']);
+							$(articlesClass + " img[name='article-0-preview-img']").attr("src", data['article-0-img']);
 
 							//reset thumbnail name field
 							$(articlesClass).find("input[name='article-x-thumbnail']").attr("value", "");
@@ -559,9 +559,9 @@
 				clipboard = $("#articles" + copyFrom + " div input[name='" + articleName + "-url']").val();
 				$("#articles" + pasteTo + " div input[name='" + articleName + "-url']").val(clipboard);
 
-				if (articleName === 'main-article' ) {
-					clipboard = $("#articles" + copyFrom + " div textarea[name='main-article-copy']").val();
-					$("#articles" + pasteTo + " div textarea[name='main-article-copy']").val(clipboard);
+				if (articleName === 'article-0' ) {
+					clipboard = $("#articles" + copyFrom + " div textarea[name='article-0-copy']").val();
+					$("#articles" + pasteTo + " div textarea[name='article-0-copy']").val(clipboard);
 				};
 
 				$("#articles" + pasteTo + " form").submit();
