@@ -443,14 +443,11 @@
 						else if (data['type'] == "articles") {
 
 							var articlesClass = "#articles" + data['city'];
-
-							//update main article image preview thumbnail
-							$(articlesClass + " img[name='article-0-preview-img']").attr("src", data['article-0-img']);
-
+							
 							//reset thumbnail name field
 							$(articlesClass).find("input[name='article-x-thumbnail']").attr("value", "");
 
-							for (i = 1; i <= 5; i++) { 
+							for (i = 0; i <= 5; i++) { 
 								//update "article-i-preview-img" thumbnails
 								$(articlesClass + " img[name='article-" + i + "-preview-img']").attr("src", data["article-" + i + "-img"]);
 
