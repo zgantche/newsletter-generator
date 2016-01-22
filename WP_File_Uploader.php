@@ -50,7 +50,9 @@ class WP_File_Uploader{
 	/**
 	 * Constructor
 	 *
-	 * Register a Variable Directory.
+	 * Register the cache.
+	 *
+	 * @param string $cache - The name of cache associated with current upload.
 	 */
 	function __construct($cache){
 		// Initiate VarDirectory, used to read/write to file cache
@@ -59,6 +61,36 @@ class WP_File_Uploader{
 		// Initiate the file cache and save its name
 		$this->file_cache = $this->var_dir->getVar($cache);
 		$this->file_cache_name = $cache;
+	}
+
+	/**
+	 * Main function; checks cache, verifies, and uploads passed file
+	 *
+	 * @param string $file - Name of the file to be uploaded
+	 * @return array $report - return a report of the upload; status, info, and file_url
+	 */
+	public function upload_file($file){
+		// Instantiate report with initial failure status
+		$this->report = ['status' => "warning", 'info' => "Initial pre-validation fail.", 'file_url' => ""];
+
+		// Search cache for file, if file not found in the cache, upload it
+		if (FALSE === self::search_cache($file)) {
+			// Check file for integrity, size, type, etc.
+			if (self::validate_file($file)){
+				// Upload upon successful validation
+				self::upload_validated_file();
+
+				$this->report['status'] = "success";
+				$this->report['info'] = "Image uploaded to server.";
+			}
+		}
+		else {
+			$this->report['status'] = "success";
+			$this->report['info'] = "Image found on server.";
+		}
+
+		// Return the final report
+		return $this->report;
 	}
 
 	/**
@@ -144,7 +176,7 @@ class WP_File_Uploader{
 	 * Void Function for uploading $verified_file via WP's media_handle_upload()
 	 *
 	 */
-	public function upload_validated_file(){
+	private function upload_validated_file(){
 		
 		// Load WordPress in a light-weight manner
 		define('WP_USE_THEMES', FALSE);
@@ -167,36 +199,6 @@ class WP_File_Uploader{
 
 		// Update our file cache
 		$this->var_dir->setVar($this->file_cache, $this->file_cache_name);
-	}
-
-	/**
-	 * Main function; checks cache, verifies, and uploads passed file
-	 *
-	 * @param string $file - Name of the file to be uploaded
-	 * @return array $report - return a report of the upload; status, info, and file_url
-	 */
-	public function upload_file($file){
-		// Instantiate report with initial failure status
-		$this->report = ['status' => "warning", 'info' => "Initial pre-validation fail.", 'file_url' => ""];
-
-		// Search cache for file, if file not found in the cache, upload it
-		if (FALSE === self::search_cache($file)) {
-			// Check file for integrity, size, type, etc.
-			if (self::validate_file($file)){
-				// Upload upon successful validation
-				self::upload_validated_file();
-
-				$this->report['status'] = "success";
-				$this->report['info'] = "Image uploaded to server.";
-			}
-		}
-		else {
-			$this->report['status'] = "success";
-			$this->report['info'] = "Image found on server.";
-		}
-
-		// Return the final report
-		return $this->report;
 	}
 
 	/**
