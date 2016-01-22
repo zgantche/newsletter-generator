@@ -106,9 +106,11 @@
 												</div>
 
 												<div class="col-md-3">
-													<img src="
-														<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['article-0-url'] )), array(300,200) )[0]; ?>
-														" name="article-0-preview-img" class="article-0-preview-img img-thumbnail center-block" />
+													<span class="file-input btn btn-warning btn-file">
+														Upload<input type="file" name="article-0-thumbnail" class="articleThumbnail">
+													</span>
+													<img src="<?php echo $articles['article-0-thumbnail']; ?>" 
+														name="article-0-preview-img" class="article-0-preview-img img-thumbnail center-block" />
 												</div>
 												<div class="col-md-9">
 													<div class="input-group">
@@ -174,13 +176,13 @@
 													<div class="col-md-9 bit-of-top-padding">
 														<div class="input-group">
 															<span class="input-group-addon">Title</span>
-															<input type="text" name="<?php echo 'article-' . $i . '-title'; ?>" class="form-control" placeholder="<?php echo 'Article ' . $i . ' Title'; ?>" 
-																value="<?php echo $articles[$article_title]; ?>" />
+															<input type="text" name="<?php echo 'article-' . $i . '-title'; ?>" class="form-control" 
+																placeholder="<?php echo 'Article ' . $i . ' Title'; ?>" value="<?php echo $articles[$article_title]; ?>" />
 														</div>
 														<div class="input-group">
 															<span class="input-group-addon">URL</span>
-															<input type="text" name="<?php echo 'article-' . $i . '-url'; ?>" class="form-control" placeholder="<?php echo 'Article ' . $i . ' Link Address'; ?>"
-																value="<?php echo $articles[$article_url]; ?>" />
+															<input type="text" name="<?php echo 'article-' . $i . '-url'; ?>" class="form-control" 
+																placeholder="<?php echo 'Article ' . $i . ' Link Address'; ?>" value="<?php echo $articles[$article_url]; ?>" />
 															<!-- Hidden fields used for 'smart' thumnail file uploads -->
 															<input type="hidden" name="<?php echo 'article-' . $i . '-thumbnail'; ?>" value="<?php echo $articles[$article_thumbnail]; ?>" />
 															<input type="hidden" name="<?php echo 'article-' . $i . '-url-old'; ?>" value="<?php echo $articles[$article_url]; ?>" />

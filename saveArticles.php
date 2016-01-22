@@ -14,6 +14,8 @@
 		'article-0-title'		=> $_POST['article-0-title'],
 		'article-0-url'			=> $_POST['article-0-url'],
 		'article-0-copy'		=> $_POST['article-0-copy'],
+		'article-0-url-old'		=> $_POST['article-0-url-old'],
+		'article-0-thumbnail'	=> $_POST['article-0-thumbnail'],
 		'article-1-title'		=> $_POST['article-1-title'],
 		'article-1-url'			=> $_POST['article-1-url'],
 		'article-1-url-old'		=> $_POST['article-1-url-old'],
@@ -37,8 +39,7 @@
 	);
 	
 	//if URL field is changed, fetch thumbnail via WordPress
-	#TO DO: Convert article-0 to article-0
-	for ($i = 1; $i <= 5; $i++) {
+	for ($i = 0; $i <= 5; $i++) {
 		if ($_POST['article-' . $i . '-url'] !== $_POST['article-' . $i . '-url-old'])
 			$article_info['article-' . $i . '-thumbnail'] = 
 				wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-' . $i . '-url'] )), [300,200] )[0];
@@ -127,7 +128,7 @@
 		'info'				=> $returnStatus['info'],
 		'type'				=> 'articles',
 		'city'				=> $_POST['city'],
-		'article-0-img'	=> wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-0-url'] )), array(300,200) )[0],
+		'article-0-img'		=> $article_info['article-0-thumbnail'],
 		'article-1-img' 	=> $article_info['article-1-thumbnail'],
 		'article-2-img'		=> $article_info['article-2-thumbnail'],
 		'article-3-img'		=> $article_info['article-3-thumbnail'],
