@@ -1,6 +1,5 @@
 <?php
 	require_once 'VarDirectory.php';	// Include VarDirectory Class
-	require_once '../wp-load.php';		// Import WordPress functions for us to use
 	
 
 	//create new varDirectory
@@ -134,15 +133,15 @@
 				<td align="center" style="font-size:13px; color: #7c7c7c; font-family:Helvetica, Arial, sans-serif; vertical-align:top;">
 					<span style="font-size:24px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; margin-left:20px; margin-right:20px; display:block; text-align: left"><b>
 						
-						<?php echo $articles['main-article-title']; ?>
+						<?php echo $articles['article-0-title']; ?>
 
 					</b></span>
 
-					<a href="<?php echo $articles['main-article-url']; ?>" target="_blank" style="text-decoration:none">
-					<img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $articles['main-article-url'] )), array(700,400) )[0]; ?>" alt="main story image" style="display: block;" border="0" width="450" height="300" />
+					<a href="<?php echo $articles['article-0-url']; ?>" target="_blank" style="text-decoration:none">
+					<img src="<?php echo $articles['article-0-thumbnail']; ?>" alt="main story image" style="display: block;" border="0" width="450" height="300" />
 
 						<p style="font-size:13px; color: #202020; line-height:1.3em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; margin-left:20px; margin-right:20px; display:block; text-align: left">
-							<?php echo nl2br($articles['main-article-copy']); ?>
+							<?php echo nl2br($articles['article-0-copy']); ?>
 						</p>
 					</a>
 				</td>
