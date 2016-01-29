@@ -380,7 +380,7 @@
 				position:fixed;
 				top:0;
 				z-index:100;">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<button type="button" class="close" data-hide="alert" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
 			<strong>Warning!</strong>
@@ -521,6 +521,12 @@
 					};
 				});
 
+				
+				/*--- Hide Warning message when "close" is clicked ---*/
+
+				$("[data-hide]").click(function(){
+					$("#warning-message").hide();
+				});
 
 				/*--- Collapse all [Duplicate] sections when user clicks a City section ---*/
 
