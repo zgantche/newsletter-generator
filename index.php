@@ -521,12 +521,13 @@
 					};
 				});
 
-				
+
 				/*--- Hide Warning message when "close" is clicked ---*/
 
 				$("[data-hide]").click(function(){
 					$("#warning-message").hide();
 				});
+				
 
 				/*--- Collapse all [Duplicate] sections when user clicks a City section ---*/
 
