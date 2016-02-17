@@ -16,12 +16,12 @@
 	 * $array['article-i-url']			string Defines article URL address (0 <= i <= 8)
 	 * $array['article-i-url-old']		string Holds article's former URL address (0 <= i <= 8)
 	 * $array['article-i-thumbnail']	string Holds address to article's thumbnail image (0 <= i <= 8)
-	 * $array['article-i-copy']			string Defines main article's copy (only i=0)
+	 * $array['article-i-copy']			string Defines main article's copy (only i = 0)
 	**/
 	$article_info = $_POST;
 	
 	//if URL field is changed, fetch thumbnail via WordPress
-	for ($i = 0; $i <= 5; $i++) {
+	for ($i = 0; $i <= 8; $i++) {
 		if ($_POST['article-' . $i . '-url'] !== $_POST['article-' . $i . '-url-old'])
 			// i == 0 == Main Article, assign it a bigger thumb resolution
 			($i === 0) ? $resolution = [700, 400] : $resolution = [320, 200];
@@ -67,6 +67,9 @@
 			case 'article-3-title':
 			case 'article-4-title':
 			case 'article-5-title':
+			case 'article-6-title':
+			case 'article-7-title':
+			case 'article-8-title':
 				$value = removeSlashes($value);
 				break;
 		}
@@ -117,7 +120,10 @@
 		'article-2-img'		=> $article_info['article-2-thumbnail'],
 		'article-3-img'		=> $article_info['article-3-thumbnail'],
 		'article-4-img'		=> $article_info['article-4-thumbnail'],
-		'article-5-img'		=> $article_info['article-5-thumbnail']
+		'article-5-img'		=> $article_info['article-5-thumbnail'],
+		'article-6-img'		=> $article_info['article-6-thumbnail'],
+		'article-7-img'		=> $article_info['article-7-thumbnail'],
+		'article-8-img'		=> $article_info['article-8-thumbnail']
 	);
 	echo json_encode( $data );
 

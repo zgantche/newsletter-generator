@@ -133,8 +133,8 @@
 											</div>
 
 											<?php 
-												//-- Loop Through Each of the 5 Thumbnail Articles --//
-												for ($i = 1; $i <= 5; $i++):
+												//-- Loop Through Each of the 8 Thumbnail Articles --//
+												for ($i = 1; $i <= 8; $i++):
 													$article_title = 'article-' . $i . '-title';
 													$article_url = 'article-' . $i . '-url';
 													$article_thumbnail = 'article-' . $i . '-thumbnail';
@@ -447,7 +447,7 @@
 							//reset thumbnail name field
 							$(articlesClass).find("input[name='article-x-thumbnail']").attr("value", "");
 
-							for (i = 0; i <= 5; i++) { 
+							for (i = 0; i <= 8; i++) { 
 								//update "article-i-preview-img" thumbnails
 								$(articlesClass + " img[name='article-" + i + "-preview-img']").attr("src", data["article-" + i + "-img"]);
 
@@ -484,7 +484,7 @@
 				$(".articleThumbnail").change(function() { 
 					var thumb = $(this);
 
-					//update appropriate city's thumbnail Name with the correct article (0-5), and submit
+					//update appropriate city's thumbnail Name with the correct article (0-8), and submit
 					thumb.closest("form").children("input[name='article-x-thumbnail']").attr("value", thumb.attr("name"));
 					thumb.closest("form").submit();
 				});
