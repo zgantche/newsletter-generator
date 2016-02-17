@@ -9,39 +9,21 @@
 		'info'		=> ""
 	);
 
-	//array for all Article Info input, passed by form
-	$article_info = array (
-		'article-0-title'		=> $_POST['article-0-title'],
-		'article-0-url'			=> $_POST['article-0-url'],
-		'article-0-copy'		=> $_POST['article-0-copy'],
-		'article-0-url-old'		=> $_POST['article-0-url-old'],
-		'article-0-thumbnail'	=> $_POST['article-0-thumbnail'],
-		'article-1-title'		=> $_POST['article-1-title'],
-		'article-1-url'			=> $_POST['article-1-url'],
-		'article-1-url-old'		=> $_POST['article-1-url-old'],
-		'article-1-thumbnail'	=> $_POST['article-1-thumbnail'],
-		'article-2-title'		=> $_POST['article-2-title'],
-		'article-2-url'			=> $_POST['article-2-url'],
-		'article-2-url-old'		=> $_POST['article-2-url-old'],
-		'article-2-thumbnail'	=> $_POST['article-2-thumbnail'],
-		'article-3-title'		=> $_POST['article-3-title'],
-		'article-3-url'			=> $_POST['article-3-url'],
-		'article-3-url-old'		=> $_POST['article-3-url-old'],
-		'article-3-thumbnail'	=> $_POST['article-3-thumbnail'],
-		'article-4-title'		=> $_POST['article-4-title'],
-		'article-4-url'			=> $_POST['article-4-url'],
-		'article-4-url-old'		=> $_POST['article-4-url-old'],
-		'article-4-thumbnail'	=> $_POST['article-4-thumbnail'],
-		'article-5-title'		=> $_POST['article-5-title'],
-		'article-5-url'			=> $_POST['article-5-url'],
-		'article-5-url-old'		=> $_POST['article-5-url-old'],
-		'article-5-thumbnail'	=> $_POST['article-5-thumbnail'],
-	);
+	/**
+	 * Array holding all Article Info passed by form
+	 * 
+	 * $array['article-i-title']		string Defines article title (0 <= i <= 8)
+	 * $array['article-i-url']			string Defines article URL address (0 <= i <= 8)
+	 * $array['article-i-url-old']		string Holds article's former URL address (0 <= i <= 8)
+	 * $array['article-i-thumbnail']	string Holds address to article's thumbnail image (0 <= i <= 8)
+	 * $array['article-i-copy']			string Defines main article's copy (only i=0)
+	**/
+	$article_info = $_POST;
 	
 	//if URL field is changed, fetch thumbnail via WordPress
 	for ($i = 0; $i <= 5; $i++) {
 		if ($_POST['article-' . $i . '-url'] !== $_POST['article-' . $i . '-url-old'])
-			//if current article is main article (i=0), assign it a bigger thumb resolution
+			// i == 0 == Main Article, assign it a bigger thumb resolution
 			($i === 0) ? $resolution = [700, 400] : $resolution = [320, 200];
 			$article_info['article-' . $i . '-thumbnail'] = 
 				wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-' . $i . '-url'] )), $resolution )[0];
