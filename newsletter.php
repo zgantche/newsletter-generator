@@ -47,255 +47,541 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Notable.ca</title> <!-- The title tag shows in email notifications, like Android 4.4. -->
 
-	<head>
-		<title>Notable</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="viewport" content="width=690, initial-scale=1">
-		<style>
-		body {
-			-webkit-font-smoothing: subpixel-antialiased !important;
-			-webkit-text-size-adjust:none !important;
-		}
-		
-		@font-face { font-family: Oswald; src: "fonts/Oswald-Megular.ttf"; }
-		
-		.link:Link, .link:Active, .link:Visited {
-			text-decoration: none;
-			color:#777777;
-		}
-		.link:Hover {
-			text-decoration: underline;
-			color:#555555;
-		}
-		</style>
-	</head>
+    <!-- CSS Reset -->
+    <style type="text/css">
+        /* Remove spaces around the email design added by some email clients. */
+        /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+        html,
+        body {
+            Margin: 0 !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+        }
+        
+        /* Stops email clients resizing small text. */
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        /* Centers email on Android 4.4 */
+        div[style*="margin: 16px 0"] {
+            margin:0 !important;
+        }
+        
+        /* Stops Outlook from adding extra spacing to tables. */
+        table,
+        td {
+            mso-table-lspace: 0pt !important;
+            mso-table-rspace: 0pt !important;
+        }
+                
+        /* Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
+        table {
+            border-spacing: 0 !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            Margin: 0 auto !important;
+        }
+        table table table {
+            table-layout: auto; 
+        }
+        
+        /* Uses a better rendering method when resizing images in IE. */
+        img {
+            -ms-interpolation-mode:bicubic;
+        }
+        
+        /* Overrides styles added when Yahoo's auto-senses a link. */
+        .yshortcuts a {
+            border-bottom: none !important;
+        }
+        
+        /* A work-around for iOS meddling in triggered links. */
+        .mobile-link--footer a,
+        a[x-apple-data-detectors] {
+            color:inherit !important;
+            text-decoration: underline !important;
+        }
+    </style>
 
-	<body style="background-color: #f1f1f1; margin:0; padding:0">
-	
-	
-		<!-- NOTABLE HEADER -->
-		<table width="780" cellpadding="0" cellspacing="0" border="0" align="center" style="margin-top:20px; background-color:#ffffff; padding:30px 0px 20px 0px;">
-			<tr>
-				<td style="padding-bottom:0px;">
-					<a href="http://www.notable.ca/" target="_blank"><img src="http://notable.ca/wp-content/uploads/2015/03/notable-logo.png" border="0" width="410" height="45" alt="notable" style="display: block; margin:0 auto;"/></a>
-				</td>
-			</tr>
-		</table>
-		
-		
-		<!-- LEADERBOARD AD -->
-		<table width="780" cellpadding="0" cellspacing="0" border="0" align="center" style="background-color:#ffffff;">
-			<tr>
-				<td style="padding-bottom:0px;">
-					<a href="<?php echo $ad_lb['link-url']; ?>" target="_blank"><img src="<?php echo $ad_lb['creative']; ?>" border="0" width="780" height="90" alt="leaderboard" style="display: block; margin:0 auto; padding-bottom: 10px;"/></a>
-				</td>
-			</tr>
-		</table>
+    <!-- Media Queries -->
+    <style type="text/css">
+        @media only screen and (max-width: 631px) {
+            .notable_logo {
+                width: 350px !important;
+            }
+            #main_article_title {
+                font-size: 26px !important;
+                margin-right: 0px !important;
+                margin-left: 0px !important;
+            }
+            #main_article_copy {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+            .thumbnail_article_img {
+                width: 45% !important;
+            }
+            .thumbnail_article_img tr td {
+                padding-left: 5px !important;
+                padding-right: 10px !important;
+            }
+            .thumbnail_article_title {
+                width: 55%!important;
+            }
+            .thumbnail_article_title tr td {
+                font-size: 19px !important;
+                padding-top: 0px !important;
+            }
+            .nav_bar_menu_items {
+                display: none !important;
+            }
+            .nav_bar_sm_icons{
+                width: 100% !important;
+            }
+            .sm_icons {
+                margin-left: 0px !important;
+                margin-right: 0px !important;
+            }
 
+            /* Forces table cells into full-width rows. */
+            .stack-column {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                direction: ltr !important;
+            }
+        }
+    </style>
+</head>
 
-		<!-- NAVIGATION -->
-		<table width="780" cellpadding="0" cellspacing="0" border="0" align="center" style="background-color:#262626; height:48px; margin-bottom: 0px;">
-			<tr>
-				
-			<td style="padding-left:10px;">
-				<span style="font-size:16px; color: #ffffff; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:15px; margin-top:20px; margin-left:20px; margin-right:20px; display:block; text-align: center"><a href="http://notable.ca/category/people/" target="_blank" style="text-decoration:none"><font color="#ffffff">PEOPLE+</font></a></span>
-			</td>
-			<td >
-				<span style="font-size:16px; color: #ffffff; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:15px; margin-top:20px; margin-left:20px; margin-right:20px; display:block; text-align: center"><a href="http://notable.ca/category/life/" target="_blank" style="text-decoration:none"><font color="#ffffff">LIFE+</font></a></span>
-			</td>
-			<td >
-				<span style="font-size:16px; color: #ffffff; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:15px; margin-top:20px; margin-left:20px; margin-right:20px; display:block; text-align: center"><a href="http://notable.ca/category/business/" target="_blank" style="text-decoration:none"><font color="#ffffff">BUSINESS+</font></a></span>
-			</td>
-			<td style="padding-right:50px;">
-				<span style="font-size:16px; color: #ffffff; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:15px; margin-top:20px; margin-left:20px; margin-right:20px; display:block; text-align: center"><a href="http://notable.ca/category/culture/" target="_blank" style="text-decoration:none"><font color="#ffffff">CULTURE+</font></a></span>
-			</td>
-			<td width="40px" align="center">
-				<a href="https://www.facebook.com/Notable.ca" target="_blank"><img src="http://notable.ca/wp-content/uploads/2015/03/social-facebook.png" alt="facebook" style="display: block;" border="0" height="20" width="20" /></a>
-			</td>
-			<td width="40px" align="center">
-				<a href="https://twitter.com/notableca" target="_blank"><img src="http://notable.ca/wp-content/uploads/2015/03/social-twitter.png" alt="twitter" style="display: block;" border="0" height="20" width="20" /></a>
-			</td>
-			<td width="40px" align="center">
-				<a href="https://www.linkedin.com/company/notable-ca" target="_blank"><img src="http://notable.ca/wp-content/uploads/2015/03/social-linkedin.png" alt="linkedin" style="display: block;" border="0" height="20" width="20" /></a>
-			</td>
-			<td width="40px" align="center" style="padding-right:10px;">
-				<a href="https://instagram.com/notableca" target="_blank"><img src="http://notable.ca/wp-content/uploads/2015/03/social-insta.png" alt="instagram" style="display: block;" border="0" height="20" width="20" /></a>
-			</td>
-			</tr>
-		</table>
-		
-		
-		
-		<!-- MAIN ARTICLE -->
-		<table width="780" cellpadding="0" cellspacing="0" border="0" align="center" style="margin-bottom:0px; background-color:#FFF; font-family:Helvetica, Arial, sans-serif;">
-			<tr>
-				<td align="center" style="font-size:13px; color: #7c7c7c; font-family:Helvetica, Arial, sans-serif; vertical-align:top;">
-					<span style="font-size:24px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; margin-left:20px; margin-right:20px; display:block; text-align: left"><b>
-						
-						<?php echo $articles['article-0-title']; ?>
+<body width="100%" bgcolor="#f1f1f1" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+<!--[if mso]>
+<table cellspacing="0" cellpadding="0" border="0" width="728" align="center">
+    <tr>
+        <td align="center" valign="top" width="660">
+<![endif]-->
+<table cellpadding="0" cellspacing="0" border="0" height="100%" width="100%" bgcolor="#f1f1f1" style="border-collapse:collapse;"><tr><td valign="top">
+    <center style="width: 100%;">
+        <div style="max-width: 728px;">
 
-					</b></span>
+            <!-- Email Header : BEGIN -->
+            <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="#242424" style="max-width: 728px;">
+                <!-- Leaderboard Ad -->
+                <tr>
+                    <td align="center" style="background-color:#f1f1f1;">
+                        <a href="<?php echo $ad_lb['link-url']; ?>" target="_blank"><img src="<?php echo $ad_lb['creative']; ?>" alt="Leaderboard Ad" width="728" border="0" align="center" style="width: 100%; max-width: 728px;" /></a>
+                    </td>
+                </tr>
+                <!-- Social Media Icons - No indentation, so it's not rendered as spacing between them :(-->
+                <tr>    
+                    <td align="right" style="padding-right:15px; padding-top:12px; padding-bottom:10px;">
+                        <a href="https://www.facebook.com/Notable.ca" target="_blank" style="color:#242424;"><img src="http://notable.ca/wp-content/uploads/2015/03/facebook_icon_74px.jpg" alt="facebook" width="29" style="max-width:29px" /></a><a href="https://twitter.com/notableca" target="_blank" style="color:#242424;"><img src="http://notable.ca/wp-content/uploads/2015/03/twitter_icon_74px.jpg" alt="twitter" width="29" style="max-width:29px" /></a><a href="https://www.linkedin.com/company/notable-ca" target="_blank" style="color:#242424;"><img src="http://notable.ca/wp-content/uploads/2015/03/linkedin_icon_74px.jpg" alt="linkedin" width="29" style="max-width:29px" /></a><a href="https://instagram.com/notableca" target="_blank" style="color:#242424;"><img src="http://notable.ca/wp-content/uploads/2015/03/instagram_icon_74px.jpg" alt="instagram" width="29" style="max-width:29px" /></a>
+                    </td>
+                </tr>
+                <!-- Header Logo -->
+                <tr>
+                    <td align="center" style="padding-bottom:35px; padding-left:20px; padding-right:20px;">
+                        <a href="http://www.notable.ca/" target="_blank">
+                            <img src="http://notable.ca/wp-content/uploads/2015/03/Notable-white-newsletter.jpg" alt="Notable.ca Header Logo" width="350" height="47" border="0" />
+                        </a>
+                    </td>
+                </tr>
+                <!-- Separator -->
+                <tr>
+                    <td style="background-color:#333333; height:15px;">
+                    </td>
+                </tr>
+            </table>
+            <!-- Email Header : END -->
 
-					<a href="<?php echo $articles['article-0-url']; ?>" target="_blank" style="text-decoration:none">
-					<img src="<?php echo $articles['article-0-thumbnail']; ?>" alt="main story image" style="display: block;" border="0" width="450" height="300" />
+            <!-- Email Body : BEGIN -->
+            <table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#fdfdfd" width="100%" style="max-width: 728px;">
 
-						<p style="font-size:13px; color: #202020; line-height:1.3em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; margin-left:20px; margin-right:20px; display:block; text-align: left">
-							<?php echo nl2br($articles['article-0-copy']); ?>
-						</p>
-					</a>
-				</td>
-				
-				<!-- ADVERTISING -->
-				<td style="font-size:12px; color: #7c7c7c; line-height:1.6em; font-family:Helvetica, Arial, sans-serif; vertical-align:top;">
+                <!-- Main Article : BEGIN -->
+                <tr>
+                    <td align="center" style="padding-top:20px; padding-left:20px; padding-right:20px;">
+                        <a href="<?php echo $articles['article-0-url']; ?>" target="_blank">
+                            <img src="<?php echo $articles['article-0-thumbnail']; ?>" alt="Main Article Thumbnail Image" width="600" border="0" align="center" style="width: 100%; max-width: 600px;" />
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tr>
+                                <td id="main_article_copy" align="center" style="padding-left: 40px; padding-right: 40px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 25px; color: #555555;">
+                                    <a href="<?php echo $articles['article-0-url']; ?>" target="_blank" style="text-decoration:none">
+                                        <h1 id="main_article_title" style="font-size:24px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; margin-left:20px; margin-right:20px; display:block; text-align: center;"><?php echo $articles['article-0-title']; ?></h1>
+                                    </a>
+                                    <?php echo nl2br($articles['article-0-copy']); ?>
+                                    <br /><br />
+                                    <!-- Call to Action Button -->
+                                    <table cellspacing="0" cellpadding="0" border="0" align="center" style="Margin: auto">
+                                        <tr>
+                                            <td align="center" style="border-radius: 3px; background: #222222;" class="button-td">
+                                                <a href="<?php echo $articles['article-0-url']; ?>" target="_blank" style="background: #222222; max-width: 250px; border: 15px solid #222222; padding: 0 10px;color: #ffffff; font-family: sans-serif; font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;" class="button-a">Continue Reading
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- Main Article : END -->
 
-					<a href="<?php echo $ad_bb1['link-url']; ?>" target="_blank"><img src="<?php echo $ad_bb1['creative']; ?>" alt="big box one" style="display: block; padding:10px 0px;" border="0" height="250" width="300" /></a>
+                <!-- Big Box Ad 1 : START -->
+                <tr>
+                    <td align="center" style="padding-top:40px; padding-bottom:40px;">
+                        <a href="<?php echo $ad_bb1['link-url']; ?>" target="_blank">
+                            <img src="<?php echo $ad_bb1['creative']; ?>" alt="Big Box Ad" width="300" border="0" align="center" style="width: 100%; max-width: 300px;" />
+                        </a>
+                    </td>
+                </tr>
+                <!-- Big Box Ad 1 : END -->
 
-					<a href="<?php echo $ad_bb2['link-url']; ?>" target="_blank"><img src="<?php echo $ad_bb2['creative']; ?>" alt="big box two" style="display: block; padding-bottom: 10px;" border="0" height="250" width="300" /></a>
+                <!-- First Group of Four Thumbnail Articles : START -->
+                <tr>
+                    <td bgcolor="#fdfdfd" align="center" height="100%" valign="top" width="100%">
+                        <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:660px; border-top:1px dashed #cccccc;">
+                            <tr>
+                                <td align="center" valign="top" style="font-size:0; padding: 10px 0;">
+                                    <h1 style="font-size:20px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; text-align: center;">FEATURED ARTICLES</h1>
+                                    <!--[if mso]>
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                            <td width="300">
+                                    <![endif]-->
+                                    <div style="display:inline-block; Margin: 0 -2px; width:100%; min-width:200px; max-width:320px; vertical-align:top;" class="stack-column">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding: 10px 10px;">
+                                                    <a href="<?php echo $articles['article-1-url']; ?>" target="_blank" style="text-decoration:none">
+                                                        <table class="thumbnail_article_img" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <img src="<?php echo $articles['article-1-thumbnail']; ?>" alt="Article Thumbnail Image" width="300" style="border: 0; width: 100%; max-width: 300px;" class="center-on-narrow" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="thumbnail_article_title" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td style="font-family: sans-serif; max-width: 300px; font-size: 20px; font-weight: bold; mso-height-rule: exactly; line-height: 25px; color: #000000; padding-top: 10px;" class="stack-column-center">
+                                                                    <?php echo $articles['article-1-title']; ?>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!--[if mso]>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                            <td width="300">
+                                    <![endif]-->
+                                    <div style="display:inline-block; Margin: 0 -2px; width:100%; min-width:200px; max-width:320px; vertical-align:top;" class="stack-column">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding: 10px 10px;">
+                                                    <a href="<?php echo $articles['article-2-url']; ?>" target="_blank" style="text-decoration:none">
+                                                        <table class="thumbnail_article_img" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <img src="<?php echo $articles['article-2-thumbnail']; ?>" alt="Article Thumbnail Image" width="300" style="border: 0; width: 100%; max-width: 300px;" class="center-on-narrow" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="thumbnail_article_title" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td style="font-family: sans-serif; max-width: 300px; font-size: 20px; font-weight: bold; mso-height-rule: exactly; line-height: 25px; color: #000000; padding-top: 10px;" class="stack-column-center">
+                                                                    <?php echo $articles['article-2-title']; ?>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!--[if mso]>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                            <td width="300">
+                                    <![endif]-->
+                                    <div style="display:inline-block; Margin: 0 -2px; width:100%; min-width:200px; max-width:320px; vertical-align:top;" class="stack-column">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding: 10px 10px;">
+                                                    <a href="<?php echo $articles['article-3-url']; ?>" target="_blank" style="text-decoration:none">
+                                                        <table class="thumbnail_article_img" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <img src="<?php echo $articles['article-3-thumbnail']; ?>" alt="Article Thumbnail Image" width="300" style="border: 0; width: 100%; max-width: 300px;" class="center-on-narrow" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="thumbnail_article_title" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td style="font-family: sans-serif; max-width: 300px; font-size: 20px; font-weight: bold; mso-height-rule: exactly; line-height: 25px; color: #000000; padding-top: 10px;" class="stack-column-center">
+                                                                    <?php echo $articles['article-3-title']; ?>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!--[if mso]>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                            <td width="300">
+                                    <![endif]-->
+                                    <div style="display:inline-block; Margin: 0 -2px; width:100%; min-width:200px; max-width:320px; vertical-align:top;" class="stack-column">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding: 10px 10px;">
+                                                    <a href="<?php echo $articles['article-4-url']; ?>" target="_blank" style="text-decoration:none">
+                                                        <table class="thumbnail_article_img" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <img src="<?php echo $articles['article-4-thumbnail']; ?>" alt="Article Thumbnail Image" width="300" style="border: 0; width: 100%; max-width: 300px;" class="center-on-narrow" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="thumbnail_article_title" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td style="font-family: sans-serif; max-width: 300px; font-size: 20px; font-weight: bold; mso-height-rule: exactly; line-height: 25px; color: #000000; padding-top: 10px;" class="stack-column-center">
+                                                                    <?php echo $articles['article-4-title']; ?>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!--[if mso]>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                    <![endif]-->
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- First Group of Four Thumbnail Articles : END -->
 
-				</td>
-			</tr>
-		</table>
-		
-		
-		
-		<!-- TOP SEPARATION BAR -->
-		<table width="780" cellpadding="0" cellspacing="0" border="0" align="center" style="background-color:#262626; height:12px; margin-bottom: 0px;"></table>
-		
-		
-		
-		<!-- OTHER ARTICLES -->
-		<table width="780" cellpadding="0" cellspacing="0" border="0" align="center" style="background-color:#ffffff; margin-bottom: 0px; padding: 10px 10px 30px 10px;">
-			<tbody><tr>
-			
-					<td width="145px" style="padding-right:9px; font-size:11.5px; align:left; color:#666666; letter-spacing:0.5px; line-height:1.4em; font-family:Helvetica, Arial, sans-serif; vertical-align: text-top;">
-			
-						<a href="<?php echo $articles['article-1-url']; ?>" target="_blank" style="text-decoration:none">
-						<img src="<?php echo $articles['article-1-thumbnail']; ?>" alt="Story 2 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
-						<font color="#000000">
-							<?php echo $articles['article-1-title']; ?>
-						</font></a>
+                <!-- Big Box Ad 2 : START -->
+                <tr>
+                    <td align="center" style="padding-top:40px; padding-bottom:40px;">
+                        <a href="<?php echo $ad_bb2['link-url']; ?>" target="_blank">
+                            <img src="<?php echo $ad_bb2['creative']; ?>" width="300" height="" alt="Big Box Ad" border="0" align="center" style="width: 100%; max-width: 300px;" />
+                        </a>
+                    </td>
+                </tr>
+                <!-- Big Box Ad 2 : END -->
 
-					</td> 
-						
-					<td width="145px" style="padding-right:9px; font-size:11.5px; align:left; color:#666666; letter-spacing:0.5px; line-height:1.4em; font-family:Helvetica, Arial, sans-serif; vertical-align: text-top;">
+                <!-- Second Group of Four Thumbnail Articles : START -->
+                <tr>
+                    <td bgcolor="#fdfdfd" align="center" height="100%" valign="top" width="100%">
+                        <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:660px; border-top:1px dashed #cccccc;">
+                            <tr>
+                                <td align="center" valign="top" style="font-size:0; padding: 10px 0;">
+                                    <h1 style="font-size:20px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; text-align: center;">TRENDING ARTICLES</h1>
+                                    <!--[if mso]>
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                            <td width="300">
+                                    <![endif]-->
+                                    <div style="display:inline-block; Margin: 0 -2px; width:100%; min-width:200px; max-width:320px; vertical-align:top;" class="stack-column">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding: 10px 10px;">
+                                                    <a href="<?php echo $articles['article-5-url']; ?>" target="_blank" style="text-decoration:none">
+                                                        <table class="thumbnail_article_img" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <img src="<?php echo $articles['article-5-thumbnail']; ?>" alt="Article Thumbnail Image" width="300" style="border: 0; width: 100%;max-width: 300px;" class="center-on-narrow" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="thumbnail_article_title" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td style="font-family: sans-serif; max-width: 300px; font-size: 20px; font-weight: bold; mso-height-rule: exactly; line-height: 25px; color: #000000; padding-top: 10px;" class="stack-column-center">
+                                                                    <?php echo $articles['article-5-title']; ?>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!--[if mso]>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                            <td width="300">
+                                    <![endif]-->
+                                    <div style="display:inline-block; Margin: 0 -2px; width:100%; min-width:200px; max-width:320px; vertical-align:top;" class="stack-column">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding: 10px 10px;">
+                                                    <a href="<?php echo $articles['article-6-url']; ?>" target="_blank" style="text-decoration:none">
+                                                        <table class="thumbnail_article_img" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <img src="<?php echo $articles['article-6-thumbnail']; ?>" alt="Article Thumbnail Image" width="300" style="border: 0; width: 100%; max-width: 300px;" class="center-on-narrow" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="thumbnail_article_title" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td style="font-family: sans-serif; max-width: 300px; font-size: 20px; font-weight: bold; mso-height-rule: exactly; line-height: 25px; color: #000000; padding-top: 10px;" class="stack-column-center">
+                                                                    <?php echo $articles['article-6-title']; ?>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!--[if mso]>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                            <td width="300">
+                                    <![endif]-->
+                                    <div style="display:inline-block; Margin: 0 -2px; width:100%; min-width:200px; max-width:320px; vertical-align:top;" class="stack-column">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding: 10px 10px;">
+                                                    <a href="<?php echo $articles['article-7-url']; ?>" target="_blank" style="text-decoration:none">
+                                                        <table class="thumbnail_article_img" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <img src="<?php echo $articles['article-7-thumbnail']; ?>" alt="Article Thumbnail Image" width="300" style="border: 0; width: 100%; max-width: 300px;" class="center-on-narrow" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="thumbnail_article_title" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td style="font-family: sans-serif; max-width: 300px; font-size: 20px; font-weight: bold; mso-height-rule: exactly; line-height: 25px; color: #000000; padding-top: 10px;" class="stack-column-center">
+                                                                    <?php echo $articles['article-7-title']; ?>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!--[if mso]>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                            <td width="300">
+                                    <![endif]-->
+                                    <div style="display:inline-block; Margin: 0 -2px; width:100%; min-width:200px; max-width:320px; vertical-align:top;" class="stack-column">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding: 10px 10px;">
+                                                    <a href="<?php echo $articles['article-8-url']; ?>" target="_blank" style="text-decoration:none">
+                                                        <table class="thumbnail_article_img" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <img src="<?php echo $articles['article-8-thumbnail']; ?>" alt="Article Thumbnail Image" width="300" style="border: 0; width: 100%; max-width: 300px;" class="center-on-narrow" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="thumbnail_article_title" align="left" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align: left;">
+                                                            <tr>
+                                                                <td style="font-family: sans-serif; max-width: 300px; font-size: 20px; font-weight: bold; mso-height-rule: exactly; line-height: 25px; color: #000000; padding-top: 10px;" class="stack-column-center">
+                                                                    <?php echo $articles['article-8-title']; ?>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!--[if mso]>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                    <![endif]-->
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- Second Group of Four Thumbnail Articles : END -->
+            </table>
 
-						<a href="<?php echo $articles['article-2-url']; ?>" target="_blank" style="text-decoration:none">
-						<img src="<?php echo $articles['article-2-thumbnail']; ?>" alt="Story 3 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
-						<font color="#000000">
-							<?php echo $articles['article-2-title']; ?>
-						</font></a>
+            <!-- Email Footer : START -->
+            <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="#242424" style="max-width: 728px;">
+                <tr>
+                    <td style="margin-top:20px; width: 100%; text-align: center;">
+                        <table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" style="background-color:#333333; height:15px;"></table>
+                        <table width="100%" height="60px" cellpadding="0" cellspacing="0" border="0" align="center">
+                            <tr >
+                                <td align="center">
+                                      <img src="http://notable.ca/wp-content/uploads/2015/03/Notable-white-newsletter.jpg" alt="Notable.ca Footer Logo" width="191" height="26" border="0" style="padding-top:23px; padding-bottom:0px;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="font-size:12px; padding:20px; color: #aaaaaa; line-height:1.6em; font-family:Helvetica, Arial, sans-serif;">
+                                    Notable Media Inc. | 476 Richmond St. W, 1st Floor | Toronto, ON, M5V 1Y2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="color: #888888; font-size: 12px; font-family: sans-serif; mso-height-rule: exactly; line-height:18px; padding-bottom:8px; padding-right:10px;">
+                                    <br />
+                                    You can always <a href="http://notable.ca/unsubscribe/" target="_blank" style="color:#888888; text-decoration:underline;">unsubscribe</a> here
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <!-- Email Footer : END -->
 
-					</td> 
-				
-					<td width="145px" style="padding-right:9px; font-size:11.5px; align:left; color:#666666; letter-spacing:0.5px; line-height:1.4em; font-family:Helvetica, Arial, sans-serif; vertical-align: text-top;">
-
-						<a href="<?php echo $articles['article-3-url']; ?>" target="_blank" style="text-decoration:none">
-						<img src="<?php echo $articles['article-3-thumbnail']; ?>" alt="Story 2 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
-						<font color="#000000">
-							<?php echo $articles['article-3-title']; ?>
-						</font></a>
-
-					</td> 
-				
-					<td width="145px" style="padding-right:9px;	font-size:11.5px; align:left; color:#666666; lletter-spacing:0.5px; line-height:1.4em; font-family:Helvetica, Arial, sans-serif; vertical-align: text-top;">
-
-						<a href="<?php echo $articles['article-4-url']; ?>" target="_blank" style="text-decoration:none">
-						<img src="<?php echo $articles['article-4-thumbnail']; ?>" alt="Story 5 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
-						<font color="#000000">
-							<?php echo $articles['article-4-title']; ?>
-						</font></a>
-
-					</td> 
-				
-					<td width="145px" style="font-size:11.5px; align:left; color:#666666; letter-spacing:0.5px; line-height:1.4em; font-family:Helvetica, Arial, sans-serif; vertical-align: text-top;">
-
-						<a href="<?php echo $articles['article-5-url']; ?>" target="_blank" style="text-decoration:none">
-						<img src="<?php echo $articles['article-5-thumbnail']; ?>" alt="Story 6 image" style="display: block; padding-bottom:7px;" border="0" height="100" width="143" />
-						<font color="#000000">
-							<?php echo $articles['article-5-title']; ?>
-						</font></a>
-
-					</td> 
-				
-			</tr></tbody>
-		</table> 
-				
-				
-				
-		<!-- BOTTOM SEPARATION BAR -->
-		<table width="780" cellpadding="0" cellspacing="0" border="0" align="center" style="background-color:#333333; height:12px; margin-bottom: 0px;"></table>
-		
-		<!-- MAIN FOOTER -->
-		<table width="780" cellpadding="" cellspacing="0" border="0" align="center" style="background-color:#262626; height:220px; margin-bottom: 0px;">
-		
-			<!-- NOTABLE LOGO -->
-			<tr>
-				<td>
-					<img src="http://notable.ca/wp-content/uploads/2015/03/notable-logo-white.png" alt="" align="left" style="display: block; padding-left:20px; padding-top:8px; padding-bottom:0px;" border="0" height="21" width="auto">
-				</td>
-			</tr>
-			
-			<!-- TEXT -->
-			<tr>
-				<td style="font-size:13px; align:left; padding-left:20px; padding-right:20px; padding-bottom:4px; color:#808080; line-height:1.38em; font-family: Helvetica, Arial, sans-serif;">
-					Notable.ca is Canada's leading online lifestyle magazine for driven young professionals. We cover all aspects of millennial life including social, professional, and charitable engagements. We're young, connected, ambitious, and one hell of a lively bunch.
-				</td>
-			</tr>
-
-			<td style="width:780px; display:inline;">
-
-				<table width="200" cellpadding="0" cellspacing="0" border="0" align="left">
-					<tr>
-						<td style="padding-left:20px; padding-bottom:20px; padding-top:2px; height:auto; font-size:13px; align:left; color:#cccccc; line-height:1.5em; font-family:Helvetica, Arial, sans-serif;">
-							<a href="http://notable.ca/advertise-with-notableca/" target="_blank" style="text-decoration:none"><font color="#ffffff">Advertise with Notable.ca</font></a><br>
-							<a href="http://notable.ca/about-notable-ca/" target="_blank" style="text-decoration:none"><font color="#ffffff">About Notable.ca</font></a><br>
-							<a href="http://notable.ca/contact-page/" target="_blank" style="text-decoration:none"><font color="#ffffff">Contact Notable</font></a>
-						</td> 
-					</tr>
-				</table>
-								
-				<table width="130" cellpadding="0" cellspacing="0" border="0" align="left" >
-					<tr>
-						<td style="padding-left:15px; padding-bottom:20px; padding-top:2px; height:auto; font-size:13px; align:left; color:#cccccc; line-height:1.5em; font-family:Helvetica, Arial, sans-serif; vertical-align: text-top;">
-							<a href="http://notable.ca/privacy-policy/" target="_blank" style="text-decoration:none"><font color="#ffffff">Privacy Policy</font></a><br>
-							<a href="http://notable.ca/unsubscribe/" target="_blank" style="text-decoration:none"><font color="#ffffff">Unsubscribe</font></a>
-						</td> 
-					</tr>
-				</table>
-				
-				<table width="200" cellpadding="0" cellspacing="0" border="0" align="left" >
-					<tr>
-						<td style="padding-left:15px; padding-bottom:20px; padding-top:2px; height:auto; font-size:13px; align:left; color:#cccccc; line-height:1.5em; font-family:Helvetica, Arial, sans-serif; vertical-align: text-top;">
-							<a href="http://notable.ca/write-for-notableca/" target="_blank" style="text-decoration:none"><font color="#ffffff">Write for Notable.ca</font></a><br>
-							<a href="http://notable.ca/jobs-at-notableca/" target="_blank" style="text-decoration:none"><font color="#ffffff">Jobs at Notable.ca</font></a>
-						</td> 
-					</tr>
-				</table>
-
-			</td>
-		</table>
-		
-		
-		
-		<!-- COPYRIGHT -->
-		<table width="780" cellpadding="0" cellspacing="0" border="0" align="center" style="background-color:#1c1d1e; height:60px; margin-bottom: 0px;">
-			<td style="font-size:10px; align:left; padding:20px; color: #7c7c7c; line-height:1.6em; font-family:Helvetica, Arial, sans-serif;">
-				© 2015 ALL RIGHTS RESERVED NOTABLE TV CORP.
-			</td>
-		</table>
-		
-		
-		
-		<!-- BOTTOM INFO -->
-		<table width="780" cellpadding="0" cellspacing="0" border="0" align="center">
-			<tr>
-				<td style="padding:0; height:50px; font-size:12px; text-align:center; color:#808080; line-height:1.6em; font-family:Helvetica, Trebuchet MS, sans-serif;">
-					<p> Notable TV Corp | 476 Richmond St. W, 1st Floor | Toronto, ON, M5V 1Y2
-				 </td> 
-			</tr>
-		</table>
-
-
-	</body>
+        </div>
+    </center>
+</td></tr></table>
+<!--[if mso]>
+        </td>
+    </tr>
+</table
+<![endif]-->
+</body>
 </html>
