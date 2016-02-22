@@ -189,7 +189,7 @@
                 <tr>
                     <td align="center" style="padding-bottom:35px; padding-left:20px; padding-right:20px;">
                         <a href="http://www.notable.ca/" target="_blank">
-                            <img src="http://notable.ca/wp-content/uploads/2015/03/Notable-white-newsletter.jpg" alt="Notable.ca Header Logo" width="350" height="47" border="0" />
+                            <img src="http://notable.ca/wp-content/uploads/2015/03/notable-logo-newsletter.jpg" alt="Notable.ca Header Logo" width="350" height="47" border="0" />
                         </a>
                     </td>
                 </tr>
@@ -555,7 +555,7 @@
                         <table width="100%" height="60px" cellpadding="0" cellspacing="0" border="0" align="center">
                             <tr >
                                 <td align="center">
-                                      <img src="http://notable.ca/wp-content/uploads/2015/03/Notable-white-newsletter.jpg" alt="Notable.ca Footer Logo" width="191" height="26" border="0" style="padding-top:23px; padding-bottom:0px;" />
+                                      <img src="http://notable.ca/wp-content/uploads/2015/03/notable-logo-newsletter.jpg" alt="Notable.ca Footer Logo" width="191" height="26" border="0" style="padding-top:23px; padding-bottom:0px;" />
                                 </td>
                             </tr>
                             <tr>
