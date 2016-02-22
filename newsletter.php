@@ -187,9 +187,9 @@
                 </tr>
                 <!-- Header Logo -->
                 <tr>
-                    <td align="center" style="padding-bottom:35px; padding-left:20px; padding-right:20px;">
+                    <td align="center" style="padding-top:2px; padding-bottom:33px; padding-left:20px; padding-right:20px;">
                         <a href="http://www.notable.ca/" target="_blank">
-                            <img src="http://notable.ca/wp-content/uploads/2015/03/notable-logo-newsletter.jpg" alt="Notable.ca Header Logo" width="350" height="47" border="0" />
+                            <img src="http://notable.ca/wp-content/uploads/2015/03/notable-logo-newsletter.jpg" alt="Notable.ca Header Logo" width="350" border="0" align="center" style="width: 100%; max-width: 350px;" />
                         </a>
                     </td>
                 </tr>
