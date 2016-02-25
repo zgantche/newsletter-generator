@@ -254,7 +254,7 @@
                         <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:660px; border-top:1px dashed #cccccc;">
                             <tr>
                                 <td align="center" valign="top" style="font-size:0; padding: 10px 0;">
-                                    <h1 style="font-size:20px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; text-align: center;">FEATURED ARTICLES</h1>
+                                    <h1 style="font-size:20px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; text-align: center;"><?php echo $articles['subheading-1']; ?></h1>
                                     <!--[if mso]>
                                     <table cellspacing="0" cellpadding="0" border="0">
                                         <tr>
@@ -408,7 +408,7 @@
                         <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:660px; border-top:1px dashed #cccccc;">
                             <tr>
                                 <td align="center" valign="top" style="font-size:0; padding: 10px 0;">
-                                    <h1 style="font-size:20px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; text-align: center;">TRENDING ARTICLES</h1>
+                                    <h1 style="font-size:20px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; text-align: center;"><?php echo $articles['subheading-2']; ?></h1>
                                     <!--[if mso]>
                                     <table cellspacing="0" cellpadding="0" border="0">
                                         <tr>

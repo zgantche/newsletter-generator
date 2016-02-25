@@ -139,6 +139,39 @@
 													$article_url = 'article-' . $i . '-url';
 													$article_thumbnail = 'article-' . $i . '-thumbnail';
 											?>
+
+												<?php 
+													// Check if Subheading needs to be inserted
+													if($i === 1 || $i === 5): 
+														if ($i === 1)
+															$subheading_num = 1;
+														else
+															$subheading_num = 2;
+												?>
+												<div class="row article-group-divider">
+													<div class="col-md-6 col-md-offset-3">
+															<div class="row">
+																<div class="col-md-8 col-md-offset-2">
+																	<select name="subheading-<?php echo $subheading_num; ?>" class="form-control" 
+																			style="">
+																		<option value="[Select Subheading]">--- Select Subheading <?php echo $subheading_num; ?> ---</option>
+																		<?php
+																			foreach (
+																				["FEATURED ARTICLES", "TRENDING ARTICLES", "LOCAL ARTICLES"] 
+																				as $subheading) {
+																			 	echo '<option value="' . $subheading . '"';
+																			 	if ($articles['subheading-' . $subheading_num] === $subheading)
+																			 		echo ' selected';
+																			 	echo '>' . $subheading . '</option>';
+																			 };
+																		?>
+																	</select>
+																</div>
+													    	</div>
+													</div>
+												</div>
+												<?php endif; ?>
+
 												<div class="row article-row">
 													<div class="col-md-9 col-md-offset-3">
 														<a data-toggle="collapse" href="<?php echo '#duplicateArticle' . $i . $city; ?>">
