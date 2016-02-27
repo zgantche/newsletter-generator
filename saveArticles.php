@@ -22,11 +22,13 @@
 	
 	//if URL field is changed, fetch thumbnail via WordPress
 	for ($i = 0; $i <= 8; $i++) {
-		if ($_POST['article-' . $i . '-url'] !== $_POST['article-' . $i . '-url-old'])
+		if ($_POST['article-' . $i . '-url'] !== $_POST['article-' . $i . '-url-old']){
 			// i == 0 == Main Article, assign it a bigger thumb resolution
-			($i === 0) ? $resolution = [700, 400] : $resolution = [320, 200];
+			$resolution = ($i === 0 ? 'cb-600-400' : 'cb-300-200');
+
 			$article_info['article-' . $i . '-thumbnail'] = 
 				wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-' . $i . '-url'] )), $resolution )[0];
+		}
 	}
 
 	//check if the user has uploaded an image file, handle upload if they have
