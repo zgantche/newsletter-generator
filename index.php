@@ -129,6 +129,9 @@
 														<textarea rows="3" name="article-0-copy" class="form-control" placeholder="Main Article's Summary" 
 															><?php echo $articles['article-0-copy']; ?></textarea>
 													</div>
+													<!-- Hidden fields used for 'smart' thumnail file uploads -->
+													<input type="hidden" name="article-0-thumbnail" value="<?php echo $articles['article-0-thumbnail']; ?>" />
+													<input type="hidden" name="article-0-url-old" value="<?php echo $articles['article-0-url']; ?>" />
 												</div>
 											</div>
 
