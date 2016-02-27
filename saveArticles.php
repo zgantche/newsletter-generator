@@ -17,6 +17,8 @@
 	 * $array['article-i-url-old']		string Holds article's former URL address (0 <= i <= 8)
 	 * $array['article-i-thumbnail']	string Holds address to article's thumbnail image (0 <= i <= 8)
 	 * $array['article-i-copy']			string Defines main article's copy (only i = 0)
+	 * $array['subheading-1']			string Holds Group 1 articles' subheading
+	 * $array['subheading-2']			string Holds Group 2 articles' subheading
 	**/
 	$article_info = $_POST;
 	
