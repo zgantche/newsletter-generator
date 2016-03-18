@@ -106,7 +106,7 @@
 												</div>
 
 												<div class="col-md-3">
-													<span class="file-input btn btn-warning btn-file">
+													<span class="btn btn-warning btn-file">
 														Upload<input type="file" name="article-0-thumbnail" class="articleThumbnail">
 													</span>
 													<img src="<?php echo $articles['article-0-thumbnail']; ?>" 
@@ -203,7 +203,7 @@
 													</div>
 
 													<div class="col-md-3">
-														<span class="file-input btn btn-warning btn-file">
+														<span class="btn btn-warning btn-file">
 															Upload<input type="file" name="<?php echo 'article-' . $i . '-thumbnail'; ?>" class="articleThumbnail">
 														</span>
 														<img src="<?php echo $articles[$article_thumbnail]; ?>" 
