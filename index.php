@@ -105,12 +105,14 @@
 													</div>
 												</div>
 
-												<div class="col-md-3">
-													<span class="btn btn-warning btn-file">
-														Upload<input type="file" name="article-0-thumbnail" class="articleThumbnail">
-													</span>
-													<img src="<?php echo $articles['article-0-thumbnail']; ?>" 
-														name="article-0-preview-img" class="article-0-preview-img img-thumbnail center-block" />
+												<div class="col-md-3 text-center">
+													<div class="thumbnail-container">
+													    <img src="<?php echo $articles['article-0-thumbnail']; ?>" style="display: block" class="article-0-preview-img img-thumbnail"/>
+													    <span class="btn btn-warning btn-file">
+															Upload<input type="file" name="article-0-thumbnail" class="articleThumbnail">
+														</span>
+													</div>
+
 												</div>
 												<div class="col-md-9">
 													<div class="input-group">
@@ -202,12 +204,14 @@
 														</div>
 													</div>
 
-													<div class="col-md-3">
-														<span class="btn btn-warning btn-file">
-															Upload<input type="file" name="<?php echo 'article-' . $i . '-thumbnail'; ?>" class="articleThumbnail">
-														</span>
-														<img src="<?php echo $articles[$article_thumbnail]; ?>" 
-															name="<?php echo 'article-' . $i . '-preview-img'; ?>" class="article-preview-img img-thumbnail center-block" />
+													<div class="col-md-3 text-center">
+														<div class="thumbnail-container">
+															<img src="<?php echo $articles[$article_thumbnail]; ?>" 
+																name="<?php echo 'article-' . $i . '-preview-img'; ?>" class="article-preview-img img-thumbnail" />
+															<span class="btn btn-warning btn-file">
+																Upload<input type="file" name="<?php echo 'article-' . $i . '-thumbnail'; ?>" class="articleThumbnail">
+															</span>
+														</div>
 													</div>
 													<div class="col-md-9 bit-of-top-padding">
 														<div class="input-group">

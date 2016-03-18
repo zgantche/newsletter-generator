@@ -139,15 +139,21 @@ center button {
 	color: inherit;
 }
 
+.thumbnail-container {
+	position: relative; 
+	display: inline-block;
+}
+
 .col-md-3:hover .btn-file {
 	display: inline;
 }
 
 .col-md-3 .btn-file {
 	padding:3px 7px; 
-	position: absolute; 
+	position: absolute;
 	left: 50%;
-	width: 75px;
+	top: 0;
+	width: 50%;
 	display: none;
 }
 
