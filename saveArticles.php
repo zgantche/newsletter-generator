@@ -25,11 +25,16 @@
 	//if URL field is changed, fetch thumbnail via WordPress
 	for ($i = 0; $i <= 8; $i++) {
 		if ($_POST['article-' . $i . '-url'] !== $_POST['article-' . $i . '-url-old']){
-			// i == 0 == Main Article, assign it a bigger thumb resolution
+			//assign thumbnail correct resolution (i == 0 == Main Article)
 			$resolution = ($i === 0 ? 'cb-600-400' : 'cb-300-200');
 
+			//fetch article thumbnail
 			$article_info['article-' . $i . '-thumbnail'] = 
 				wp_get_attachment_image_src( get_post_thumbnail_id(url_to_postid( $_POST['article-' . $i . '-url'] )), $resolution )[0];
+
+			//if no thumbnail found, use placeholder kitten!
+			if (strlen($article_info['article-' . $i . '-thumbnail']) == 0)
+				$article_info['article-' . $i . '-thumbnail'] = 'http://notable.ca/wp-content/uploads/2015/03/placekitten-600-400_text.jpeg';
 		}
 	}
 
