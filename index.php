@@ -107,7 +107,7 @@
 
 												<div class="col-md-3 text-center">
 													<div class="thumbnail-container">
-													    <img src="<?php echo $articles['article-0-thumbnail']; ?>" style="display: block" class="article-0-preview-img img-thumbnail"/>
+													    <img src="<?php echo $articles['article-0-thumbnail']; ?>" name="article-0-preview-img" style="display: block" class="article-0-preview-img img-thumbnail"/>
 													    <span class="btn btn-warning btn-file">
 															Upload<input type="file" name="article-0-thumbnail" class="articleThumbnail">
 														</span>
