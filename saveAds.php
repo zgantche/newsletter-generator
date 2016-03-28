@@ -33,17 +33,21 @@
 		$ad_info['creative'] = $report['file_url'];
 	}
 
-	//clean up input (call $value by reference)
-	foreach ($ad_info as &$value) {
+	//clean up input (call $url by reference)
+	foreach ($ad_info as &$url) {
 		//replace all special colons with regular ones
-		$value = str_replace(array("‘", "’"), "'", $value);
-		$value = str_replace(array('“', '”'), '"', $value);
+		$url = str_replace(array("‘", "’"), "'", $url);
+		$url = str_replace(array('“', '”'), '"', $url);
 		//replace other special characters with regular ones
-		$value = str_replace("–", "-", $value);
-		$value = str_replace("…", "...", $value);
+		$url = str_replace("–", "-", $url);
+		$url = str_replace("…", "...", $url);
 
 		//trim spaces at beginning & end of string, then convert special char's to HTML entities
-		$value = htmlspecialchars( trim($value) );
+		$url = htmlspecialchars( trim($url) );
+		
+		//add "http://" if URL doesn not start with either "http://" or "https://"
+		if (!preg_match("~^https?://~", $url))
+			$url = "http://" . $url;
 	}
 
 	//save $ad_info to varDirectory
