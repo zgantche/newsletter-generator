@@ -566,7 +566,7 @@
                             <tr>
                                 <td align="right" style="color: #888888; font-size: 12px; font-family: sans-serif; mso-height-rule: exactly; line-height:18px; padding-bottom:8px; padding-right:10px;">
                                     <br />
-                                    You can always <a href="http://notable.ca/unsubscribe/" target="_blank" style="color:#888888; text-decoration:underline;">unsubscribe</a> here
+                                    You can always <a href="*|UNSUB|*" target="_blank" style="color:#888888; text-decoration:underline;">unsubscribe</a> here
                                 </td>
                             </tr>
                         </table>
