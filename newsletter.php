@@ -218,7 +218,7 @@
                             <tr>
                                 <td id="main_article_copy" align="center" style="padding-left: 40px; padding-right: 40px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 25px; color: #555555;">
                                     <a href="<?php echo $articles['article-0-url']; ?>" target="_blank" style="text-decoration:none">
-                                        <h1 id="main_article_title" style="font-size:24px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; margin-left:20px; margin-right:20px; display:block; text-align: center;"><?php echo $articles['article-0-title']; ?></h1>
+                                        <h1 id="main_article_title" style="font-size:24px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; margin-left:20px; margin-right:20px; display:block; text-align: center; font-weight: bold;"><?php echo $articles['article-0-title']; ?></h1>
                                     </a>
                                     <?php echo nl2br($articles['article-0-copy']); ?>
                                     <br /><br />
@@ -254,7 +254,7 @@
                         <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:660px; border-top:1px dashed #cccccc;">
                             <tr>
                                 <td align="center" valign="top" style="font-size:0; padding: 10px 0;">
-                                    <h1 style="font-size:20px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; text-align: center;"><?php echo $articles['subheading-1']; ?></h1>
+                                    <h1 style="font-size:20px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; text-align: center; font-weight: bold;"><?php echo $articles['subheading-1']; ?></h1>
                                     <!--[if mso]>
                                     <table cellspacing="0" cellpadding="0" border="0">
                                         <tr>
@@ -408,7 +408,7 @@
                         <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:660px; border-top:1px dashed #cccccc;">
                             <tr>
                                 <td align="center" valign="top" style="font-size:0; padding: 10px 0;">
-                                    <h1 style="font-size:20px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; text-align: center;"><?php echo $articles['subheading-2']; ?></h1>
+                                    <h1 style="font-size:20px; color: #202020; line-height:1.2em; font-family:Helvetica, Arial, sans-serif; margin-bottom:20px; margin-top:20px; text-align: center; font-weight: bold;"><?php echo $articles['subheading-2']; ?></h1>
                                     <!--[if mso]>
                                     <table cellspacing="0" cellpadding="0" border="0">
                                         <tr>
